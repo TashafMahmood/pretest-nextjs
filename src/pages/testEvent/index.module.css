@@ -1,0 +1,9 @@
+.image_container {
+  /* object-fit: cover; */
+  height: calc(100vh - 20px) !important;
+  max-width: 350px;
+  margin-top: 20px;
+  /* background: fit; */
+  max-width: 100%;
+  height: auto;
+}

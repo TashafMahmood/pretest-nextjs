@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.elredmod.one",
+            "sha256_cert_fingerprints": [
+                "85:02:1F:F4:D9:3B:D9:A0:DE:17:C0:9D:57:AF:74:28:27:84:61:46:FD:D1:A8:70:92:DF:8F:7C:64:70:B3:0B"
+            ]
+        }
+    }
+]
