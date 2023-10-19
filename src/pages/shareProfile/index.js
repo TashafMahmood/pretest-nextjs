@@ -46,6 +46,11 @@ export async function getServerSideProps({ res, query }) {
   res.setHeader("Cache-Control", "no-store");
   const userCode = query.userCode ?? "";
 
+  console.log(
+    `${baseURL}noSessionPreviewCardScreenshot?userCode=${userCode}`,
+    "hehehe"
+  );
+
   const response = await fetch(
     `${baseURL}noSessionPreviewCardScreenshot?userCode=${userCode}`,
     {
