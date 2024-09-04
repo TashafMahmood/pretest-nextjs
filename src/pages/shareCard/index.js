@@ -60,7 +60,6 @@
 // }
 // export default ShareCard;
 
-
 import { useEffect } from "react";
 import { baseURL, webviewURL, appDefaultHeader, appHeaderKey1, appHeaderKey2 } from "@/config";
 import Head from "next/head";
