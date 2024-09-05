@@ -13,7 +13,7 @@ function ShareNeed(props) {
   return (
     <>
       <Head>
-        <meta property="og:title" content={data.needDescription} key="title" />
+      <meta property="og:title" content={data.needDescription || "No Description Added"} key="title" />
         {data?.otherTags?.length && (
           <meta
             property="og:description"
