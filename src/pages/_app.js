@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
 
+console.log('nextjs deployed...')
 export default function App({ Component, pageProps }) {
   return (
     <>
