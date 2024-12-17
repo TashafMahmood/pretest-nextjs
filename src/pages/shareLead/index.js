@@ -29,7 +29,7 @@ function ShareNeed(props) {
       <div className="d-flex align-item-center justify-content-center height-100">
         <iframe
           allow="web-share"
-          src={`${webviewURL}my-bio/leads/responding-leads?leadId=${leadId}&userCode=${userCode}`}
+          src={`${webviewURL}/leads/responding-leads?leadId=${leadId}&userCode=${userCode}`}
           className="iframe-cont"
           title=""
         ></iframe>
