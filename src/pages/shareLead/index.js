@@ -61,7 +61,7 @@ export async function getServerSideProps({ res, query }) {
 
   console.log(
     leadOwner_userCode,
-    "hhhhhhh",
+    "latest console",
     `${baseURL}webViewPreviewLeadScreenshot?leadId=${leadId}&userCode=${leadOwner_userCode}`,
     data
   );
