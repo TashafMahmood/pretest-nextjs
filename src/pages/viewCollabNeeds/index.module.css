@@ -1,0 +1,68 @@
+@font-face {
+    font-family: "AvenirPro-regular";
+    src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Regular.otf")
+      format("opentype");
+  }
+  
+  @font-face {
+    font-family: "AvenirPro-medium";
+    src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+      format("opentype");
+    /* You may include additional font properties if needed */
+  }
+
+
+.main_cover{
+    background:#0d0d0d;
+    height: 100vh;
+    max-width: 375px;
+    margin: auto;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.inner_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 38px;
+}
+
+.oops{
+    color:#E72D38;
+    margin-top: 30px;
+    font-size: 22px;
+    font-weight: 500;
+    font-family: "AvenirPro-medium";
+}
+
+.msg{
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 10px;
+    font-family: "AvenirPro-regular";
+}
+
+.download{
+    background: #E72D38;
+    padding: 8.5px 28.5px;
+    margin-top: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 100px;
+    cursor: pointer;
+    font-family: "AvenirPro-regular";
+}
+
+
+
+@media (max-width:500px){
+    .main_cover{
+        max-width: 100%;
+    }
+}
