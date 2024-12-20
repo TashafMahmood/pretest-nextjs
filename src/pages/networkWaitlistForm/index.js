@@ -296,8 +296,7 @@ const NetworkWaitlistForm = () => {
     setLoading(true);
     try {
       const res = await axios.post(
-        // `${process.env.NEXT_PUBLIC_API}userPortalAdminAddToNetworkRequestPost`,
-        `https://pretest.elred.io/userPortalAdminAddToNetworkRequestPost`,
+        `${process.env.NEXT_PUBLIC_API}userPortalAdminAddToNetworkRequestPost`,
         {
           name: formData.name,
           email: formData.email,
