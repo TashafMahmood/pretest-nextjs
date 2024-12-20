@@ -23,28 +23,21 @@
   max-width: 375px;
   margin: auto;
   position: relative;
-}
-/* .main_cover {
-  background: #0d0d0d;
-  height: 100%;
-  max-width: 375px;
-  margin: auto;
-  color: #fff;
-  overflow: auto;
-} */
-
-.main_cover {
-  background: #0d0d0d;
-  height: 100%;
-  max-width: 375px;
-  margin: auto;
-  color: #fff;
   overflow: auto; /* Allows scrolling */
   -ms-overflow-style: none;  /* For Internet Explorer 10+ */
   scrollbar-width: none; /* For Firefox */
+  background: #0d0d0d;
+
 }
 
-.main_cover::-webkit-scrollbar {
+.main_cover {
+  /* height: 100%; */
+  max-width: 375px;
+  margin: auto;
+  color: #fff;
+}
+
+.main::-webkit-scrollbar {
   display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
 }
 
