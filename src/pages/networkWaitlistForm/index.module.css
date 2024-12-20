@@ -24,18 +24,28 @@
   margin: auto;
   position: relative;
 }
-.main_cover {
+/* .main_cover {
   background: #0d0d0d;
-  height: calc(100vh - 80px);
+  height: 100%;
   max-width: 375px;
   margin: auto;
   color: #fff;
   overflow: auto;
-  /* position: relative; */
-  /* display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column; */
+} */
+
+.main_cover {
+  background: #0d0d0d;
+  height: 100%;
+  max-width: 375px;
+  margin: auto;
+  color: #fff;
+  overflow: auto; /* Allows scrolling */
+  -ms-overflow-style: none;  /* For Internet Explorer 10+ */
+  scrollbar-width: none; /* For Firefox */
+}
+
+.main_cover::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
 }
 
 #banner {
@@ -109,13 +119,13 @@
   font-size: 16px;
   font-weight: 500;
   color: #e72d38;
-  margin-bottom: 11px;
+  margin-bottom: 25px;
 }
 
 .bottom_div {
   height: 80px;
   background: #0d0d0d;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   max-width: 375px;
   width: 100%;
@@ -123,8 +133,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  left: 50%;
-  transform: translateX(-50%);
+  /* left: 50%;
+  transform: translateX(-50%); */
 }
 
 .submit_btn {
@@ -136,7 +146,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin: 0 20px;
+  /* margin: 0 20px; */
   font-size: 20px;
   font-weight: 500;
   cursor: pointer;
