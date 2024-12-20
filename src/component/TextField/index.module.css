@@ -1,0 +1,42 @@
+.input_lable{
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    }
+    
+    .input_div{
+        margin-bottom: 24px;
+    }
+    
+    .input_field{
+        width: 100%;
+        outline: none;
+        padding: 12px;
+        border-radius: 4px;
+        background-color: #242426;
+        border: none;
+        color: #fff;
+        height: 40px;
+    }
+    
+    .input_field::placeholder{
+        color: #8E8E93;
+        font-size: 14px;
+        font-weight: 400;
+    }
+    
+    .imp{
+        color: #E72D38;
+    }
+
+    .react-tel-input{
+        background-color: red !important;
+    }
+
+    .dropdown{
+        background-color: pink !important;
+    }
+
+    /* .react-tel-input .selected-flag:hover{
+        background-color: #8E8E93 !important;
+    } */

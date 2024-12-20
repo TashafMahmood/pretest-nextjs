@@ -1,0 +1,181 @@
+@font-face {
+  font-family: "AvenirPro-regular";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Regular.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-medium";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+    format("opentype");
+  /* You may include additional font properties if needed */
+}
+
+@font-face {
+  font-family: "AvenirPro-bold";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Bold.otf")
+    format("opentype");
+  /* You may include additional font properties if needed */
+}
+
+.main{
+  height: 100vh;
+  max-width: 375px;
+  margin: auto;
+  position: relative;
+}
+.main_cover {
+  background: #0d0d0d;
+  height: calc(100vh - 80px);
+  max-width: 375px;
+  margin: auto;
+  color: #fff;
+  overflow: auto;
+  /* position: relative; */
+  /* display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; */
+}
+
+#banner {
+  max-width: 375px;
+  height: auto;
+  /* position: sticky;
+    top: 0; */
+}
+
+.container_div {
+  padding: 20px;
+  font-family: "AvenirPro-regular";
+}
+
+.form_title {
+  font-size: 20px;
+  line-height: 30px;
+  font-family: "AvenirPro-regular";
+}
+
+.network_name {
+  font-weight: 600;
+  font-family: "AvenirPro-medium";
+}
+
+.indicator {
+  color: #e72d38;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}
+
+.inner_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 38px;
+}
+
+.oops {
+  color: #e72d38;
+  margin-top: 30px;
+  font-size: 22px;
+  font-weight: 500;
+  font-family: "AvenirPro-medium";
+}
+
+.msg {
+  font-size: 16px;
+  font-weight: 400;
+  margin-top: 10px;
+  font-family: "AvenirPro-regular";
+}
+
+.download {
+  background: #e72d38;
+  padding: 8.5px 28.5px;
+  margin-top: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 100px;
+  cursor: pointer;
+  font-family: "AvenirPro-regular";
+}
+
+.clear_form {
+  margin-top: 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #e72d38;
+  margin-bottom: 11px;
+}
+
+.bottom_div {
+  height: 80px;
+  background: #0d0d0d;
+  position: absolute;
+  bottom: 0;
+  max-width: 375px;
+  width: 100%;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.submit_btn {
+  background-color: #e72d38;
+  /* margin: 20px; */
+  height: 48px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 20px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.input_lable {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.imp {
+  color: #e6525c;
+}
+
+.error_message{
+  margin-top: -20px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #E72D38;
+}
+
+@media (max-width: 500px) {
+  .main{
+    max-width: 100%;
+
+  }
+  .main_cover {
+    max-width: 100%;
+  }
+
+  #banner {
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .bottom_div{
+    max-width: 500px;
+    width: 100%;
+  }
+}
