@@ -235,7 +235,7 @@ const NetworkWaitlistForm = () => {
     countryCode: "+91",
   });
 
-  console.log('Waiting list form deployed...')
+  console.log('Waiting list form deployed... 23 Dec 2024')
 
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const [popup, setPopup] = useState(false);
