@@ -98,3 +98,9 @@ a {
 .react-tel-input .country-list{
   max-height: 150px !important;
 }
+
+.react-tel-input .country-list .divider{
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  border-bottom: none !important;
+}
