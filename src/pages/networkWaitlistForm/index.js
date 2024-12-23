@@ -25,11 +25,14 @@ const NetworkWaitlistForm = () => {
   const [loading, setLoading] = useState(false);
   const [warning, setWarning] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
 
   const [isEmailValid, setIsEmailValid] = useState(true); // Track email validity
 
   const emailRegex = /^[^\s@]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+  const emojiRegex = /[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu; // Regex to detect emojis
+  const nameRegex = /^[a-zA-Z\s]*$/; // Allow only letters and spaces
+
 
   // Check if all fields are valid
   const isFormValid =
@@ -37,20 +40,30 @@ const NetworkWaitlistForm = () => {
     isPhoneValid &&
     isEmailValid;
 
+
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
+
+    // Remove emojis from the input
+    const sanitizedValue = value.replace(emojiRegex, "");
+
+    // For the "name" field, validate against the regex
+    if (name === "name" && !nameRegex.test(sanitizedValue)) {
+      return; // Do nothing if the value contains invalid characters
+    }
+
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: sanitizedValue, // Use the sanitized value
     }));
 
     if (name === "email") {
-      setIsEmailValid(emailRegex.test(value)); 
+      setIsEmailValid(emailRegex.test(sanitizedValue));
     }
   };
 
   const handleChange = (e, value, name) => {
-    let phoneNumber = e?.replace(value?.dialCode, "").trim(); 
+    let phoneNumber = e?.replace(value?.dialCode, "").trim();
 
     setFormData((prev) => ({
       ...prev,
@@ -59,9 +72,9 @@ const NetworkWaitlistForm = () => {
     }));
 
     if (phoneNumber?.length >= 7) {
-      setIsPhoneValid(true); 
+      setIsPhoneValid(true);
     } else {
-      setIsPhoneValid(false); 
+      setIsPhoneValid(false);
     }
   };
 
@@ -122,12 +135,12 @@ const NetworkWaitlistForm = () => {
     } catch (error) {
       if (error?.response?.data?.errorCode === 111) {
         setWarning(true);
-        setPopup(true); 
-      }else{
+        setPopup(true);
+      } else {
         setError(true);
-        setPopup(true)
+        setPopup(true);
       }
-      
+
       setLoading(false);
     }
   };
@@ -150,7 +163,7 @@ const NetworkWaitlistForm = () => {
           </div>
           <div className={styles.indicator}>*Indicates required question</div>
           <TextField
-            title={"Full name"}
+            title={"Full Name"}
             placeholder={"Enter your full name"}
             value={formData.name}
             onChange={onChangeHandler}
@@ -206,7 +219,7 @@ const NetworkWaitlistForm = () => {
           />
           <div className={styles.clear_form}>
             <span onClick={onClearForm} style={{ cursor: "pointer" }}>
-              Clear Form
+              Clear form
             </span>
           </div>
           <div className={styles.bottom_div}>
