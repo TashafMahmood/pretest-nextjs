@@ -33,6 +33,7 @@ const NetworkWaitlistForm = () => {
   const emojiRegex = /[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu; // Regex to detect emojis
   const nameRegex = /^[a-zA-Z\s]*$/; // Allow only letters and spaces
 
+  console.log('new deploy')
 
   // Check if all fields are valid
   const isFormValid =
