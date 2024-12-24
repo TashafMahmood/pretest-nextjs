@@ -77,6 +77,25 @@ a {
   background-color: #242426 !important;
   margin-bottom: 20px !important;
   font-family: "AvenirPro-regular" !important;
+  overflow-y: auto !important;
+}
+
+/* Thin scrollbar styling for modern browsers */
+.react-tel-input .country-list::-webkit-scrollbar {
+  width: 4px !important;
+}
+
+.react-tel-input .country-list::-webkit-scrollbar-thumb {
+  background-color: #555 !important; /* Adjust scrollbar color */
+  border-radius: 10px !important;
+}
+
+.react-tel-input .country-list::-webkit-scrollbar-thumb:hover {
+  background-color: #777 !important; /* Color on hover */
+}
+
+.react-tel-input .country-list::-webkit-scrollbar-track {
+  background: #242426 !important; /* Match the background color */
 }
 
 .react-tel-input .country-list .country .dial-code {
