@@ -104,3 +104,7 @@ a {
   padding-bottom: 0 !important;
   border-bottom: none !important;
 }
+
+.spinner-border {
+  --bs-spinner-border-width: 0.15em !important;
+}

@@ -21,14 +21,17 @@
 
 .overlay{
     background: rgba(0, 0, 0, 0.593);
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 375px;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 auto;
+
 }
 
 
@@ -114,4 +117,15 @@
     font-family: "AvenirPro-regular";
     margin-top: 20px;
     cursor: pointer;
+}
+
+@media(max-width:500px){
+  .overlay{
+    /* width: 500px; */
+    width: 100%;
+  }
+
+  .popup{
+    margin: 20px;
+  }
 }

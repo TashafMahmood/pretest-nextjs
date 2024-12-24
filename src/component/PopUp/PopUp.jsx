@@ -10,9 +10,9 @@ const PopUp = ({ warning, success, error, setPopup }) => {
     <div className={styles.overlay}>
       <div className={styles.popup}>
         <div className={styles.img_div}>
-          <Image src={warning && warningIcon} alt="" />
-          <Image src={success && successIcon} alt="" />
-          <Image src={error && errorIcon} alt="" />
+          {warning && <Image src={warningIcon} alt="" />}
+          {success && <Image src={successIcon} alt="" />}
+          {error && <Image src={errorIcon} alt="" />}
         </div>
         <div className={styles.msg}>
           {warning && "Limit exceeded"}
@@ -24,9 +24,27 @@ const PopUp = ({ warning, success, error, setPopup }) => {
           {success && "Your form has been successfully submitted."}
           {error && "Server error, please try after sometime."}
         </div>
-        {warning && <div className={styles.ok_warning} onClick={(prev)=>setPopup(!prev)}>Ok</div>}
-        {success && <div className={styles.ok_success} onClick={(prev)=>setPopup(!prev)}>Ok</div>}
-        {error && <div className={styles.ok_error} onClick={(prev)=>setPopup(!prev)}>Ok</div>}
+        {warning && (
+          <div
+            className={styles.ok_warning}
+            onClick={(prev) => setPopup(!prev)}
+          >
+            Ok
+          </div>
+        )}
+        {success && (
+          <div
+            className={styles.ok_success}
+            onClick={(prev) => setPopup(!prev)}
+          >
+            Ok
+          </div>
+        )}
+        {error && (
+          <div className={styles.ok_error} onClick={(prev) => setPopup(!prev)}>
+            Ok
+          </div>
+        )}
       </div>
     </div>
   );

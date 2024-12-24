@@ -18,7 +18,7 @@ const NetworkWaitlistForm = () => {
     countryCode: "+91",
   });
 
-  console.log("Waiting list form deployed... 23 Dec 2024");
+  const [overflow, setOverflow] = useState(false)
 
   const [isPhoneValid, setIsPhoneValid] = useState(false);
   const [popup, setPopup] = useState(false);
@@ -71,7 +71,7 @@ const NetworkWaitlistForm = () => {
       phone: phoneNumber || "",
     }));
 
-    if (phoneNumber?.length >= 7) {
+    if (phoneNumber?.length === 10) {
       setIsPhoneValid(true);
     } else {
       setIsPhoneValid(false);
@@ -116,6 +116,7 @@ const NetworkWaitlistForm = () => {
         if (slackRes.status === 200) {
           setSuccess(true);
           setPopup(true);
+          setOverflow(true)
           setLoading(false);
         } else {
           console.error("Error sending message to Slack:", slackRes.data.error);
@@ -136,9 +137,11 @@ const NetworkWaitlistForm = () => {
       if (error?.response?.data?.errorCode === 111) {
         setWarning(true);
         setPopup(true);
+        setOverflow(true)
       } else {
         setError(true);
         setPopup(true);
+        setOverflow(true)
       }
 
       setLoading(false);
@@ -147,13 +150,14 @@ const NetworkWaitlistForm = () => {
 
   const closePopup = () => {
     setPopup(false);
+    setOverflow(false)
     setSuccess(false);
     setWarning(false);
     setError(false);
   };
 
   return (
-    <div className={styles.main}>
+    <div className={`${styles.main} ${overflow && styles.noScroll}`}>
       <div className={styles.main_cover}>
         <Image src={awfisBanner} alt="" id={styles.banner} />
         <div className={styles.container_div}>
@@ -200,16 +204,8 @@ const NetworkWaitlistForm = () => {
             onlyCountries={[
               "us",
               "in",
-              "bh",
               "ca",
-              "my",
-              "fr",
-              "pl",
-              "la",
               "gb",
-              "pt",
-              "qa",
-              "za",
             ]}
             preferredCountries={["in"]}
             value={`${formData.countryCode}${formData.phone}`}
@@ -242,7 +238,6 @@ const NetworkWaitlistForm = () => {
       {popup && success && <PopUp success={true} setPopup={closePopup} />}
       {popup && warning && <PopUp warning={true} setPopup={closePopup} />}
       {popup && error && <PopUp error={true} setPopup={closePopup} />}
-      {console.log(warning, "warning..")}
     </div>
   );
 };
