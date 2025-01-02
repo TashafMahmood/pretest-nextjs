@@ -2,10 +2,36 @@
   "applinks": {
       "apps": [],
       "details": [
-      {
-        "appID": "YN83UST97S.com.elredmod.one",
-        "paths": ["*"]
-      }
-    ]
+          {
+              "appID": "YN83UST97S.com.elredmod.one",
+              "paths": [
+                  "*"
+              ]
+          },
+          {
+              "appID": "YN83UST97S.com.elredmod.one.test",
+              "paths": [
+                  "*"
+              ]
+          },
+          {
+              "appID": "YN83UST97S.com.elredmod.one.dev",
+              "paths": [
+                  "*"
+              ]
+          },
+          {
+              "appID": "YN83UST97S.com.elredmod.one.demo",
+              "paths": [
+                  "*"
+              ]
+          },
+          {
+              "appID": "YN83UST97S.com.elredmod.one.backup",
+              "paths": [
+                  "*"
+              ]
+          }
+      ]
   }
 }
