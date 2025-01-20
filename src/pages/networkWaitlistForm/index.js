@@ -18,9 +18,9 @@ const NetworkWaitlistForm = () => {
     countryCode: "+91",
   });
 
-  const [overflow, setOverflow] = useState(false)
+  const [overflow, setOverflow] = useState(false);
 
-  const [isPhoneValid, setIsPhoneValid] = useState(false);
+  const [isPhoneValid, setIsPhoneValid] = useState(true);
   const [popup, setPopup] = useState(false);
   const [loading, setLoading] = useState(false);
   const [warning, setWarning] = useState(false);
@@ -28,40 +28,71 @@ const NetworkWaitlistForm = () => {
   const [error, setError] = useState(false);
 
   const [isEmailValid, setIsEmailValid] = useState(true); // Track email validity
+  const [isNameValid, setIsNameValid] = useState(true); // Track name validity
 
-  const emailRegex = /^[^\s@]+@[a-zA-Z0-9]+\.[a-zA-Z]{2,}$/;
+  const emailRegex = /^[^\s@]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+){1,2}$/;
   const emojiRegex = /[\p{Emoji_Presentation}\p{Extended_Pictographic}]/gu; // Regex to detect emojis
   const nameRegex = /^[a-zA-Z\s]*$/; // Allow only letters and spaces
 
-  console.log('new deploy')
+  console.log("pretest deploy...");
 
   // Check if all fields are valid
   const isFormValid =
     Object.values(formData).every((value) => value.trim() !== "") &&
     isPhoneValid &&
-    isEmailValid;
+    isEmailValid &&
+    isNameValid;
 
+  // const onChangeHandler = (e) => {
+  //   const { name, value } = e.target;
+
+  //   // Remove emojis and spaces from the input
+  //   const sanitizedValue = value.replace(emojiRegex, "");
+
+  //   // For the "name" field, validate against the regex
+  //   if (name === "name" && !nameRegex.test(sanitizedValue)) {
+  //     return; // Do nothing if the value contains invalid characters
+  //   }
+
+  //   setFormData((prev) => ({
+  //     ...prev,
+  //     [name]: sanitizedValue, // Use the sanitized value
+  //   }));
+
+  //   if (name === "email") {
+  //     // Validate email and set validity
+  //     setIsEmailValid(emailRegex.test(sanitizedValue));
+  //   }
+  // };
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
-
+  
     // Remove emojis from the input
     const sanitizedValue = value.replace(emojiRegex, "");
-
-    // For the "name" field, validate against the regex
-    if (name === "name" && !nameRegex.test(sanitizedValue)) {
-      return; // Do nothing if the value contains invalid characters
+  
+    if (name === "name") {
+      // Allow typing but ensure only valid characters
+      if (!nameRegex.test(sanitizedValue)) {
+        return; // Prevent invalid characters
+      }
+  
+      // Set validity only after user stops typing (minimum 3 characters)
+      setIsNameValid(sanitizedValue.length >= 3);
     }
-
+  
     setFormData((prev) => ({
       ...prev,
       [name]: sanitizedValue, // Use the sanitized value
     }));
-
+  
     if (name === "email") {
       setIsEmailValid(emailRegex.test(sanitizedValue));
     }
   };
+  
+
+  console.log(isNameValid,'---')
 
   const handleChange = (e, value, name) => {
     let phoneNumber = e?.replace(value?.dialCode, "").trim();
@@ -117,7 +148,7 @@ const NetworkWaitlistForm = () => {
         if (slackRes.status === 200) {
           setSuccess(true);
           setPopup(true);
-          setOverflow(true)
+          setOverflow(true);
           setLoading(false);
         } else {
           console.error("Error sending message to Slack:", slackRes.data.error);
@@ -138,11 +169,11 @@ const NetworkWaitlistForm = () => {
       if (error?.response?.data?.errorCode === 111) {
         setWarning(true);
         setPopup(true);
-        setOverflow(true)
+        setOverflow(true);
       } else {
         setError(true);
         setPopup(true);
-        setOverflow(true)
+        setOverflow(true);
       }
 
       setLoading(false);
@@ -151,7 +182,7 @@ const NetworkWaitlistForm = () => {
 
   const closePopup = () => {
     setPopup(false);
-    setOverflow(false)
+    setOverflow(false);
     setSuccess(false);
     setWarning(false);
     setError(false);
@@ -166,6 +197,7 @@ const NetworkWaitlistForm = () => {
             Form Request to be a part of AWFIS Network ({" "}
             <span className={styles.network_name}>R City Group</span> )
           </div>
+          
           <div className={styles.indicator}>*Indicates required question</div>
           <TextField
             title={"Full Name"}
@@ -175,6 +207,11 @@ const NetworkWaitlistForm = () => {
             name="name"
             type={"text"}
           />
+          {!isNameValid && (
+            <div className={styles.error_message} style={{zIndex:444}}>
+              Name should be of minimum 3 letters
+            </div>
+          )}
           <TextField
             title={"Official Email ID"}
             placeholder={"Enter your Email ID"}
@@ -197,23 +234,24 @@ const NetworkWaitlistForm = () => {
             onChange={onChangeHandler}
             type={"text"}
           />
+          
           <div className={styles.input_lable}>
-            Phone number that will receive OTP{" "}
-            <span className={styles.imp}>*</span>
+            Phone number <span className={styles.imp}>*</span>
           </div>
           <PhoneInput
-            onlyCountries={[
-              "us",
-              "in",
-              "ca",
-              "gb",
-            ]}
+            onlyCountries={["us", "in", "ca", "gb"]}
             preferredCountries={["in"]}
             value={`${formData.countryCode}${formData.phone}`}
             placeholder="Enter your Phone number"
             name="phone"
             onChange={(e, phone) => handleChange(e, phone, "phone")}
           />
+          
+          {!isPhoneValid && (
+            <div className={styles.error_message} style={{ marginTop:"7px", zIndex:444}}>
+              Invalid phone number - enter 10 digits
+            </div>
+          )}
           <div className={styles.clear_form}>
             <span onClick={onClearForm} style={{ cursor: "pointer" }}>
               Clear form
