@@ -109,6 +109,34 @@ function ShareCard(props) {
     return <NotFound />;
   }
 
+  function formatDescription(description) {
+    if (!description) {
+      return "";
+    }
+
+    // Extract the part after "Title: " if it exists
+    const prefix = "Title: ";
+    if (description.startsWith(prefix)) {
+      const title = description.slice(prefix.length).trim(); // Extract the title part
+
+      // Apply transformation based on length
+      const formattedTitle =
+        title.length <= 3
+          ? title.toUpperCase() // Uppercase if length <= 3
+          : title
+              .split(" ")
+              .map(
+                (word) =>
+                  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+              )
+              .join(" "); // Title case for longer titles
+
+      return `${prefix}${formattedTitle}`; // Add the "Title: " prefix back
+    }
+
+    return description; // Return as is if no "Title: " prefix exists
+  }
+
   return (
     <>
       <Head>
@@ -121,29 +149,17 @@ function ShareCard(props) {
           content={data?.cardImageURL ?? ""}
           key="image"
         />
-        {/* <meta property="og:title" content={truncateWithEllipses(data?.cardTitle ?? "")} key="title" /> */}
         <meta
           property="og:title"
-          content={
-            data?.cardTitle
-              ? data.cardTitle.length <= 3
-                ? truncateWithEllipses(data.cardTitle.toUpperCase())
-                : truncateWithEllipses(
-                    data.cardTitle
-                      .split(" ")
-                      .map(
-                        (word) =>
-                          word.charAt(0).toUpperCase() +
-                          word.slice(1).toLowerCase()
-                      )
-                      .join(" ")
-                  )
-              : "No Title Provided"
-          }
+          content={truncateWithEllipses(data?.cardTitle ?? "")}
           key="title"
         />
+        {/* <meta property="og:description" content={data?.description ?? ""} /> */}
 
-        <meta property="og:description" content={data?.description ?? ""} />
+        <meta
+          property="og:description"
+          content={formatDescription(data?.description)}
+        />
       </Head>
       <div className="d-flex align-item-center justify-content-center height-100">
         <iframe
