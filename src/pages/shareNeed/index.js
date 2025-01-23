@@ -5,8 +5,6 @@ import Head from "next/head";
 function ShareNeed(props) {
   const { data, needId, userCode } = props;
 
-  console.log(data, "...................");
-
   if (!userCode && !needId) {
     return <NotFound />;
   }
