@@ -11,22 +11,7 @@ function ShareNeed(props) {
   return (
     <>
       <Head>
-        {/* <meta property="og:title" content={data.needDescription || "No Description Added"} key="title" /> */}
-        <meta
-          property="og:title"
-          content={
-            data.needDescription
-              ? data.needDescription.length <= 3
-                ? data.needDescription.toUpperCase()
-                : data.needDescription
-                    .toLowerCase()
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ")
-              : "No Description Added"
-          }
-          key="title"
-        />
+        <meta property="og:title" content={data.needDescription || "No Description Added"} key="title" />
         {data?.otherTags?.length && (
           <meta
             property="og:description"
