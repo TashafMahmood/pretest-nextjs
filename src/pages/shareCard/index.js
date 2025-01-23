@@ -130,10 +130,11 @@ function ShareCard(props) {
                 ? truncateWithEllipses(data.cardTitle.toUpperCase())
                 : truncateWithEllipses(
                     data.cardTitle
-                      .toLowerCase()
                       .split(" ")
                       .map(
-                        (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                        (word) =>
+                          word.charAt(0).toUpperCase() +
+                          word.slice(1).toLowerCase()
                       )
                       .join(" ")
                   )
