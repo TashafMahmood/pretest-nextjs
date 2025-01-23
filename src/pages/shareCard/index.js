@@ -109,33 +109,35 @@ function ShareCard(props) {
     return <NotFound />;
   }
 
-  function formatDescription(description) {
-    if (!description) {
-      return "";
-    }
+  // function formatDescription(description) {
+  //   if (!description) {
+  //     return "";
+  //   }
 
-    // Extract the part after "Title: " if it exists
-    const prefix = "Title: ";
-    if (description.startsWith(prefix)) {
-      const title = description.slice(prefix.length).trim(); // Extract the title part
+  //   // Extract the part after "Title: " if it exists
+  //   const prefix = "Title: ";
+  //   if (description.startsWith(prefix)) {
+  //     const title = description.slice(prefix.length).trim(); // Extract the title part
 
-      // Apply transformation based on length
-      const formattedTitle =
-        title.length <= 3
-          ? title.toUpperCase() // Uppercase if length <= 3
-          : title
-              .split(" ")
-              .map(
-                (word) =>
-                  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-              )
-              .join(" "); // Title case for longer titles
+  //     // Apply transformation based on length
+  //     const formattedTitle =
+  //       title.length <= 3
+  //         ? title.toUpperCase() // Uppercase if length <= 3
+  //         : title
+  //             .split(" ")
+  //             .map(
+  //               (word) =>
+  //                 word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+  //             )
+  //             .join(" "); // Title case for longer titles
 
-      return `${prefix}${formattedTitle}`; // Add the "Title: " prefix back
-    }
+  //     return `${prefix}${formattedTitle}`; // Add the "Title: " prefix back
+  //   }
 
-    return description; // Return as is if no "Title: " prefix exists
-  }
+  //   return description; // Return as is if no "Title: " prefix exists
+  // }
+
+  console.log(data,'9999')
 
   return (
     <>
@@ -155,11 +157,15 @@ function ShareCard(props) {
           key="title"
         />
         {/* <meta property="og:description" content={data?.description ?? ""} /> */}
-
         <meta
           property="og:description"
-          content={formatDescription(data?.description)}
+          content={data?.description ?? ""}
+          key="description"
         />
+        {/* <meta
+          property="og:description"
+          content={formatDescription(data?.description)}
+        /> */}
       </Head>
       <div className="d-flex align-item-center justify-content-center height-100">
         <iframe
