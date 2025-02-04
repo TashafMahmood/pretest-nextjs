@@ -2,6 +2,7 @@ import Head from "next/head";
 import { deleteUserURL } from "@/config";
 
 function DeleteUSerAccount() {
+  console.log('..')
   return (
     <>
      <Head>
