@@ -103,6 +103,7 @@ function ShareProfile(props) {
     return <NotFound />;
   }
 
+  console.log(data,'share profile')
   return (
     <>
       <Head>

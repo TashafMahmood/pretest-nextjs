@@ -137,7 +137,7 @@ function ShareCard(props) {
   //   return description; // Return as is if no "Title: " prefix exists
   // }
 
-  console.log(data,'9999')
+  console.log(data,'share card')
 
   return (
     <>
