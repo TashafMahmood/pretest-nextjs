@@ -5,13 +5,31 @@ import Head from "next/head";
 function ShareNeed(props) {
   const { data, needId, userCode } = props;
 
+  const formattedTitleTags =
+    data?.titleTags?.length === 1
+      ? data?.titleTags[0]
+      : data?.titleTags?.join(", ");
+
+  const truncatedTitleTags =
+    formattedTitleTags.length > 32
+      ? `${formattedTitleTags.substring(0, 32)}...`
+      : formattedTitleTags;
+
   if (!userCode && !needId) {
     return <NotFound />;
   }
   return (
     <>
       <Head>
-        <meta property="og:title" content={data.needDescription || "No Description Added"} key="title" />
+        <meta
+          property="og:title"
+          content={
+            data?.needType === "introduction"
+              ? `Open to collaborate on ${truncatedTitleTags}`
+              : data.needDescription || "No Description Added"
+          }
+          key="title"
+        />
         {data?.otherTags?.length && (
           <meta
             property="og:description"
