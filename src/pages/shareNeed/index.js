@@ -5,6 +5,8 @@ import Head from "next/head";
 function ShareNeed(props) {
   const { data, needId, userCode } = props;
 
+  console.log(data,'data')
+
   const formattedTitleTags =
     data?.titleTags?.length === 1
       ? data?.titleTags?.[0]
@@ -26,7 +28,7 @@ function ShareNeed(props) {
           content={
             data?.needType === "introduction"
               ? `Open to collaborate on ${truncatedTitleTags}`
-              : data.needDescription || "No Description Added"
+              : data.needDescription || `${data?.firstname} needs help with something. Tap to know more!`
           }
           key="title"
         />
