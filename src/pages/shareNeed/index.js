@@ -84,7 +84,7 @@ export async function getServerSideProps({ res, query }) {
 
   const result = data?.result && data?.result?.length && data?.result[0];
 
-  console.log(result);
+  console.log(data,'ddddd');
 
   return {
     props: { data: result, userCode: needOwner_userCode, needId }, // will be passed to the page component as props
