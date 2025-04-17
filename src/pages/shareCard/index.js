@@ -91,7 +91,7 @@ function ShareCard(props) {
         " " +
         cardName +
         " " +
-        title?.slice(-3).join(" ");
+        title?.slice(-4).join(" ");
       return title;
     }
   };
@@ -137,7 +137,6 @@ function ShareCard(props) {
   //   return description; // Return as is if no "Title: " prefix exists
   // }
 
-  console.log(data,'share card')
 
   return (
     <>

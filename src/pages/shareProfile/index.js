@@ -85,7 +85,7 @@ function ShareProfile(props) {
       return text
     else{
       cardName = cardName?.slice(0, 10) + "...'s";
-      title = title?.slice(0, 2)?.join(' ') + ' ' + cardName + ' ' + title?.slice(-3).join(' ')
+      title = title?.slice(0, 2)?.join(' ') + ' ' + cardName + ' ' + title?.slice(-4).join(' ')
       return title;
     }
   }
@@ -103,7 +103,6 @@ function ShareProfile(props) {
     return <NotFound />;
   }
 
-  console.log(data,'share profile')
   return (
     <>
       <Head>
