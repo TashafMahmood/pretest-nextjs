@@ -7,18 +7,21 @@ import success from "../../../../../public/successLogo.svg";
 import pending from "../../../../../public/pendingLogo.svg";
 import copyIcon from "../../../../../public/copyIcon.svg";
 import { status } from "../../../../lib/paymentsData";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import withAuth from "@/hoc/withAuth";
+import axios from "axios";
 
 const Success = () => {
-  const transactionId = "2jdjmsjdn094-msdmdm3-mdk4728";
-  const [copied, setCopied] = useState(false);
-  const [isPending, setIsPending] = useState(true);
+  const searchParams = useSearchParams();
   const router = useRouter();
+  const [copied, setCopied] = useState(false);
+  const [isPending, setIsPending] = useState(false);
+  const [transactionData, setTransactionData] = useState(null);
+  const [error, setError] = useState("");
 
   const handleCopy = () => {
     navigator.clipboard
-      .writeText(transactionId)
+      .writeText(transactionData?.transactionDetails?.txnid)
       .then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000); // hide after 2 seconds
@@ -28,16 +31,53 @@ const Success = () => {
       });
   };
 
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsPending(false);
+  //   }, 3000);
+  // }, []);
+
   useEffect(() => {
-    setTimeout(() => {
-      setIsPending(false);
-    }, 3000);
-  }, []);
+    const txnId = searchParams.get("txnid");
+    const token = localStorage.getItem("accessToken");
+
+    if (!txnId) return;
+
+    const fetchTransactionStatus = async () => {
+      try {
+        const res = await axios.get(
+          `https://uftw2680orcg.elred.io/payment/getFinalPaymentStatus?txnid=${txnId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const result = res?.data?.result?.[0];
+        setTransactionData(result);
+        if (result?.status?.toLowerCase() === "pending") {
+          setIsPending(true);
+        } else {
+          setIsPending(false);
+        }
+      } catch (err) {
+        console.error("Failed to fetch transaction status ❌", err);
+        setError("Failed to fetch transaction status");
+      }
+    };
+
+    fetchTransactionStatus();
+  }, [searchParams]);
 
   const handleGoHome = () => {
-    router.push("/payments");
+    router.push(
+      `/membership/home?nccode=${transactionData?.networkClusterDetails?.networkClusterCode}`
+    );
   };
 
+  console.log(transactionData, "9999");
   return (
     <div className={style.container_div}>
       <div className={style.title}>Transaction Details</div>
@@ -51,7 +91,7 @@ const Success = () => {
         </div>
         <div className={style.trnsId}>Transaction ID</div>
         <div className={style.trnx}>
-          <div>{transactionId}</div>
+          <div>{transactionData?.transactionDetails?.txnid}</div>
           <div style={{ position: "relative" }}>
             <Image
               src={copyIcon}

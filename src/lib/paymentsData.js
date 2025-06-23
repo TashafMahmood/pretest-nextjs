@@ -9,5 +9,5 @@ export const membershipStatusName = {
   ACTIVE: "active",
   PAYMENT_REQUIRED: "paymentRequired",
   FREE_NETWORK: "freeNetwork",
-  FREE_SUBSCRIPTION: "freeSubscription",
+  FREE_USER_SUBSCRIPTION: "freeUserSubscription",
 };

@@ -124,8 +124,8 @@ const PurchasePlan = ({ data }) => {
           <input type="hidden" name="phone" value={payuFormData?.transactionDetails?.phone} />
           <input type="hidden" name="surl" value={payuFormData?.transactionDetails?.surl} />
           {/* <input type="hidden" name="surl" value={"http://localhost:3000/membership/status/success"} /> */}
-          {/* <input type="hidden" name="furl" value={payuFormData?.transactionDetails?.furl} /> */}
-          <input type="hidden" name="furl" value={`http://localhost:3000/membership/status/failed?txnid=${payuFormData?.transactionDetails?.txnid}`} />
+          <input type="hidden" name="furl" value={payuFormData?.transactionDetails?.furl} />
+          {/* <input type="hidden" name="furl" value={`http://localhost:3000/membership/status/failed?txnid=${payuFormData?.transactionDetails?.txnid}`} /> */}
           <input type="hidden" name="hash" value={payuFormData?.transactionDetails?.hash} />
           <input type="hidden" name="udf1" value={payuFormData?.transactionDetails?.udf1 || ""} />
           <input type="hidden" name="udf2" value={payuFormData?.transactionDetails?.udf2 || ""} />

@@ -13,6 +13,7 @@ import { membershipStatusName } from "../../../lib/paymentsData";
 import PurchaseCompleted from "@/component/PurchaseCompleted";
 import PurchasePlan from "@/component/PurchasePlan";
 import SessionExpired from "@/component/SessionExpired/SessionExpired";
+import FreePlan from "@/component/FreePlan";
 
 const Payments = () => {
   const searchParams = useSearchParams();
@@ -73,7 +74,7 @@ const Payments = () => {
           errorCode: "-1",
         });
       }
-    };
+    };  
 
     // Add slight delay to ensure state is properly set before API call
     const timer = setTimeout(fetchData, 50);
@@ -89,7 +90,7 @@ const Payments = () => {
     return <SessionExpired />;
   }
 
-  console.log(state, "STATE");
+  console.log(state?.membershipStatus, "STATE");
   return (
     <div className={styles.container_div}>
       <PaymentHeader />
@@ -105,6 +106,11 @@ const Payments = () => {
       {state.hasNetworkCode &&
         state.membershipStatus === membershipStatusName?.PAYMENT_REQUIRED && (
           <PurchasePlan data={state?.data} />
+        )}
+
+      {state.hasNetworkCode &&
+        state.membershipStatus === membershipStatusName?.FREE_USER_SUBSCRIPTION && (
+          <FreePlan data={state?.data} />
         )}
 
       {isOpen && <LogoutPayment />}
