@@ -1,21 +1,53 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./index.module.css";
 import Image from "next/image";
 import failed from "../../../../../public/failedLogo.svg";
 import copyIcon from "../../../../../public/copyIcon.svg";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import withAuth from "@/hoc/withAuth";
+import axios from "axios";
 
 const Failed = () => {
-  const transactionId = "2jdjmsjdn094-msdmdm3-mdk4728";
+  const searchParams = useSearchParams();
   const [copied, setCopied] = useState(false);
+  const [isPending, setIsPending] = useState(true);
   const router = useRouter();
+  const [transactionData, setTransactionData] = useState(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const txnId = searchParams.get("txnid");
+    const token = localStorage.getItem("accessToken");
+
+    if (!txnId) return;
+
+    const fetchTransactionStatus = async () => {
+      try {
+        const res = await axios.get(
+          `https://uftw2680orcg.elred.io/payment/getFinalPaymentStatus?txnid=${txnId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        setTransactionData(res?.data?.result?.[0]);
+      } catch (err) {
+        console.error("Failed to fetch transaction status ❌", err);
+        setError("Failed to fetch transaction status");
+      }
+    };
+
+    fetchTransactionStatus(); // 🔁 call it immediately
+  }, [searchParams]);
 
   const handleCopy = () => {
     navigator.clipboard
-      .writeText(transactionId)
+      .writeText(transactionData?.transactionDetails?.txnid)
       .then(() => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000); // hide after 2 seconds
@@ -26,7 +58,9 @@ const Failed = () => {
   };
 
   const handleGoHome = () => {
-    router.push("/payments");
+    router.push(
+      `/membership/home?nccode=${transactionData?.networkClusterDetails?.networkClusterCode}`
+    );
   };
 
   return (
@@ -36,11 +70,11 @@ const Failed = () => {
         <Image src={failed} alt="failed" />
         <div className={style.titleTag}>Failed</div>
         <div className={style.details}>
-          Your payment of Rs. 1 for the plan yearly is failed. Please try again.
+          Your payment of Rs. {transactionData?.transactionDetails?.amount} for the plan yearly is failed. Please try again.
         </div>
         <div className={style.trnsId}>Transaction ID</div>
         <div className={style.trnx}>
-          <div>{transactionId}</div>
+          <div>{transactionData?.transactionDetails?.txnid}</div>
           <div style={{ position: "relative" }}>
             <Image
               src={copyIcon}
