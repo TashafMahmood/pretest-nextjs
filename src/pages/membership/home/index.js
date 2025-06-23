@@ -95,7 +95,7 @@ import FullScreenLoader from "@/component/FullScreenLoader/FullScreenLoader";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
 import HomeComponent from "@/component/HomeComponent/HomeComponent";
-import { membershipStatusName } from "../paymentsData";
+import { membershipStatusName } from "../../../lib/paymentsData";
 import PurchaseCompleted from "@/component/PurchaseCompleted";
 import PurchasePlan from "@/component/PurchasePlan";
 import SessionExpired from "@/component/SessionExpired/SessionExpired";

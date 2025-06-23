@@ -6,7 +6,7 @@ import Image from "next/image";
 import success from "../../../../../public/successLogo.svg";
 import pending from "../../../../../public/pendingLogo.svg";
 import copyIcon from "../../../../../public/copyIcon.svg";
-import { status } from "../../paymentsData";
+import { status } from "../../../../lib/paymentsData";
 import { useRouter } from "next/navigation";
 import withAuth from "@/hoc/withAuth";
 

@@ -17,10 +17,48 @@
 }
 
 
-.inner_div {
+/* .inner_div {
   padding-top: 78px;
   position: relative;
   height: 100vh;
+} */
+
+.inner_div {
+  position: relative; /* Needed for the overlay to work */
+  background: #0d0d0d;
+  background-image: url("../../../public/planBGstatic.png");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  max-width: 375px;
+  margin: auto;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding-top: 78px;
+  z-index: 1; /* So overlay goes under content */
+  overflow: hidden;
+}
+
+.inner_div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.75
+  ); /* Adjust the alpha for darker or lighter overlay */
+  z-index: 0;
+}
+
+.inner_div > * {
+  position: relative; /* Bring all inner content above overlay */
+  z-index: 1;
 }
 
 .plan_div {
@@ -59,6 +97,7 @@
   transform: translate(-50%, -50%);
   width: 70%;
 }
+
 
 .congrats {
   font-size: 24px;

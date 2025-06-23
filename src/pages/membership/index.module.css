@@ -16,9 +16,6 @@
   max-width: 375px;
   margin: auto;
   color: #fff;
-  /* display: flex;
-      align-items: center;
-      justify-content: center; */
   flex-direction: column;
 }
 
