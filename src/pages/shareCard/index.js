@@ -137,6 +137,8 @@ function ShareCard(props) {
   //   return description; // Return as is if no "Title: " prefix exists
   // }
 
+  console.log(truncateWithEllipses(data?.cardTitle ?? ""),'card title....')
+
 
   return (
     <>

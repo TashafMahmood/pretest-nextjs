@@ -1,0 +1,139 @@
+// // DARK THEMING
+// $theme_bg: #0d0d0d;
+// $theme_red: #e72d38;
+// $theme_light_red: #ff2130;
+// $theme_light: #ffffff;
+// $theme_grey: #525252;
+// $theme_border: #909090;
+// $theme_shimmer_dark: #1a1d27;
+// $theme_shimmer_bg: #1e232d;
+// $theme_shimmer: #242939;
+// $theme_text: #fff;
+// $comment_likes: #e5e5e5;
+// $download_header: #04112b;
+
+// // DELETE USER ACCOUNT VARIABLES
+// $textarea_bg: #242426;
+// $disabled_text: #a2a2a4;
+// $otp_input: #363638;
+
+.main_container {
+  max-width: 375px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $theme_bg;
+}
+
+@media (max-width: 500px) {
+  .main_container {
+    max-width: 500px;
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #f7f7f7 inset !important;
+}
+
+.react-simple-toast {
+  width: 80% !important;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: white !important;
+  color: black !important;
+  font-size: 12px !important;
+  padding: 10px 20px !important;
+}
+
+//Global changes from inputcountry.scss
+
+// App.scss or _app.scss (global)
+.css-b62m3t-container {}
+.css-1u9des2-indicatorSeparator { display: none; }
+.css-1nmdiq5-menu {
+  min-width: 350px;
+  font-size: 12px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+.css-13cymwt-control {
+  border: none !important;
+  outline: none !important;
+  cursor: pointer !important;
+  background-color: #F7F7F7 !important;
+  height: 46px;
+  width: 86px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px !important;
+}
+
+.css-t3ipsp-control {
+  box-shadow: none !important;
+  border-width: 0 !important;
+  border-radius: 8px !important;
+  background-color: #F7F7F7 !important;
+
+  &:hover {
+    border-color: transparent !important;
+  }
+}
+
+.css-1xc3v61-indicatorContainer,
+.css-15lsz6c-indicatorContainer {
+  svg {
+    color: $theme_red;
+  }
+}
+
+.css-1xc3v61-indicatorContainer,
+.css-15lsz6c-indicatorContainer {
+  padding-left: 0 !important;
+}
+
+.css-art2ul-ValueContainer2 {
+  padding-right: 0 !important;
+}
+
+.css-w9q2zk-Input2 {
+  width: 35px;
+  z-index: 0;
+}

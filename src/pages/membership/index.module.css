@@ -1,0 +1,96 @@
+@font-face {
+  font-family: "AvenirPro-md";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-demi";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Demi.otf")
+    format("opentype");
+}
+
+.container_div {
+  background: #0d0d0d;
+  height: 100vh;
+  max-width: 375px;
+  margin: auto;
+  color: #fff;
+  /* display: flex;
+      align-items: center;
+      justify-content: center; */
+  flex-direction: column;
+}
+
+.sign_in {
+  font-size: 24px;
+  padding: 0 20px;
+  padding-top: 64px;
+  font-weight: 600;
+  font-family: "AvenirPro-demi";
+}
+
+.sign_in_text {
+  padding: 0 20px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 27px;
+  font-family: "AvenirPro-md";
+}
+
+.phn_title {
+  font-family: "AvenirPro-md";
+  font-size: 16px;
+  margin-top: 30px;
+}
+
+.input_wrapper {
+  padding: 0 20px;
+}
+
+/* .button_wrapper {
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+} */
+
+.button_wrapper {
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  max-width: 375px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.signin_btn {
+  background-color: #e72d38;
+  height: 48px;
+  border-radius: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-family: "AvenirPro-md";
+  cursor: pointer;
+}
+
+.disabled_btn{
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (max-width: 500px) {
+  .container_div {
+    max-width: 100%;
+  }
+
+  .button_wrapper {
+    max-width: 100%; 
+    left: 0;
+    transform: none;
+  }
+}

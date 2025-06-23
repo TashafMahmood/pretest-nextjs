@@ -1,0 +1,148 @@
+@font-face {
+  font-family: "AvenirPro-regular";
+  src: url("../../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Regular.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-demi";
+  src: url("../../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Demi.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-md";
+  src: url("../../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-lt";
+  src: url("../../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-UltLt.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-regular";
+  src: url("../../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Regular.otf")
+    format("opentype");
+}
+
+.container_div {
+  background: #0d0d0d;
+  height: 100vh;
+  max-width: 375px;
+  margin: auto;
+  color: #fff;
+  position: relative;
+  /* display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column; */
+}
+
+.title {
+  text-align: center;
+  padding-top: 60px;
+  font-size: 24px;
+  font-weight: 400;
+  color: #cccccc;
+  font-family: "AvenirPro-regular";
+}
+
+.titleTag {
+  font-size: 28px;
+  font-weight: 600;
+  font-family: "AvenirPro-demi";
+  margin-top: 30px;
+}
+
+.details {
+  font-size: 16px;
+  line-height: 24px;
+  color: #cccccc;
+  font-weight: 500;
+  font-family: "AvenirPro-md";
+  margin-top: 10px;
+}
+/* .content_div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 375px;
+} */
+
+.content_div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 90%;
+  max-width: 375px;
+}
+
+.trnsId {
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+  color: #cccccc;
+  font-family: "AvenirPro-regular";
+}
+
+.trnx {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: -0.3px;
+  color: #cccccc;
+  font-family: "AvenirPro-regular";
+  gap: 4px;
+}
+
+.copied {
+  position: absolute;
+  top: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: no-wrap;
+}
+
+.homeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home {
+  width: 60%;
+  background-color: #e72d38;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  margin-top: 50px;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "AvenirPro-md";
+  cursor: pointer;
+
+}
+
+@media (max-width: 500px) {
+  .container_div {
+    max-width: 100%;
+  }
+}

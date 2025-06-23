@@ -1,0 +1,195 @@
+import { useEffect, useState } from "react";
+import _ from "lodash";
+import styles from "./OtpPage.module.scss";
+// import "./otppage.scss";
+// import Button from "../../components/Button/Button";
+// import TitleText from "../../components/TitleText/TitleText";
+import OTPInput from "react-otp-input";
+// import SuccessPage from "../SuccessPage/SuccessPage";
+// import ConfirmationPopup from "../../components/ConfirmationPopup/ConfirmationPopup";
+// import { useCountdownTimer } from "../../components/Hooks/useCountDownTimer";
+import axios from "axios";
+// import { formatPhoneNumber } from "../../functions";
+// import SavingChangesOverlay from "../../components/SavingChangesOverlay/SavingChangesOverlay";
+import toast from "react-simple-toasts";
+import { useCountdownTimer } from "@/Hooks/useCountDownTimer";
+import { formatPhoneNumber } from "@/pages/membership/functions";
+import TitleText from "../TitleText/TitleText";
+import Button from "../Button/Button";
+import { useRouter } from "next/navigation";
+
+const OtpPage = ({
+  number,
+  reason,
+  transactionId,
+  resendOtp,
+  setExisted,
+  setDate,
+  countryPrefix,
+}) => {
+  const { REACT_APP_API_ENDPOINT } = process.env;
+  const [otp, setOtp] = useState("");
+  const [incorrectOtp, setIncorrectOtp] = useState(false);
+  const [expiredOtp, setExpiredOtp] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [confirm, setConfirm] = useState(false);
+  const [startTimer, setStartTimer] = useState(false);
+  const { timer, formatTime, resetTimer } = useCountdownTimer(60, startTimer);
+  const [submittingOverlay, setSubmittingOverlay] = useState(false);
+  const buttonDisabled = otp.length < 6;
+  const router = useRouter()
+
+  useEffect(() => {
+    setStartTimer(true);
+  }, []);
+
+
+
+  const submitRequest = async () => {
+    // setConfirm(false);
+    // setSubmittingOverlay(true);
+    const data = {
+      providedOTP: otp,
+      transactionId,
+      phoneNumber: countryPrefix + number,
+    };
+    try {
+      const res = await axios.post(
+        `https://uftw2680orcg.elred.io/payment/verifyPhoneOTP`,
+        data
+      );
+      console.log(res, "RESPONSE FROM OTP PAGE...");
+      localStorage.setItem("accessToken", res?.data?.result?.[0]?.accessToken);
+      router.push('/membership/home')
+
+      // if (res?.data?.success) {
+      //   setSuccess(true);
+      // } else if (res?.data?.errorCode === 5) {
+      //   setIncorrectOtp(true);
+      //   setOtp("");
+      // } else if (res?.data?.errorCode === 8) {
+      //   setExpiredOtp(true);
+      //   setOtp("");
+      // } else if (res?.data?.errorCode === 10) {
+      //   setDate(res?.data?.result?.[0]?.requestCreatedAt);
+      //   setExisted(true);
+      // }
+    } catch (error) {
+      if (error?.response?.data?.errorCode === 115) {
+        toast(error?.response?.data?.message);
+      } else {
+        console.log(error);
+      }
+    } finally {
+      setSubmittingOverlay(false);
+    }
+  };
+
+  let disabled = otp.length < 6;
+  const handleChangeOTP = (value) => {
+    const updatedOTP = value?.replace(/\D/g, "");
+    if (updatedOTP) {
+      setIncorrectOtp(false);
+      setExpiredOtp(false);
+    }
+    setOtp(updatedOTP);
+  };
+
+  const focusOut = _.debounce(() => {
+    document.activeElement.blur();
+  }, 100);
+
+  useEffect(() => {
+    if (otp?.toString()?.length === 6 && window?.screen?.width <= 420)
+      focusOut();
+  }, [otp]);
+
+  return (
+    <div className={styles.mainPage}>
+      <div className={styles.mainPageContent}>
+        <TitleText title={"OTP Verification"} />
+        <div className={styles.mainPageDesc}>
+          We have sent OTP to your registered mobile number{" "}
+          <span className={styles.otpPagePhoneNumber}>
+            {formatPhoneNumber(number)}
+          </span>
+          {transactionId}
+        </div>
+
+        <div className={styles.otpInputLabel}>OTP</div>
+        <div className={styles.otpInputWrapperDiv}>
+          <OTPInput
+            value={otp}
+            onChange={handleChangeOTP}
+            isInputNum
+            numInputs={6}
+            pattern="[0-9]*"
+            inputType="number"
+            renderInput={(props) => (
+              <input
+                {...props}
+                className={
+                  incorrectOtp || expiredOtp
+                    ? `${styles.customInputOne} ${styles.borderError}`
+                    : styles.customInputOne
+                }
+                type="text"
+                inputMode="decimal"
+                style={{
+                  background: "#363638",
+                  color: "white",
+                  textAlign: "center",
+                }}
+              />
+            )}
+          />
+          {incorrectOtp && (
+            <div className={styles.incorrectOtpError}>Invalid OTP entered</div>
+          )}
+          {expiredOtp && (
+            <div className={styles.incorrectOtpError}>OTP expired</div>
+          )}
+        </div>
+
+        {timer > 0 && startTimer ? (
+          <div className={styles.otpTimeRemaining}>
+            Time Remaining: {formatTime(timer)}
+          </div>
+        ) : (
+          <div className={styles.resendOtpLinkContainer}>
+            <span
+              className={styles.resendOtpLinkTxt}
+              onClick={() => {
+                resendOtp();
+                resetTimer();
+                setIncorrectOtp(false);
+                setOtp("");
+                setExpiredOtp(false);
+              }}
+            >
+              Resend OTP
+            </span>
+          </div>
+        )}
+      </div>
+
+      <div className={styles.bottom_wrapper}>
+        <div className={styles.instruction}>
+          <span className={styles.note}>Note</span> - Please check the OTP
+          entered. ( you will have to wait for the timer to complete to request
+          for a new OTP)
+        </div>
+        <div
+          className={`${styles.verify_btn} ${
+            disabled ? styles.disabled_btn : ""
+          }`}
+          onClick={!disabled ? submitRequest : undefined}
+        >
+          Verify
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default OtpPage;

@@ -1,0 +1,130 @@
+@font-face {
+  font-family: "AvenirPro-demi";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Demi.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-regular";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Regular.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-bold";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Bold.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-md";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+    format("opentype");
+}
+
+.inner_div {
+  padding: 20px;
+  padding-top: 68px;
+  overflow: auto;
+  margin-bottom: 60px;
+}
+
+.plan_container {
+  border: 1px solid #434343;
+  border-radius: 12px;
+  padding: 30px;
+  text-align: center;
+}
+
+.network_name {
+  font-size: 20px;
+  font-family: "AvenirPro-demi";
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.network_type {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.network_membership {
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "AvenirPro-regular";
+  /* margin-bottom: 8px; */
+  color: #cccccc;
+  letter-spacing: 1px;
+}
+
+.numbers {
+  font-family: "AvenirPro-bold";
+}
+
+.network_amount {
+  font-size: 24px;
+  font-family: "AvenirPro-md";
+}
+
+.benefits {
+  font-size: 14px;
+  font-family: "AvenirPro-regular";
+  color: #cccccc;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.benefit {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.b_title {
+  font-size: 16px;
+  font-family: "AvenirPro-demi";
+  font-weight: 600;
+}
+
+.b_desc {
+  font-size: 12px;
+  font-family: "AvenirPro-regular";
+  margin-bottom: 16px;
+}
+
+.stickyBtnWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  z-index: 999;
+}
+
+.stickyBtn {
+  width: 100%;
+  background-color: #e72d38;
+  color: white;
+  border: none;
+  border-radius: 100px;
+  padding: 14px;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: "AvenirPro-md";
+  font-weight: 500;
+}
+
+.nw_logo {
+  border-radius: 50%;
+  border: 1.6px solid #909090;
+}
+
+@media (min-width: 500px) {
+  .stickyBtnWrapper {
+    width: 375px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

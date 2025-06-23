@@ -114,11 +114,11 @@ a {
   background-color: rgb(58, 58, 58) !important;
 }
 
-.react-tel-input .country-list{
+.react-tel-input .country-list {
   max-height: 150px !important;
 }
 
-.react-tel-input .country-list .divider{
+.react-tel-input .country-list .divider {
   margin-bottom: 0 !important;
   padding-bottom: 0 !important;
   border-bottom: none !important;
@@ -126,4 +126,39 @@ a {
 
 .spinner-border {
   --bs-spinner-border-width: 0.15em !important;
+}
+
+.offcanvas.half-width {
+  width: 60% !important;
+  max-width: 100%;
+  background-color: #242426 !important;
+}
+
+.offcanvas-body.payment-menu {
+  padding: 20px 0 !important;
+}
+
+.offcanvas-backdrop.show {
+  width: 375px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.offerings_screen {
+  max-width: 375px !important;
+  margin: 0 auto;
+}
+
+@media (min-width: 501px) {
+  .offcanvas.half-width {
+    width: 375px !important;
+    /* max-width: 100%; */
+    background-color: #242426 !important;
+    top: 50%;
+    left: 0;
+    margin: 0 auto;
+    /* transform: translate(-50%, -50%); */
+    transform: none !important;
+  }
 }

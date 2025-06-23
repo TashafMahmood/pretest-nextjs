@@ -1,0 +1,120 @@
+@font-face {
+  font-family: "AvenirPro-md";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-regular";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Regular.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-bold";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Bold.otf")
+    format("opentype");
+}
+
+
+.inner_div {
+  padding-top: 78px;
+  position: relative;
+  height: 100vh;
+}
+
+.plan_div {
+  border: 1px solid #9e9e9f;
+  background-color: #d6d6d624;
+  margin: 0 20px;
+  padding: 16px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.ntw_name {
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "AvenirPro-md";
+}
+
+.ntw_type {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "AvenirPro-regular";
+  color: #e5e5e5;
+}
+
+.content_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+}
+
+.congrats {
+  font-size: 24px;
+  font-weight: 600;
+  font-family: "AvenirPro-demi";
+  margin-top: 20px;
+}
+
+.you_are {
+  font-size: 14px;
+  font-family: "AvenirPro-regular";
+  margin-top: 20px;
+}
+
+.leafDiv {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.members_count {
+  max-width: 160px;
+  text-align: center;
+}
+
+.count {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: "AvenirPro-bold";
+  letter-spacing: 2px;
+}
+
+.members {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "AvenirPro-md";
+}
+
+.text_msg {
+  /* padding: 0 58px; */
+  font-size: 14px;
+  font-style: 400px;
+  text-align: center;
+  font-family: "AvenirPro-regular";
+  color: #cccccc;
+  letter-spacing: -0.3px;
+  margin-top: 30px;
+}
+
+.network_logo {
+  border-radius: 50%;
+  border: 1.35px solid #909090;
+}
+
+@media (max-height: 700px) {
+  .content_div {
+    margin-top: 45px;
+  }
+}

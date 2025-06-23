@@ -1,0 +1,85 @@
+@font-face {
+  font-family: "AvenirPro-demi";
+  src: url("../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Demi.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-regular";
+  src: url("../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Regular.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-bold";
+  src: url("../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Bold.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-md";
+  src: url("../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-lt";
+  src: url("../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-UltLt.otf")
+    format("opentype");
+}
+
+.container_div2 {
+  background: #0d0d0d;
+  background-image: url("../../../../public/planBGstatic.png");
+  height: 100vh;
+  max-width: 375px;
+  margin: auto;
+  color: #fff;
+  /* display: flex;
+      align-items: center;
+      justify-content: center; */
+  /* flex-direction: column; */
+}
+
+.container_div {
+  position: relative; /* Needed for the overlay to work */
+  background: #0d0d0d;
+  background-image: url("../../../../public/planBGstatic.png");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  max-width: 375px;
+  margin: auto;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 1; /* So overlay goes under content */
+  overflow: hidden;
+}
+
+.container_div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.75
+  ); /* Adjust the alpha for darker or lighter overlay */
+  z-index: 0;
+}
+
+.container_div > * {
+  position: relative; /* Bring all inner content above overlay */
+  z-index: 1;
+}
+
+@media (max-width: 500px) {
+  .container_div {
+    max-width: 100%;
+  }
+}

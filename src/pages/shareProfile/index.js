@@ -74,6 +74,8 @@ import Head from "next/head";
 import NotFound from "@/component/notFound";
 
 function ShareProfile(props) {
+
+  console.log(props,'PROPSSSS.....')
   const { data, userCode, networkCode } = props;
 
   const truncateWithEllipses = (text) => {

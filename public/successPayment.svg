@@ -1,0 +1,39 @@
+<svg width="89" height="80" viewBox="0 0 89 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="39.2925" cy="39.2925" r="39.2925" fill="#3F3F3F"/>
+<mask id="mask0_702_4528" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="79" height="79">
+<circle cx="39.2925" cy="39.2925" r="39.2925" fill="#E0E9F9"/>
+</mask>
+<g mask="url(#mask0_702_4528)">
+<rect x="2.62109" y="6.54834" width="74.0008" height="57.629" rx="9.57849" fill="#4FB4F3"/>
+<rect x="2.62109" y="22.2656" width="74.0008" height="5.56643" fill="#2589D4"/>
+<rect x="11.1328" y="34.7075" width="20.956" height="5.89387" rx="2.94694" fill="#2589D4"/>
+<circle cx="62.213" cy="55.6642" r="22.2657" fill="#3C3C3C"/>
+</g>
+<circle cx="62.2136" cy="55.6643" r="19.6462" fill="#02BB0C"/>
+<g filter="url(#filter0_d_702_4528)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M73.7853 46.9032C74.4546 47.4947 74.5172 48.518 73.9257 49.1916L61.5126 63.2238C61.3692 63.3858 61.1948 63.5176 60.9997 63.6111C60.8046 63.7047 60.5927 63.7581 60.3765 63.7684C60.1604 63.7787 59.9444 63.7455 59.7413 63.6709C59.5382 63.5962 59.3521 63.4816 59.194 63.3339L51.0985 55.7781C50.7871 55.4846 50.6045 55.0797 50.5907 54.652C50.5769 54.2243 50.733 53.8085 51.0248 53.4955C51.3167 53.1825 51.7206 52.9978 52.1482 52.9818C52.5759 52.9657 52.9925 53.1196 53.307 53.4098L60.1935 59.8215L71.5056 47.0414C71.6467 46.8818 71.8178 46.7517 72.0092 46.6584C72.2006 46.565 72.4086 46.5104 72.6212 46.4976C72.8337 46.4847 73.0467 46.514 73.248 46.5836C73.4492 46.6532 73.6348 46.7618 73.794 46.9032H73.7853Z" fill="white"/>
+</g>
+<g clip-path="url(#clip0_702_4528)">
+<rect x="2.62109" y="6.54883" width="74.0008" height="57.629" rx="9.57849" fill="#4FB4F3"/>
+<rect x="2.62109" y="22.2661" width="74.0008" height="5.56643" fill="#2589D4"/>
+<rect x="11.1328" y="34.708" width="20.956" height="5.89387" rx="2.94694" fill="#2589D4"/>
+</g>
+<line x1="78.5032" y1="70.4607" x2="86.3165" y2="76.3579" stroke="#02BB0C" stroke-opacity="0.6" stroke-width="1.30975" stroke-linecap="round"/>
+<line x1="80.6769" y1="66.9549" x2="87.3835" y2="68.4453" stroke="#02BB0C" stroke-opacity="0.6" stroke-width="1.30975" stroke-linecap="round"/>
+<line x1="75.5567" y1="73.5703" x2="78.8755" y2="79.1016" stroke="#02BB0C" stroke-opacity="0.6" stroke-width="1.30975" stroke-linecap="round"/>
+<defs>
+<filter id="filter0_d_702_4528" x="49.935" y="45.8398" width="27.6705" height="21.2046" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dx="1.30975" dy="1.30975"/>
+<feGaussianBlur stdDeviation="0.982312"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.45 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_702_4528"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_702_4528" result="shape"/>
+</filter>
+<clipPath id="clip0_702_4528">
+<rect width="35.3632" height="34.0535" fill="white" transform="translate(2.62109 6.54834)"/>
+</clipPath>
+</defs>
+</svg>

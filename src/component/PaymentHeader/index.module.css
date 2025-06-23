@@ -1,0 +1,116 @@
+@font-face {
+  font-family: "AvenirPro-regular";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+    format("opentype");
+}
+
+.header_wrapper {
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  max-width: 375px;
+  background-color: #0d0d0d;
+  z-index: 999;
+  
+}
+
+.menu_top {
+  padding: 30px 20px 36px 20px;
+  text-align: end;
+}
+
+.close_button{
+  cursor: pointer;
+}
+
+.user_profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+.name_div {
+  display: flex;
+  flex-direction: column;
+  font-family: "AvenirPro-regular";
+}
+.username {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.name {
+  font-size: 14px;
+  font-weight: 400;
+  color: #8e8e93;
+}
+
+.menus_div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 10px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 10px;
+}
+
+.logout_menu {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  /* padding: 0 10px; */
+  margin: 0 10px;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.active_menu {
+  background-color: #363638;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.menu_title {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "AvenirPro-regular";
+  color: #fff;
+}
+
+.logout_title {
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "AvenirPro-regular";
+  color: #fff;
+}
+
+.border_line {
+  border: 0.5px solid #999999;
+  margin-bottom: 24px;
+}
+.logout_div {
+  position: absolute;
+  bottom: 30px;
+  /* width: 90%; */
+  width: calc(100% - 20px);
+  padding-left: 20px;
+}
+
+
+@media (max-width: 500px) {
+  .header_wrapper {
+    max-width: 100%;
+  }
+}

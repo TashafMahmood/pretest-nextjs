@@ -1,0 +1,132 @@
+@use '../../styles/variables.scss' as *;
+
+.country_select {
+  display: flex;
+  align-items: normal;
+  // border-bottom: 0.6px solid rgba(0, 0, 0, 0.3);
+  gap: 16px;
+  padding-top: 10px;
+  // justify-content: center;
+  // box-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+  // width: 300px;
+
+  .country_select_input_field {
+    outline: none;
+    border: none;
+    padding: 10px 0;
+    width: 100%;
+    background-color: $textarea_bg !important;
+    border-radius: 8px;
+    height: 46px;
+    padding: 0 18px;
+    color: $theme_text;
+
+    &::placeholder{
+      color: #A2A2A4;
+    }
+  }
+}
+
+// .css-b62m3t-container {
+// }
+
+// .css-1u9des2-indicatorSeparator {
+//   display: none;
+// }
+
+// .css-1nmdiq5-menu {
+//   min-width: 350px;
+//   font-size: 12px;
+
+//   /* Hide the scrollbar */
+//   &::-webkit-scrollbar {
+//     width: 5px; /* Width of the scrollbar */
+//   }
+
+//   /* Track */
+//   &::-webkit-scrollbar-track {
+//     background: transparent; /* Color of the scrollbar track */
+//   }
+
+//   /* Handle */
+//   &::-webkit-scrollbar-thumb {
+//     background: #888; /* Color of the scrollbar handle */
+//     border-radius: 5px; /* Roundness of the scrollbar handle */
+//   }
+
+//   /* Handle on hover */
+//   &::-webkit-scrollbar-thumb:hover {
+//     background: #555; /* Color of the scrollbar handle on hover */
+//   }
+// }
+
+.main {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// .css-13cymwt-control {
+//   border: none !important;
+//   outline: none !important;
+//   cursor: pointer !important;
+//   background-color: #F7F7F7 !important;
+//   // background-color: red !important;
+//   height: 46px;
+//   width: 86px;
+//   font-size: 16px;
+//   font-weight: 500;
+//   border-radius: 8px !important;
+// }
+
+// .css-t3ipsp-control {
+//   box-shadow: none !important;
+//   border-width: 0 !important;
+//   border-radius: 0 !important;
+//   cursor: pointer !important;
+//   width: 86px;
+//   height: 46px !important;
+//   background-color: #F7F7F7 !important;
+//   border-radius: 8px !important;
+
+//   &:hover{
+//       border-color: transparent !important;
+//   }
+// }
+
+// .css-1xc3v61-indicatorContainer,
+// .css-15lsz6c-indicatorContainer {
+//   svg {
+//     color: #e72d38;
+//   }
+// }
+
+// .css-1xc3v61-indicatorContainer {
+//   padding-left: 0 !important;
+// }
+
+// .css-art2ul-ValueContainer2 {
+//   padding-right: 0 !important;
+// }
+
+// .css-w9q2zk-Input2 {
+//   // background-color: yellow;
+//   width: 35px;
+//   // border: 1px solid;
+//   z-index: 0;
+// }
+
+// .css-15lsz6c-indicatorContainer {
+//   padding-left: 0 !important;
+// }
+
+.error_msg {
+  color: #e72d38;
+  font-size: 12px;
+  margin-top: 16px;
+}
+
+
+

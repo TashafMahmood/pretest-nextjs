@@ -1,0 +1,16 @@
+@use "../../styles/variables.scss" as *;
+
+@font-face {
+  font-family: "AvenirPro-demi";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Demi.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+.title_text {
+  font-size: 24px;
+  font-weight: 600;
+  color: $theme_text;
+  font-family: "AvenirPro-demi";
+}
