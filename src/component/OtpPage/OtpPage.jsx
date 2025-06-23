@@ -1,22 +1,13 @@
 import { useEffect, useState } from "react";
 import _ from "lodash";
 import styles from "./OtpPage.module.scss";
-// import "./otppage.scss";
-// import Button from "../../components/Button/Button";
-// import TitleText from "../../components/TitleText/TitleText";
 import OTPInput from "react-otp-input";
-// import SuccessPage from "../SuccessPage/SuccessPage";
-// import ConfirmationPopup from "../../components/ConfirmationPopup/ConfirmationPopup";
-// import { useCountdownTimer } from "../../components/Hooks/useCountDownTimer";
 import axios from "axios";
-// import { formatPhoneNumber } from "../../functions";
-// import SavingChangesOverlay from "../../components/SavingChangesOverlay/SavingChangesOverlay";
 import toast from "react-simple-toasts";
 import { useCountdownTimer } from "@/Hooks/useCountDownTimer";
-import { formatPhoneNumber } from "@/pages/membership/functions";
 import TitleText from "../TitleText/TitleText";
-import Button from "../Button/Button";
 import { useRouter } from "next/navigation";
+import { formatPhoneNumber } from "@/lib/functions";
 
 const OtpPage = ({
   number,
