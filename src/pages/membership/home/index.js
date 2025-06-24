@@ -14,6 +14,7 @@ import PurchaseCompleted from "@/component/PurchaseCompleted";
 import PurchasePlan from "@/component/PurchasePlan";
 import SessionExpired from "@/component/SessionExpired/SessionExpired";
 import FreePlan from "@/component/FreePlan";
+import FreeUserSubscription from "@/component/FreeUserSubscription";
 
 const Payments = () => {
   const searchParams = useSearchParams();
@@ -90,7 +91,6 @@ const Payments = () => {
     return <SessionExpired />;
   }
 
-  console.log(state?.membershipStatus, "STATE");
   return (
     <div className={styles.container_div}>
       <PaymentHeader />
@@ -99,7 +99,7 @@ const Payments = () => {
       {!state.hasNetworkCode && <HomeComponent />}
 
       {state.hasNetworkCode &&
-        state.membershipStatus === membershipStatusName?.FREE_NETWORK && (
+        state.membershipStatus === membershipStatusName?.ACTIVE && (
           <PurchaseCompleted data={state?.data} />
         )}
 
@@ -109,8 +109,13 @@ const Payments = () => {
         )}
 
       {state.hasNetworkCode &&
-        state.membershipStatus === membershipStatusName?.FREE_USER_SUBSCRIPTION && (
+        state.membershipStatus === membershipStatusName?.FREE_NETWORK && (
           <FreePlan data={state?.data} />
+        )}
+
+      {state.hasNetworkCode &&
+        state.membershipStatus === membershipStatusName?.FREE_USER_SUBSCRIPTION && (
+          <FreeUserSubscription data={state?.data} />
         )}
 
       {isOpen && <LogoutPayment />}

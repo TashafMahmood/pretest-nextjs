@@ -157,3 +157,10 @@
     margin-top: 45px;
   }
 }
+
+@media (max-width: 500px) {
+  .inner_div {
+    max-width: none; /* ✅ overrides max-width */
+    width: 100vw;     /* ✅ ensures full screen width */
+  }
+}

@@ -4,6 +4,7 @@ import successPayment from "../../../public/successPayment.svg";
 import leftLeaf from "../../../public/leftLeaf.svg";
 import rightLeaf from "../../../public/rightLeaf.svg";
 import Image from "next/image";
+import moment from "moment";
 
 const PurchaseCompleted = ({ data }) => {
   return (
@@ -18,7 +19,9 @@ const PurchaseCompleted = ({ data }) => {
         />
         <div>
           <div className={style.ntw_name}>
-            {data?.networkClusterDetails?.name}
+            {data?.networkClusterDetails?.name?.length > 18
+              ? data.networkClusterDetails.name.slice(0, 18) + "..."
+              : data?.networkClusterDetails?.name}
           </div>
           <div className={style.ntw_type}>Premium Network</div>
         </div>
@@ -37,7 +40,15 @@ const PurchaseCompleted = ({ data }) => {
         </div>
         <div className={style.text_msg}>
           You've made the payment for {data?.networkClusterDetails?.name} and
-          now is a part of this network, your subscription ends on 26 June 2026.
+          now is a part of this network, your subscription starts on{" "}
+          {moment(data?.memberShipDetails?.subscriptionStartDate).format(
+            "DD MMMM YYYY"
+          )}{" "}
+          and ends on{" "}
+          {moment(data?.memberShipDetails?.subscriptionEndDate).format(
+            "DD MMMM YYYY"
+          )}
+          .
         </div>
       </div>
     </div>
