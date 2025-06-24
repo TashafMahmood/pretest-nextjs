@@ -37,24 +37,24 @@ const Login = () => {
     }
   };
 
-  const resendOTP = async () => {
-    try {
-      const res = await axios.post(
-        "https://uftw2680orcg.elred.io/payment/sendPhoneOTP",
-        {
-          phoneNumber: countryPrefix + number,
-          hashId: "elred",
-        }
-      );
-      localStorage.setItem("trxId", res?.data?.result?.[0]?.transactionId);
+  // const resendOTP = async () => {
+  //   try {
+  //     const res = await axios.post(
+  //       "https://uftw2680orcg.elred.io/payment/sendPhoneOTP",
+  //       {
+  //         phoneNumber: countryPrefix + number,
+  //         hashId: "elred",
+  //       }
+  //     );
+  //     localStorage.setItem("trxId", res?.data?.result?.[0]?.transactionId);
 
-      setLoading(false);
-      setOtpPage(true);
-      console.log(res?.data?.result?.[0], "response");
-    } catch (error) {
-      setLoading(false);
-    }
-  }
+  //     setLoading(false);
+  //     setOtpPage(true);
+  //     console.log(res?.data?.result?.[0], "response");
+  //   } catch (error) {
+  //     setLoading(false);
+  //   }
+  // }
 
   
   return (

@@ -1,11 +1,14 @@
 import React from "react";
 import style from "./index.module.css";
 import { useLogout } from "@/context/LogoutContext";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const LogoutPayment = () => {
   const { setIsOpen } = useLogout();
-  const router = useRouter()
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const nccode = searchParams.get("nccode");
 
   const logoutNow = () => {
     setIsOpen(false);
@@ -14,8 +17,8 @@ const LogoutPayment = () => {
   const handleLogout = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("userdata");
-    localStorage.removeItem("trxId")
-    router.push("/membership");
+    localStorage.removeItem("trxId");
+    router.push(nccode ? `/membership?nccode=${nccode}` : "/membership");
     setIsOpen(false);
   };
 

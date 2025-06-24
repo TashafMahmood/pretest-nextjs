@@ -6,7 +6,7 @@ import axios from "axios";
 import toast from "react-simple-toasts";
 import { useCountdownTimer } from "@/Hooks/useCountDownTimer";
 import TitleText from "../TitleText/TitleText";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { formatPhoneNumber } from "@/lib/functions";
 
 const OtpPage = ({
@@ -29,16 +29,15 @@ const OtpPage = ({
   const [submittingOverlay, setSubmittingOverlay] = useState(false);
   const buttonDisabled = otp.length < 6;
   const router = useRouter()
+  const searchParams = useSearchParams();
+
+  const nccode = searchParams.get("nccode")
 
   useEffect(() => {
     setStartTimer(true);
   }, []);
 
-
-
   const submitRequest = async () => {
-    // setConfirm(false);
-    // setSubmittingOverlay(true);
     const data = {
       providedOTP: otp,
       transactionId,
@@ -49,23 +48,10 @@ const OtpPage = ({
         `https://uftw2680orcg.elred.io/payment/verifyPhoneOTP`,
         data
       );
-      console.log(res, "RESPONSE FROM OTP PAGE...");
       localStorage.setItem("accessToken", res?.data?.result?.[0]?.accessToken);
       localStorage.setItem("userdata", JSON.stringify(res?.data?.result?.[0]));
-      router.push('/membership/home')
+      router.push(`/membership/home?nccode=${nccode}`)
 
-      // if (res?.data?.success) {
-      //   setSuccess(true);
-      // } else if (res?.data?.errorCode === 5) {
-      //   setIncorrectOtp(true);
-      //   setOtp("");
-      // } else if (res?.data?.errorCode === 8) {
-      //   setExpiredOtp(true);
-      //   setOtp("");
-      // } else if (res?.data?.errorCode === 10) {
-      //   setDate(res?.data?.result?.[0]?.requestCreatedAt);
-      //   setExisted(true);
-      // }
     } catch (error) {
       if (error?.response?.data?.errorCode === 115) {
         toast(error?.response?.data?.message);

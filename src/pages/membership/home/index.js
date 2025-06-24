@@ -15,6 +15,7 @@ import PurchasePlan from "@/component/PurchasePlan";
 import SessionExpired from "@/component/SessionExpired/SessionExpired";
 import FreePlan from "@/component/FreePlan";
 import FreeUserSubscription from "@/component/FreeUserSubscription";
+import FreePlanComp from "@/component/FreePlanComp";
 
 const Payments = () => {
   const searchParams = useSearchParams();
@@ -119,7 +120,8 @@ const Payments = () => {
         <PurchasePlan data={state?.data} />
       ) : (
         <>
-          {state.membershipStatus === membershipStatusName?.ACTIVE && (
+          {state.membershipStatus ===
+            membershipStatusName?.ACTIVE && (
             <PurchaseCompleted data={state?.data} setRenew={setRenew} />
           )}
 
