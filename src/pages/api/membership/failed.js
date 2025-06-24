@@ -7,12 +7,10 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const { txnid } = req.body;
 
-    console.log("Received txnid from PayU:", txnid);
-
     // Redirect to your success page using a GET request
     return res.redirect(
       302,
-      `/membership/status/success?txnid=${encodeURIComponent(txnid || "")}`
+      `/membership/status/failed?txnid=${encodeURIComponent(txnid || "")}`
     );
   } else {
     res.setHeader("Allow", ["POST"]);
