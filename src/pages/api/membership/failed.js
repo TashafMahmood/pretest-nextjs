@@ -3,15 +3,19 @@
 //     res.redirect(301, '/membership/status/failed');
 //   }
 
-export default function handler(req, res) {
-  const { txnid } = req.query;
+export default async function handler(req, res) {
+  if (req.method === "POST") {
+    const { txnid } = req.body;
 
-  // Log for debugging (optional)
-  console.log("Redirecting to success page with txnid:", txnid);
+    console.log("Received txnid from PayU:", txnid);
 
-  // Build redirect URL with txnid
-  const redirectUrl = `/membership/status/success?txnid=${txnid || ""}`;
-
-  // 307 ensures the request method remains the same (if POST)
-  res.redirect(307, redirectUrl);
+    // Redirect to your success page using a GET request
+    return res.redirect(
+      302,
+      `/membership/status/success?txnid=${encodeURIComponent(txnid || "")}`
+    );
+  } else {
+    res.setHeader("Allow", ["POST"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 }
