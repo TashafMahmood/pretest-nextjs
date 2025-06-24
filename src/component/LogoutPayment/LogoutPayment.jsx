@@ -13,7 +13,7 @@ const LogoutPayment = () => {
 
   const handleLogout = () => {
     localStorage.clear("accessToken");
-    router.push("/payments/login")
+    router.push("/membership")
   };
 
   return (

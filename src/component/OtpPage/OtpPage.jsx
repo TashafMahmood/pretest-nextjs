@@ -104,7 +104,6 @@ const OtpPage = ({
           <span className={styles.otpPagePhoneNumber}>
             {formatPhoneNumber(number)}
           </span>
-          {transactionId}
         </div>
 
         <div className={styles.otpInputLabel}>OTP</div>

@@ -162,3 +162,10 @@ a {
     transform: none !important;
   }
 }
+
+@media(max-width: 500px){
+  .offcanvas-backdrop.show{
+    max-width: 500px;
+    width: 100%;
+  }
+}

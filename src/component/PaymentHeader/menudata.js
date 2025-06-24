@@ -3,7 +3,7 @@ export const menuData = [
     id: 1,
     title: "Home",
     logo: "home",
-    path: "/payments",
+    path: "/membership/home",
   },
   {
     id: 2,
