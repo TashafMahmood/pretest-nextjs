@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       // Redirect to your success page using a GET request
       return res.redirect(
         302,
-        `/membership/status/failed?txnid=${encodeURIComponent(txnid || "")}`
+        `/membership/status/success?txnid=${encodeURIComponent(txnid || "")}`
       );
     } else {
       res.setHeader("Allow", ["POST"]);
