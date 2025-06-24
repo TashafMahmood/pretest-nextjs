@@ -21,16 +21,16 @@ const Payments = () => {
   const { isOpen } = useLogout();
   const [state, setState] = useState({
     isLoading: true,
-    hasNetworkCode: null, // null = initial state, false = no code, string = has code
+    hasNetworkCode: null,
     membershipStatus: null,
     data: [],
     errorCode: null,
   });
+  const [renew, setRenew] = useState(false);
 
   useEffect(() => {
     const nccode = searchParams.get("nccode");
 
-    // Immediate state update to prevent initial flash
     setState((prev) => ({ ...prev, isLoading: true }));
 
     const fetchData = async () => {
@@ -75,14 +75,12 @@ const Payments = () => {
           errorCode: "-1",
         });
       }
-    };  
+    };
 
-    // Add slight delay to ensure state is properly set before API call
     const timer = setTimeout(fetchData, 50);
     return () => clearTimeout(timer);
   }, [searchParams]);
 
-  // Show loader during initial load and when we haven't determined the state yet
   if (state.isLoading || state.hasNetworkCode === null) {
     return <FullScreenLoader />;
   }
@@ -95,18 +93,16 @@ const Payments = () => {
     <div className={styles.container_div}>
       <PaymentHeader />
 
-      {/* Render appropriate component based on final state */}
       {!state.hasNetworkCode && <HomeComponent />}
 
-      {state.hasNetworkCode &&
+      {/* {state.hasNetworkCode &&
         state.membershipStatus === membershipStatusName?.ACTIVE && (
-          <PurchaseCompleted data={state?.data} />
+          <PurchaseCompleted data={state?.data} setRenew={setRenew} />
         )}
 
       {state.hasNetworkCode &&
-        state.membershipStatus === membershipStatusName?.PAYMENT_REQUIRED && (
-          <PurchasePlan data={state?.data} />
-        )}
+        (state.membershipStatus === membershipStatusName?.PAYMENT_REQUIRED ||
+          renew) && <PurchasePlan data={state?.data} />}
 
       {state.hasNetworkCode &&
         state.membershipStatus === membershipStatusName?.FREE_NETWORK && (
@@ -114,9 +110,34 @@ const Payments = () => {
         )}
 
       {state.hasNetworkCode &&
-        state.membershipStatus === membershipStatusName?.FREE_USER_SUBSCRIPTION && (
+        state.membershipStatus ===
+          membershipStatusName?.FREE_USER_SUBSCRIPTION && (
           <FreeUserSubscription data={state?.data} />
-        )}
+        )} */}
+
+      {state.hasNetworkCode && renew ? (
+        <PurchasePlan data={state?.data} />
+      ) : (
+        <>
+          {state.membershipStatus === membershipStatusName?.ACTIVE && (
+            <PurchaseCompleted data={state?.data} setRenew={setRenew} />
+          )}
+
+          {state.membershipStatus ===
+            membershipStatusName?.PAYMENT_REQUIRED && (
+            <PurchasePlan data={state?.data} />
+          )}
+
+          {state.membershipStatus === membershipStatusName?.FREE_NETWORK && (
+            <FreePlan data={state?.data} />
+          )}
+
+          {state.membershipStatus ===
+            membershipStatusName?.FREE_USER_SUBSCRIPTION && (
+            <FreeUserSubscription data={state?.data} />
+          )}
+        </>
+      )}
 
       {isOpen && <LogoutPayment />}
     </div>

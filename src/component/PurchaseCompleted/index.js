@@ -6,7 +6,7 @@ import rightLeaf from "../../../public/rightLeaf.svg";
 import Image from "next/image";
 import moment from "moment";
 
-const PurchaseCompleted = ({ data }) => {
+const PurchaseCompleted = ({ data, setRenew }) => {
   return (
     <div className={style.inner_div}>
       <div className={style.plan_div}>
@@ -50,6 +50,9 @@ const PurchaseCompleted = ({ data }) => {
           )}
           .
         </div>
+      </div>
+      <div className={style.stickyBtnWrapper} onClick={()=>setRenew(true)}>
+        <button className={style.stickyBtn}>Renew now</button>
       </div>
     </div>
   );
