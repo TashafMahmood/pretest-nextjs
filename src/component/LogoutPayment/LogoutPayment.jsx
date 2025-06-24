@@ -12,7 +12,9 @@ const LogoutPayment = () => {
   };
 
   const handleLogout = () => {
-    localStorage.clear("accessToken");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("userdata");
+    localStorage.removeItem("trxId")
     router.push("/membership");
     setIsOpen(false);
   };

@@ -47,9 +47,10 @@ const Login = () => {
         }
       );
       localStorage.setItem("trxId", res?.data?.result?.[0]?.transactionId);
+
       setLoading(false);
       setOtpPage(true);
-      console.log(res?.data?.result?.[0]?.transactionId, "response");
+      console.log(res?.data?.result?.[0], "response");
     } catch (error) {
       setLoading(false);
     }

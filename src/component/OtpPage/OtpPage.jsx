@@ -51,6 +51,7 @@ const OtpPage = ({
       );
       console.log(res, "RESPONSE FROM OTP PAGE...");
       localStorage.setItem("accessToken", res?.data?.result?.[0]?.accessToken);
+      localStorage.setItem("userdata", JSON.stringify(res?.data?.result?.[0]));
       router.push('/membership/home')
 
       // if (res?.data?.success) {

@@ -108,6 +108,11 @@
   padding-left: 20px;
 }
 
+.dpImg{
+  border: 1px solid #909090;
+  border-radius: 50%;
+}
+
 
 @media (max-width: 500px) {
   .header_wrapper {
