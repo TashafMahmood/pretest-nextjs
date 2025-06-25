@@ -1,6 +1,7 @@
 // hoc/withGuest.js
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 
 const withGuest = (WrappedComponent) => {
   return function GuestComponent(props) {
