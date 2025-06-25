@@ -16,6 +16,7 @@ import SessionExpired from "@/component/SessionExpired/SessionExpired";
 import FreePlan from "@/component/FreePlan";
 import FreeUserSubscription from "@/component/FreeUserSubscription";
 import FreePlanComp from "@/component/FreePlanComp";
+import InvalidNetworkComp from "@/component/InvalidNetwork/InvalidNetwork";
 
 const Payments = () => {
   const searchParams = useSearchParams();
@@ -67,14 +68,32 @@ const Payments = () => {
           errorCode: null,
         });
       } catch (error) {
-        console.error("API ERROR:", error);
-        setState({
-          isLoading: false,
-          hasNetworkCode: false,
-          membershipStatus: null,
-          data: [],
-          errorCode: "-1",
-        });
+        console.error("API ERROR:", error?.response?.data?.errorCode);
+        if (error?.response?.data?.errorCode == -1) {
+          setState({
+            isLoading: false,
+            hasNetworkCode: true,
+            membershipStatus: null,
+            data: [],
+            errorCode: -1,
+          });
+        } else if (error?.response?.data?.errorCode == 1) {
+          setState({
+            isLoading: false,
+            hasNetworkCode: true,
+            membershipStatus: null,
+            data: [],
+            errorCode: 1,
+          });
+        } else {
+          setState({
+            isLoading: false,
+            hasNetworkCode: false,
+            membershipStatus: null,
+            data: [],
+            errorCode: error?.response?.data?.errorCode,
+          });
+        }
       }
     };
 
@@ -86,16 +105,14 @@ const Payments = () => {
     return <FullScreenLoader />;
   }
 
-  if (state.errorCode === "-1") {
-    return <SessionExpired />;
-  }
-
   return (
     <div className={styles.container_div}>
       <PaymentHeader />
 
-      {!state.hasNetworkCode && <HomeComponent />}
+      {!state.hasNetworkCode && state.errorCode == null && <HomeComponent />}
 
+      {state.hasNetworkCode && state.errorCode == -1 && <InvalidNetworkComp />}
+      {state.hasNetworkCode && state.errorCode == 1 && <SessionExpired />}
       {/* {state.hasNetworkCode &&
         state.membershipStatus === membershipStatusName?.ACTIVE && (
           <PurchaseCompleted data={state?.data} setRenew={setRenew} />
@@ -120,8 +137,7 @@ const Payments = () => {
         <PurchasePlan data={state?.data} />
       ) : (
         <>
-          {state.membershipStatus ===
-            membershipStatusName?.ACTIVE && (
+          {state.membershipStatus === membershipStatusName?.ACTIVE && (
             <PurchaseCompleted data={state?.data} setRenew={setRenew} />
           )}
 
