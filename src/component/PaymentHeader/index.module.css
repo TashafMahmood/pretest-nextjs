@@ -89,6 +89,18 @@
   color: #fff;
 }
 
+.disabled_menu_title{
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "AvenirPro-regular";
+  color: #fff;
+  opacity: 0.5;
+}
+
+.disabled_img{
+  opacity: 0.5;
+}
+
 .logout_title {
   font-size: 16px;
   font-weight: 500;

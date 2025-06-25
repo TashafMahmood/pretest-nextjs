@@ -69,7 +69,7 @@ const Login = () => {
             <div className={style.sign_in_text}>
               Enter the phone number used to sign up on ElRed.
             </div>
-            <div className={style.input_wrapper}>
+            {/* <div className={style.input_wrapper}>
               <div className={style.phn_title}>Phone number</div>
               <InputCountry
                 number={number}
@@ -79,6 +79,10 @@ const Login = () => {
                 countryPrefix={countryPrefix}
                 setCountryPrefix={setCountryPrefix}
               />
+            </div> */}
+            <div className={style.input_wrapper}>
+              <div className={style.phn_title}>Email id</div>
+              <input className={style.email_input}/>
             </div>
             <div className={style.button_wrapper}>
               <div

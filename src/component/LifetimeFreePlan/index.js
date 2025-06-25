@@ -7,7 +7,7 @@ import freeNetwork from "../../../public/freenetwork.svg";
 import Image from "next/image";
 import moment from "moment";
 
-const FreePlanComp = ({ data, setRenew }) => {
+const LifetimeFreePlan = ({ data, setRenew }) => {
   return (
     <div className={style.inner_div}>
       <div className={style.plan_div}>
@@ -29,14 +29,14 @@ const FreePlanComp = ({ data, setRenew }) => {
       </div>
       <div className={style.content_div}>
         <Image src={freeNetwork} alt="success" />
-        <div className={style.congrats}>Free network</div>
+        <div className={style.congrats}>Lifetime free access</div>
 
         <div className={style.text_msg}>
-          This is a Free Network. You need not Pay
+          You have been given life time free access. You need not pay
         </div>
       </div>
     </div>
   );
 };
 
-export default FreePlanComp;
+export default LifetimeFreePlan;

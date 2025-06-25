@@ -10,13 +10,15 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { formatPhoneNumber } from "@/lib/functions";
 
 const OtpPage = ({
-  number,
+  // number,
   reason,
   transactionId,
   resendOtp,
   setExisted,
   setDate,
   countryPrefix,
+  email,
+  maskedEmail,
 }) => {
   const { REACT_APP_API_ENDPOINT } = process.env;
   const [otp, setOtp] = useState("");
@@ -28,30 +30,58 @@ const OtpPage = ({
   const { timer, formatTime, resetTimer } = useCountdownTimer(60, startTimer);
   const [submittingOverlay, setSubmittingOverlay] = useState(false);
   const buttonDisabled = otp.length < 6;
-  const router = useRouter()
+  const router = useRouter();
   const searchParams = useSearchParams();
 
-  const nccode = searchParams.get("nccode")
+  const nccode = searchParams.get("nccode");
 
   useEffect(() => {
     setStartTimer(true);
   }, []);
 
+  // const submitRequest = async () => {
+  //   const data = {
+  //     providedOTP: otp,
+  //     transactionId,
+  //     phoneNumber: countryPrefix + number,
+  //   };
+  //   try {
+  //     const res = await axios.post(
+  //       `https://uftw2680orcg.elred.io/payment/verifyPhoneOTP`,
+  //       data
+  //     );
+  //     localStorage.setItem("accessToken", res?.data?.result?.[0]?.accessToken);
+  //     localStorage.setItem("userdata", JSON.stringify(res?.data?.result?.[0]));
+  //     {nccode ? router.push(`/membership/home?nccode=${nccode}`) : router.push(`/membership/home`)}
+  //   } catch (error) {
+  //     if (error?.response?.data?.errorCode === 115) {
+  //       toast(error?.response?.data?.message);
+  //     } else {
+  //       console.log(error);
+  //     }
+  //   } finally {
+  //     setSubmittingOverlay(false);
+  //   }
+  // };
+
   const submitRequest = async () => {
     const data = {
+      email,
       providedOTP: otp,
-      transactionId,
-      phoneNumber: countryPrefix + number,
     };
     try {
       const res = await axios.post(
-        `https://uftw2680orcg.elred.io/payment/verifyPhoneOTP`,
+        `https://uftw2680orcg.elred.io/payment/verifyEmailOTP`,
         data
       );
       localStorage.setItem("accessToken", res?.data?.result?.[0]?.accessToken);
       localStorage.setItem("userdata", JSON.stringify(res?.data?.result?.[0]));
-      router.push(`/membership/home?nccode=${nccode}`)
 
+      if (nccode) {
+        router.push(`/membership/home?nccode=${nccode}`);
+      } else {
+        router.push(`/membership/home`);
+      }
     } catch (error) {
       if (error?.response?.data?.errorCode === 115) {
         toast(error?.response?.data?.message);
@@ -87,10 +117,7 @@ const OtpPage = ({
       <div className={styles.mainPageContent}>
         <TitleText title={"OTP Verification"} />
         <div className={styles.mainPageDesc}>
-          We have sent OTP to your registered mobile number{" "}
-          <span className={styles.otpPagePhoneNumber}>
-            {formatPhoneNumber(number)}
-          </span>
+          We have sent OTP to your registered Email id <span>{maskedEmail}</span>
         </div>
 
         <div className={styles.otpInputLabel}>OTP</div>

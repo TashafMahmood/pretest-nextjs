@@ -126,11 +126,6 @@
   font-size: 14px;
   font-weight: 500;
   font-family: "AvenirPro-md";
-  display: -webkit-box;
-  -webkit-line-clamp: 2;       /* Show max 2 lines */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .text_msg {
@@ -140,7 +135,8 @@
   font-family: "AvenirPro-regular";
   color: #cccccc;
   letter-spacing: -0.3px;
-  margin-top: 30px;
+  margin-top: 20px;
+  line-height: 24px;
 }
 
 .network_logo {

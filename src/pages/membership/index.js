@@ -2,81 +2,144 @@
 import React, { useState } from "react";
 import style from "./index.module.css";
 import PaymentHeader from "@/component/PaymentHeader/PaymentHeader";
-import InputCountry from "@/component/InputCountry/InputCountry";
 import OtpPage from "@/component/OtpPage/OtpPage";
 import OTPloader from "@/component/OTPloader/OTPloader";
 import withGuest from "@/hoc/withGuest";
 import axios from "axios";
+import ToastMessage from "@/component/ToastMessage/ToastMessage";
 
 const Login = () => {
-  const [number, setNumber] = useState("");
-  const [phoneError, setPhoneError] = useState("");
-  const [countryPrefix, setCountryPrefix] = useState("+91");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [loading, setLoading] = useState(false);
   const [otpPage, setOtpPage] = useState(false);
   const [trnID, setTrnID] = useState("");
+  const [toastError, setToastError] = useState(false);
+  const [toastErrorMessage, setToastErrorMessage] = useState("");
+  const [invalidError, setInvalidError] = useState("");
 
-  const isDisabled = number.length < 10;
+  const validateEmail = (value) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setInvalidError(false);
+    if (!regex.test(value)) {
+      setEmailError("Invalid Email id");
+    } else {
+      setEmailError("");
+    }
+  };
+
+  const maskEmail = (email) => {
+    const [name, domain] = email.split("@");
+    if (!name || !domain) return email;
+
+    const visibleChars = name.slice(0, 3);
+    const masked = "*".repeat(name.length - 3);
+    return `${visibleChars}${masked}@${domain}`;
+  };
+
+  const isDisabled = email.length === 0 || emailError !== "";
 
   const signIn = async () => {
+    if (isDisabled) return;
     setLoading(true);
     try {
       const res = await axios.post(
-        "https://uftw2680orcg.elred.io/payment/sendPhoneOTP",
+        "https://uftw2680orcg.elred.io/payment/sendEmailOTP",
         {
-          phoneNumber: countryPrefix + number,
-          hashId: "elred",
+          email,
         }
       );
-      setTrnID(res?.data?.result?.[0]?.transactionId);
-      localStorage.setItem("trxId", res?.data?.result?.[0]?.transactionId);
+      const transactionId = res?.data?.result?.[0]?.transactionId;
+      setTrnID(transactionId);
+      localStorage.setItem("trxId", transactionId);
       setLoading(false);
       setOtpPage(true);
-      console.log(res?.data?.result?.[0]?.transactionId, "response");
+      console.log(transactionId, "response");
     } catch (error) {
+      if (error?.response?.data?.errorCode == 11) {
+        setInvalidError(true);
+      } else if (error?.response?.data?.errorCode == -1) {
+        setToastErrorMessage("Something went wrong");
+        setToastError(true);
+        setTimeout(() => {
+          setToastError(false);
+          setToastErrorMessage(""); // Optional: clear message
+        }, 3000);
+      } else if (error?.response?.data?.errorCode == 113) {
+        setToastErrorMessage(error?.response?.data?.message);
+        setToastError(true);
+        setTimeout(() => {
+          setToastError(false);
+          setToastErrorMessage(""); // Optional: clear message
+        }, 3000);
+      }else if (error?.response?.data?.errorCode == 115) {
+        setToastErrorMessage(error?.response?.data?.message);
+        setToastError(true);
+        setTimeout(() => {
+          setToastError(false);
+          setToastErrorMessage(""); // Optional: clear message
+        }, 3000);
+      }else if (error?.response?.data?.errorCode == 104) {
+        setToastErrorMessage(error?.response?.data?.message);
+        setToastError(true);
+        setTimeout(() => {
+          setToastError(false);
+          setToastErrorMessage(""); // Optional: clear message
+        }, 3000);
+      }
+      console.log(error, "error");
       setLoading(false);
     }
   };
 
-  const resendOTP = async () => {
-    try {
-      const res = await axios.post(
-        "https://uftw2680orcg.elred.io/payment/sendPhoneOTP",
-        {
-          phoneNumber: countryPrefix + number,
-          hashId: "elred",
-        }
-      );
-      localStorage.setItem("trxId", res?.data?.result?.[0]?.transactionId);
-      setLoading(false);
-      setOtpPage(true);
-      console.log(res?.data?.result?.[0]?.transactionId, "response");
-    } catch (error) {
-      setLoading(false);
-    }
+  const closeToast = () => {
+    setToastError(false);
+    setToastErrorMessage("");
   };
+
   return (
     <div className={style.container_div}>
       <>
         {otpPage ? (
-          <OtpPage resendOtp={signIn} number={number} transactionId={trnID} countryPrefix={countryPrefix}/>
+          <OtpPage
+            resendOtp={signIn}
+            email={email}
+            maskedEmail={maskEmail(email)}
+            transactionId={trnID}
+            countryPrefix="" // not used if you're validating email
+          />
         ) : (
           <>
             <PaymentHeader noDisplay={true} />
             <div className={style.sign_in}>Sign In</div>
             <div className={style.sign_in_text}>
-              Enter the phone number used to sign up on ElRed.
+              Enter your Email id used to sign up on el RED.
             </div>
             <div className={style.input_wrapper}>
-              <div className={style.phn_title}>Phone number</div>
-              <InputCountry
-                number={number}
-                setNumber={setNumber}
-                phoneError={phoneError}
-                setPhoneError={setPhoneError}
-                countryPrefix={countryPrefix}
-                setCountryPrefix={setCountryPrefix}
+              <div className={style.phn_title}>Email id</div>
+              <input
+                className={`${style.email_input} ${
+                  emailError
+                    ? style.invalid_input
+                    : email
+                    ? style.valid_input
+                    : ""
+                }`}
+                placeholder="Your Email id"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  validateEmail(e.target.value);
+                }}
               />
+              {emailError && (
+                <div className={style.error_text}>{emailError}</div>
+              )}
+              {invalidError && (
+                <div className={style.error_text}>
+                  The email is not used to create an account via the el RED App
+                </div>
+              )}
             </div>
             <div className={style.button_wrapper}>
               <div
@@ -92,6 +155,9 @@ const Login = () => {
         )}
       </>
       {loading && <OTPloader />}
+      {toastError && (
+        <ToastMessage close={closeToast} message={toastErrorMessage} />
+      )}
     </div>
   );
 };

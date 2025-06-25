@@ -7,6 +7,7 @@ import Image from "next/image";
 import moment from "moment";
 
 const PurchaseCompleted = ({ data, setRenew }) => {
+  console.log(data, "data...");
   return (
     <div className={style.inner_div}>
       <div className={style.plan_div}>
@@ -23,6 +24,10 @@ const PurchaseCompleted = ({ data, setRenew }) => {
               ? data.networkClusterDetails.name.slice(0, 18) + "..."
               : data?.networkClusterDetails?.name}
           </div>
+          {/* <div className={style.ntw_name}>
+            {data?.networkClusterDetails?.name}
+          </div> */}
+
           <div className={style.ntw_type}>Premium Network</div>
         </div>
       </div>
@@ -33,8 +38,12 @@ const PurchaseCompleted = ({ data, setRenew }) => {
         <div className={style.leafDiv}>
           <Image src={leftLeaf} alt="/" />
           <div className={style.members_count}>
-            <div className={style.count}>20,000+</div>
-            <div className={style.members}>members of Rotary Club network</div>
+            <div className={style.count}>
+              {data?.networkClusterDetails?.numberOfMembers}+
+            </div>
+            <div className={style.members}>
+              members of {data?.networkClusterDetails?.name}
+            </div>
           </div>
           <Image src={rightLeaf} alt="/" />
         </div>
@@ -51,7 +60,7 @@ const PurchaseCompleted = ({ data, setRenew }) => {
           .
         </div>
       </div>
-      <div className={style.stickyBtnWrapper} onClick={()=>setRenew(true)}>
+      <div className={style.stickyBtnWrapper} onClick={() => setRenew(true)}>
         <button className={style.stickyBtn}>Renew now</button>
       </div>
     </div>

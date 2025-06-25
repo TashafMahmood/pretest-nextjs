@@ -29,6 +29,7 @@
 
 .sign_in_text {
   padding: 0 20px;
+  padding-right: 60px;
   margin-top: 10px;
   font-size: 16px;
   font-weight: 500;
@@ -75,10 +76,49 @@
   cursor: pointer;
 }
 
-.disabled_btn{
+.disabled_btn {
   opacity: 0.5;
   cursor: default;
 }
+
+.email_input {
+  width: 100%;
+  height: 46px;
+  margin-top: 7px;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  background-color: #242426;
+  color: #fff;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "AvenirPro-md";
+}
+
+.email_input::placeholder{
+  color: #8E8E93;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: "AvenirPro-md";
+}
+
+.error_text {
+  color: #F12632;
+  font-size: 12px;
+  margin-top: 6px;
+  font-family: "AvenirPro-md";
+  font-weight: 500;
+}
+
+.invalid_input {
+  border: 1px solid #F12632;
+}
+
+.valid_input {
+  border: 1px solid #242426;
+}
+
 
 @media (max-width: 500px) {
   .container_div {
@@ -86,7 +126,7 @@
   }
 
   .button_wrapper {
-    max-width: 100%; 
+    max-width: 100%;
     left: 0;
     transform: none;
   }

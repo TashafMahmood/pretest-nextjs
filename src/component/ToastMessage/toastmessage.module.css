@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "AvenirPro-md";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+    format("opentype");
+}
+@font-face {
+  font-family: "AvenirPro-regular";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Regular.otf")
+    format("opentype");
+}
+
+.toast_div {
+  position: absolute;
+  bottom: 0;
+  z-index: 999;
+  background-color: transparent;
+  max-width: 375px;
+  width: 100%;
+}
+
+.main_toast_div {
+  /* background-color: pink; */
+  margin: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 16px;
+  border-radius: 18px;
+  background: linear-gradient(to right, #672b2b 0%, #422525 20%, #3a3a3c 100%);
+  position: relative;
+}
+
+.error_div {
+  display: flex;
+  flex-direction: column;
+}
+
+.invalid_ntw {
+  font-size: 16px;
+  font-family: "AvenirPro-md";
+  color: #f12632;
+}
+
+.error_msg_text {
+  font-size: 12px;
+  font-weight: 400;
+  color: #f3f3f3;
+  font-family: "AvenirPro-regular";
+}
+
+.close_cross_btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

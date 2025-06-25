@@ -58,12 +58,37 @@ const PaymentHeader = ({ noDisplay }) => {
         </div>
         <Offcanvas.Body className="payment-menu">
           <div className={styles.user_profile}>
-            <Image src={userData?.dpURL} width={40} height={40} alt="user-profile" className={styles.dpImg}/>
+            <Image
+              src={userData?.dpURL}
+              width={40}
+              height={40}
+              alt="user-profile"
+              className={styles.dpImg}
+            />
             <div className={styles.name_div}>
-              <span className={styles.username}>
+              {/* <span className={styles.username}>
                 {userData.firstname} {userData.lastname}
+              </span> */}
+              <span className={styles.username}>
+                {(() => {
+                  const first = userData?.firstname || "";
+                  const last = userData?.lastname || "";
+                  const full = `${first} ${last}`.trim();
+
+                  if (full.length <= 20) return full;
+
+                  if (`${first}`.length <= 20) {
+                    return first;
+                  }
+
+                  return `${first}`.substring(0, 17) + "..."; // show ellipsis if even first is too long
+                })()}
               </span>
-              <span className={styles.name}>{userData.userName}</span>
+              <span className={styles.name}>
+                {userData?.userName?.length > 18
+                  ? `${userData.userName.slice(0, 15)}...`
+                  : userData?.userName}
+              </span>
             </div>
           </div>
           <div className={styles.menus_div}>
@@ -79,8 +104,17 @@ const PaymentHeader = ({ noDisplay }) => {
                   alt={data?.logo}
                   width={36}
                   height={36}
+                  className={data?.disabled && styles.disabled_img}
                 />
-                <div className={styles.menu_title}>{data?.title}</div>
+                <div
+                  className={
+                    data?.disabled
+                      ? styles.disabled_menu_title
+                      : styles.menu_title
+                  }
+                >
+                  {data?.title}
+                </div>
               </div>
             ))}
           </div>

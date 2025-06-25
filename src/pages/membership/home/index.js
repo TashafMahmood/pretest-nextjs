@@ -13,10 +13,10 @@ import { membershipStatusName } from "../../../lib/paymentsData";
 import PurchaseCompleted from "@/component/PurchaseCompleted";
 import PurchasePlan from "@/component/PurchasePlan";
 import SessionExpired from "@/component/SessionExpired/SessionExpired";
-import FreePlan from "@/component/FreePlan";
-import FreeUserSubscription from "@/component/FreeUserSubscription";
+
 import FreePlanComp from "@/component/FreePlanComp";
 import InvalidNetworkComp from "@/component/InvalidNetwork/InvalidNetwork";
+import LifetimeFreePlan from "@/component/LifetimeFreePlan";
 
 const Payments = () => {
   const searchParams = useSearchParams();
@@ -147,12 +147,12 @@ const Payments = () => {
           )}
 
           {state.membershipStatus === membershipStatusName?.FREE_NETWORK && (
-            <FreePlan data={state?.data} />
+            <FreePlanComp data={state?.data} />
           )}
 
           {state.membershipStatus ===
             membershipStatusName?.FREE_USER_SUBSCRIPTION && (
-            <FreeUserSubscription data={state?.data} />
+            <LifetimeFreePlan data={state?.data} />
           )}
         </>
       )}
