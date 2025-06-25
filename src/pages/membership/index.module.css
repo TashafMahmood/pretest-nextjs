@@ -119,6 +119,12 @@
   border: 1px solid #242426;
 }
 
+.submit_button_spinner {
+  border-width: 2px !important;
+  color: #ff2130 !important;
+  height: 20px !important;
+  width: 20px !important;
+}
 
 @media (max-width: 500px) {
   .container_div {

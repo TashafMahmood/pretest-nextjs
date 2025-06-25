@@ -7,6 +7,8 @@ import OTPloader from "@/component/OTPloader/OTPloader";
 import withGuest from "@/hoc/withGuest";
 import axios from "axios";
 import ToastMessage from "@/component/ToastMessage/ToastMessage";
+import { Spinner } from "react-bootstrap";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -72,14 +74,14 @@ const Login = () => {
           setToastError(false);
           setToastErrorMessage(""); // Optional: clear message
         }, 3000);
-      }else if (error?.response?.data?.errorCode == 115) {
+      } else if (error?.response?.data?.errorCode == 115) {
         setToastErrorMessage(error?.response?.data?.message);
         setToastError(true);
         setTimeout(() => {
           setToastError(false);
           setToastErrorMessage(""); // Optional: clear message
         }, 3000);
-      }else if (error?.response?.data?.errorCode == 104) {
+      } else if (error?.response?.data?.errorCode == 104) {
         setToastErrorMessage(error?.response?.data?.message);
         setToastError(true);
         setTimeout(() => {
@@ -142,13 +144,28 @@ const Login = () => {
               )}
             </div>
             <div className={style.button_wrapper}>
-              <div
+              {/* <div
                 className={`${style.signin_btn} ${
                   isDisabled ? style.disabled_btn : ""
                 }`}
                 onClick={signIn}
               >
                 Sign In
+              </div> */}
+              <div
+                className={`${style.signin_btn} ${
+                  isDisabled || loading ? style.disabled_btn : ""
+                }`}
+                onClick={!isDisabled && !loading ? signIn : undefined}
+              >
+                {loading ? (
+                  <Spinner
+                    animation="border"
+                    className={style.submit_button_spinner}
+                  />
+                ) : (
+                  "Sign In"
+                )}
               </div>
             </div>
           </>
