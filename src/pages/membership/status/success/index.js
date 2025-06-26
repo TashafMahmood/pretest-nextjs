@@ -10,6 +10,8 @@ import { status } from "../../../../lib/paymentsData";
 import { useRouter, useSearchParams } from "next/navigation";
 import withAuth from "@/hoc/withAuth";
 import axios from "axios";
+import { getBrowserType } from "@/lib/functions";
+import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
 
 const Success = () => {
   const searchParams = useSearchParams();
@@ -18,6 +20,8 @@ const Success = () => {
   const [isPending, setIsPending] = useState(false);
   const [transactionData, setTransactionData] = useState(null);
   const [error, setError] = useState("");
+
+  const BROWSER_TYPE = getBrowserType();
 
   const handleCopy = () => {
     navigator.clipboard
@@ -77,7 +81,17 @@ const Success = () => {
     );
   };
 
-  console.log(transactionData, "9999");
+  if (
+    BROWSER_TYPE !== "Google Chrome" &&
+    BROWSER_TYPE !== "ios" &&
+    BROWSER_TYPE !== "safari mac" &&
+    BROWSER_TYPE !== "Microsoft Edge" &&
+    BROWSER_TYPE !== "Mozilla Firefox" &&
+    BROWSER_TYPE !== "Unknown browser"
+  ) {
+    return <BrowserNotSupported />;
+  }
+
   return (
     <div className={style.container_div}>
       <div className={style.title}>Transaction Details</div>
@@ -88,9 +102,10 @@ const Success = () => {
         </div>
         <div className={style.details}>
           {isPending
-            ? status?.PENDING_STATUS_DESC
-            : `Your payment of Rs. 1 for the plan yearly is processed successfully.`}
+            ? `Your payment of Rs. ${transactionData?.transactionDetails?.amount} for the yearly plan is pending now. Please avoid making a duplicate payment. Kindly check again after some time.`
+            : `Your payment of Rs. ${transactionData?.transactionDetails?.amount} for the yearly plan is processed successfully.`}
         </div>
+
         <div className={style.trnsId}>Transaction ID</div>
         <div className={style.trnx}>
           <div>{transactionData?.transactionDetails?.txnid}</div>

@@ -8,7 +8,8 @@ import withGuest from "@/hoc/withGuest";
 import axios from "axios";
 import ToastMessage from "@/component/ToastMessage/ToastMessage";
 import { Spinner } from "react-bootstrap";
-
+import { getBrowserType } from "@/lib/functions";
+import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -19,6 +20,8 @@ const Login = () => {
   const [toastError, setToastError] = useState(false);
   const [toastErrorMessage, setToastErrorMessage] = useState("");
   const [invalidError, setInvalidError] = useState("");
+
+  const BROWSER_TYPE = getBrowserType();
 
   const validateEmail = (value) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -31,12 +34,35 @@ const Login = () => {
   };
 
   const maskEmail = (email) => {
-    const [name, domain] = email.split("@");
+    if (!email || !email.includes("@")) return email;
+
+    const [name, domain] = email.toLowerCase().trim().split("@");
+
     if (!name || !domain) return email;
 
-    const visibleChars = name.slice(0, 3);
-    const masked = "*".repeat(name.length - 3);
-    return `${visibleChars}${masked}@${domain}`;
+    let visible = "";
+    let masked = "";
+
+    const len = name.length;
+
+    if (len === 1) {
+      visible = "";
+      masked = "*";
+    } else if (len === 2) {
+      visible = name.slice(0, 1);
+      masked = "*";
+    } else if (len === 3) {
+      visible = name.slice(0, 1);
+      masked = "*".repeat(2);
+    } else if (len === 4) {
+      visible = name.slice(0, 2);
+      masked = "*".repeat(2);
+    } else {
+      visible = name.slice(0, 3);
+      masked = "*".repeat(len - 3);
+    }
+
+    return `${visible}${masked}@${domain}`;
   };
 
   const isDisabled = email.length === 0 || emailError !== "";
@@ -48,7 +74,7 @@ const Login = () => {
       const res = await axios.post(
         "https://uftw2680orcg.elred.io/payment/sendEmailOTP",
         {
-          email,
+          email: email.toLowerCase().trim(),
         }
       );
       const transactionId = res?.data?.result?.[0]?.transactionId;
@@ -56,7 +82,6 @@ const Login = () => {
       localStorage.setItem("trxId", transactionId);
       setLoading(false);
       setOtpPage(true);
-      console.log(transactionId, "response");
     } catch (error) {
       if (error?.response?.data?.errorCode == 11) {
         setInvalidError(true);
@@ -98,6 +123,17 @@ const Login = () => {
     setToastError(false);
     setToastErrorMessage("");
   };
+
+  if (
+    BROWSER_TYPE !== "Google Chrome" &&
+    BROWSER_TYPE !== "ios" &&
+    BROWSER_TYPE !== "safari mac" &&
+    BROWSER_TYPE !== "Microsoft Edge" &&
+    BROWSER_TYPE !== "Mozilla Firefox" &&
+    BROWSER_TYPE !== "Unknown browser"
+  ) {
+    return <BrowserNotSupported />;
+  }
 
   return (
     <div className={style.container_div}>
@@ -144,14 +180,6 @@ const Login = () => {
               )}
             </div>
             <div className={style.button_wrapper}>
-              {/* <div
-                className={`${style.signin_btn} ${
-                  isDisabled ? style.disabled_btn : ""
-                }`}
-                onClick={signIn}
-              >
-                Sign In
-              </div> */}
               <div
                 className={`${style.signin_btn} ${
                   isDisabled || loading ? style.disabled_btn : ""

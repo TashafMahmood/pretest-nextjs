@@ -8,6 +8,8 @@ import copyIcon from "../../../../../public/copyIcon.svg";
 import { useRouter, useSearchParams } from "next/navigation";
 import withAuth from "@/hoc/withAuth";
 import axios from "axios";
+import { getBrowserType } from "@/lib/functions";
+import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
 
 const Failed = () => {
   const searchParams = useSearchParams();
@@ -16,6 +18,8 @@ const Failed = () => {
   const router = useRouter();
   const [transactionData, setTransactionData] = useState(null);
   const [error, setError] = useState("");
+
+  const BROWSER_TYPE = getBrowserType();
 
   useEffect(() => {
     const txnId = searchParams.get("txnid");
@@ -63,6 +67,17 @@ const Failed = () => {
     );
   };
 
+  if (
+    BROWSER_TYPE !== "Google Chrome" &&
+    BROWSER_TYPE !== "ios" &&
+    BROWSER_TYPE !== "safari mac" &&
+    BROWSER_TYPE !== "Microsoft Edge" &&
+    BROWSER_TYPE !== "Mozilla Firefox" &&
+    BROWSER_TYPE !== "Unknown browser"
+  ) {
+    return <BrowserNotSupported />;
+  }
+
   return (
     <div className={style.container_div}>
       <div className={style.title}>Transaction Details</div>
@@ -70,7 +85,7 @@ const Failed = () => {
         <Image src={failed} alt="failed" />
         <div className={style.titleTag}>Failed</div>
         <div className={style.details}>
-          Your payment of Rs. {transactionData?.transactionDetails?.amount} for the plan yearly is failed. Please try again.
+          Your payment of Rs. {transactionData?.transactionDetails?.amount} for the yearly plan is failed. Please try again.
         </div>
         <div className={style.trnsId}>Transaction ID</div>
         <div className={style.trnx}>

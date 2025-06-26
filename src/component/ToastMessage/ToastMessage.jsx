@@ -13,11 +13,6 @@ const ToastMessage = ({close, message}) => {
         <Image src={errorLogo} alt="" />
         <div className={style.error_div}>
           <div className={style.invalid_ntw}>{message}</div>
-          {/* <div className={style.invalid_ntw}>Invalid Network Code</div>
-          <div className={style.error_msg_text}>
-            Please check the Network Code. Network Code Invalid or Network
-            Deleted.
-          </div> */}
         </div>
         <Image src={cross} alt="" className={style.close_cross_btn} onClick={close}/>
       </div>

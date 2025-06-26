@@ -15,9 +15,14 @@
   src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Bold.otf")
     format("opentype");
 }
+@font-face {
+  font-family: "AvenirPro-demi";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Demi.otf")
+    format("opentype");
+}
 
 .inner_div {
-  position: relative; 
+  position: relative;
   background: #0d0d0d;
   background-image: url("../../../public/planBGstatic.png");
   background-size: cover;
@@ -40,12 +45,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(
-    0,
-    0,
-    0,
-    0.75
-  ); 
+  background: rgba(0, 0, 0, 0.75);
   z-index: 0;
 }
 
@@ -70,6 +70,14 @@
   font-size: 20px;
   font-weight: 500;
   font-family: "AvenirPro-md";
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  flex-shrink: 1;
+  min-width: 0;         /* ← KEY FIX */
+  
 }
 
 .ntw_type {
@@ -127,7 +135,7 @@
   font-weight: 500;
   font-family: "AvenirPro-md";
   display: -webkit-box;
-  -webkit-line-clamp: 2;       /* Show max 2 lines */
+  -webkit-line-clamp: 2; /* Show max 2 lines */
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -135,10 +143,10 @@
 
 .text_msg {
   font-size: 14px;
-  font-style: 400px;
+  font-weight: 400px;
   text-align: center;
   font-family: "AvenirPro-regular";
-  color: #cccccc;
+  color: #fff;
   letter-spacing: -0.3px;
   margin-top: 30px;
 }
@@ -170,6 +178,16 @@
   cursor: pointer;
   font-family: "AvenirPro-md";
   font-weight: 500;
+}
+
+.bolder_text {
+  font-family: "AvenirPro-demi";
+}
+
+.ntw_name_div {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 
 @media (max-height: 700px) {

@@ -18,11 +18,12 @@ const PurchaseCompleted = ({ data, setRenew }) => {
           alt="network-logo"
           className={style.network_logo}
         />
-        <div>
+        <div className={style.ntw_name_div}>
           <div className={style.ntw_name}>
-            {data?.networkClusterDetails?.name?.length > 18
+            {/* {data?.networkClusterDetails?.name?.length > 18
               ? data.networkClusterDetails.name.slice(0, 18) + "..."
-              : data?.networkClusterDetails?.name}
+              : data?.networkClusterDetails?.name} */}
+              {data?.networkClusterDetails?.name}
           </div>
           {/* <div className={style.ntw_name}>
             {data?.networkClusterDetails?.name}
@@ -48,15 +49,22 @@ const PurchaseCompleted = ({ data, setRenew }) => {
           <Image src={rightLeaf} alt="/" />
         </div>
         <div className={style.text_msg}>
-          You've made the payment for {data?.networkClusterDetails?.name} and
-          now is a part of this network, your subscription starts on{" "}
-          {moment(data?.memberShipDetails?.subscriptionStartDate).format(
-            "DD MMMM YYYY"
-          )}{" "}
+          You've made the payment for{" "}
+          <span className={style.bolder_text}>
+            {data?.networkClusterDetails?.name}
+          </span>{" "}
+          and now is a part of this network, your subscription starts on{" "}
+          <span className={style.bolder_text}>
+            {moment(data?.memberShipDetails?.subscriptionStartDate).format(
+              "DD MMMM YYYY"
+            )}
+          </span>{" "}
           and ends on{" "}
-          {moment(data?.memberShipDetails?.subscriptionEndDate).format(
-            "DD MMMM YYYY"
-          )}
+          <span className={style.bolder_text}>
+            {moment(data?.memberShipDetails?.subscriptionEndDate).format(
+              "DD MMMM YYYY"
+            )}
+          </span>
           .
         </div>
       </div>

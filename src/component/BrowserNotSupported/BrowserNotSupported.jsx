@@ -1,10 +1,10 @@
 import React from "react";
-import style from "./index.module.css";
+import style from "./browsernotsupported.module.css";
 import PaymentHeader from "@/component/PaymentHeader/PaymentHeader";
 import Image from "next/image";
-import notSupported from "../../../../public/notSupported.svg";
+import notSupported from "../../../public/notSupported.svg";
 
-const InvalidNetwork = () => {
+const BrowserNotSupported = () => {
   return (
     <div className={style.container_div}>
       <PaymentHeader noDisplay={true} />
@@ -19,4 +19,4 @@ const InvalidNetwork = () => {
   );
 };
 
-export default InvalidNetwork;
+export default BrowserNotSupported;

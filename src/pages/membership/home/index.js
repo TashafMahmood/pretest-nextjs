@@ -17,6 +17,9 @@ import SessionExpired from "@/component/SessionExpired/SessionExpired";
 import FreePlanComp from "@/component/FreePlanComp";
 import InvalidNetworkComp from "@/component/InvalidNetwork/InvalidNetwork";
 import LifetimeFreePlan from "@/component/LifetimeFreePlan";
+import { getBrowserType } from "@/lib/functions";
+import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
+import ToastMessage from "@/component/ToastMessage/ToastMessage";
 
 const Payments = () => {
   const searchParams = useSearchParams();
@@ -29,6 +32,8 @@ const Payments = () => {
     errorCode: null,
   });
   const [renew, setRenew] = useState(false);
+
+  const BROWSER_TYPE = getBrowserType();
 
   useEffect(() => {
     const nccode = searchParams.get("nccode");
@@ -105,35 +110,24 @@ const Payments = () => {
     return <FullScreenLoader />;
   }
 
- 
+  if (
+    BROWSER_TYPE !== "Google Chrome" &&
+    BROWSER_TYPE !== "ios" &&
+    BROWSER_TYPE !== "safari mac" &&
+    BROWSER_TYPE !== "Microsoft Edge" &&
+    BROWSER_TYPE !== "Mozilla Firefox" &&
+    BROWSER_TYPE !== "Unknown browser"
+  ) {
+    return <BrowserNotSupported />;
+  }
 
   return (
     <div className={styles.container_div}>
       <PaymentHeader />
-      {!state.isLoading && state.errorCode == 116 && <InvalidNetworkComp/>}
+      {!state.isLoading && state.errorCode == 116 && <InvalidNetworkComp />}
       {!state.hasNetworkCode && state.errorCode == null && <HomeComponent />}
-
       {state.hasNetworkCode && state.errorCode == -1 && <InvalidNetworkComp />}
       {state.hasNetworkCode && state.errorCode == 1 && <SessionExpired />}
-      {/* {state.hasNetworkCode &&
-        state.membershipStatus === membershipStatusName?.ACTIVE && (
-          <PurchaseCompleted data={state?.data} setRenew={setRenew} />
-        )}
-
-      {state.hasNetworkCode &&
-        (state.membershipStatus === membershipStatusName?.PAYMENT_REQUIRED ||
-          renew) && <PurchasePlan data={state?.data} />}
-
-      {state.hasNetworkCode &&
-        state.membershipStatus === membershipStatusName?.FREE_NETWORK && (
-          <FreePlan data={state?.data} />
-        )}
-
-      {state.hasNetworkCode &&
-        state.membershipStatus ===
-          membershipStatusName?.FREE_USER_SUBSCRIPTION && (
-          <FreeUserSubscription data={state?.data} />
-        )} */}
 
       {state.hasNetworkCode && renew ? (
         <PurchasePlan data={state?.data} />

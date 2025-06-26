@@ -1,0 +1,58 @@
+@font-face {
+    font-family: "AvenirPro-md";
+    src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+      format("opentype");
+  }
+  
+  @font-face {
+    font-family: "AvenirPro-demi";
+    src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Demi.otf")
+      format("opentype");
+  }
+  
+  .container_div {
+    background: #0d0d0d;
+    height: 100vh;
+    max-width: 375px;
+    margin: auto;
+    color: #fff;
+    /* display: flex;
+        align-items: center;
+        justify-content: center; */
+    flex-direction: column;
+  }
+  
+  .inner_div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+  }
+  
+  .title {
+    margin-top: 45px;
+    font-size: 24px;
+    font-weight: 600;
+    font-family: "AvenirPro-demi";
+  }
+  
+  .reason {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #cccccc;
+    font-family: "AvenirPro-md";
+  }
+  
+  @media (max-width: 500px) {
+    .container_div {
+      max-width: 100%;
+    }
+  }
+  

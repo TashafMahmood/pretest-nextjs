@@ -13,6 +13,9 @@ const withGuest = (WrappedComponent) => {
       const token = localStorage.getItem("accessToken");
       const nccode = searchParams.get("nccode");
 
+      if(nccode){
+        
+      }
       if (token) {
         {
           nccode

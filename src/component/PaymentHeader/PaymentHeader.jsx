@@ -67,9 +67,6 @@ const PaymentHeader = ({ noDisplay }) => {
             />
             <div className={styles.name_div}>
               {/* <span className={styles.username}>
-                {userData.firstname} {userData.lastname}
-              </span> */}
-              <span className={styles.username}>
                 {(() => {
                   const first = userData?.firstname || "";
                   const last = userData?.lastname || "";
@@ -88,7 +85,9 @@ const PaymentHeader = ({ noDisplay }) => {
                 {userData?.userName?.length > 18
                   ? `${userData.userName.slice(0, 15)}...`
                   : userData?.userName}
-              </span>
+              </span> */}
+              <div className={styles.username}> {userData?.firstname} {userData?.lastname}</div>
+              <div className={styles.name}>{userData?.userName}</div>
             </div>
           </div>
           <div className={styles.menus_div}>
@@ -98,6 +97,7 @@ const PaymentHeader = ({ noDisplay }) => {
                   pathname == data?.path ? styles.active_menu : ""
                 }`}
                 key={data.id}
+                onClick={pathname == data?.path ? handleClose : null}
               >
                 <Image
                   src={`/${data?.logo}.svg`}

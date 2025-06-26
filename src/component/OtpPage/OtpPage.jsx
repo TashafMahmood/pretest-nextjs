@@ -9,6 +9,7 @@ import TitleText from "../TitleText/TitleText";
 import { useRouter, useSearchParams } from "next/navigation";
 import { formatPhoneNumber } from "@/lib/functions";
 import ToastMessage from "../ToastMessage/ToastMessage";
+import PaymentHeader from "../PaymentHeader/PaymentHeader";
 
 const OtpPage = ({
   // number,
@@ -42,31 +43,6 @@ const OtpPage = ({
     setStartTimer(true);
   }, []);
 
-  // const submitRequest = async () => {
-  //   const data = {
-  //     providedOTP: otp,
-  //     transactionId,
-  //     phoneNumber: countryPrefix + number,
-  //   };
-  //   try {
-  //     const res = await axios.post(
-  //       `https://uftw2680orcg.elred.io/payment/verifyPhoneOTP`,
-  //       data
-  //     );
-  //     localStorage.setItem("accessToken", res?.data?.result?.[0]?.accessToken);
-  //     localStorage.setItem("userdata", JSON.stringify(res?.data?.result?.[0]));
-  //     {nccode ? router.push(`/membership/home?nccode=${nccode}`) : router.push(`/membership/home`)}
-  //   } catch (error) {
-  //     if (error?.response?.data?.errorCode === 115) {
-  //       toast(error?.response?.data?.message);
-  //     } else {
-  //       console.log(error);
-  //     }
-  //   } finally {
-  //     setSubmittingOverlay(false);
-  //   }
-  // };
-
   const submitRequest = async () => {
     const data = {
       email,
@@ -87,6 +63,7 @@ const OtpPage = ({
       }
     } catch (error) {
       if (error?.response?.data?.errorCode == -1) {
+        setOtp("");
         setIncorrectOtp(true);
       } else if (error?.response?.data?.errorCode === 115) {
         setErrorMsg(error?.response?.data?.message);
@@ -128,88 +105,93 @@ const OtpPage = ({
   };
 
   return (
-    <div className={styles.mainPage}>
-      <div className={styles.mainPageContent}>
-        <TitleText title={"OTP Verification"} />
-        <div className={styles.mainPageDesc}>
-          We have sent OTP to your registered Email id{" "}
-          <span>{maskedEmail}</span>
-        </div>
+    <>
+      <PaymentHeader noDisplay />
+      <div className={styles.mainPage}>
+        <div className={styles.mainPageContent}>
+          <TitleText title={"OTP Verification"} />
+          <div className={styles.mainPageDesc}>
+            We have sent OTP to your registered Email id{" "}
+            <span>{maskedEmail}</span>
+          </div>
 
-        <div className={styles.otpInputLabel}>OTP</div>
-        <div className={styles.otpInputWrapperDiv}>
-          <OTPInput
-            value={otp}
-            onChange={handleChangeOTP}
-            isInputNum
-            numInputs={6}
-            pattern="[0-9]*"
-            inputType="number"
-            renderInput={(props) => (
-              <input
-                {...props}
-                className={
-                  incorrectOtp || expiredOtp
-                    ? `${styles.customInputOne} ${styles.borderError}`
-                    : styles.customInputOne
-                }
-                type="text"
-                inputMode="decimal"
-                style={{
-                  background: "#363638",
-                  color: "white",
-                  textAlign: "center",
-                }}
-              />
+          <div className={styles.otpInputLabel}>OTP</div>
+          <div className={styles.otpInputWrapperDiv}>
+            <OTPInput
+              value={otp}
+              onChange={handleChangeOTP}
+              isInputNum
+              numInputs={6}
+              pattern="[0-9]*"
+              inputType="number"
+              renderInput={(props) => (
+                <input
+                  {...props}
+                  className={
+                    incorrectOtp || expiredOtp
+                      ? `${styles.customInputOne} ${styles.borderError}`
+                      : styles.customInputOne
+                  }
+                  type="text"
+                  inputMode="decimal"
+                  style={{
+                    background: "#363638",
+                    color: "white",
+                    textAlign: "center",
+                  }}
+                />
+              )}
+            />
+            {incorrectOtp && (
+              <div className={styles.incorrectOtpError}>
+                Invalid OTP entered
+              </div>
             )}
-          />
-          {incorrectOtp && (
-            <div className={styles.incorrectOtpError}>Invalid OTP entered</div>
-          )}
-          {expiredOtp && (
-            <div className={styles.incorrectOtpError}>OTP expired</div>
+            {expiredOtp && (
+              <div className={styles.incorrectOtpError}>OTP expired</div>
+            )}
+          </div>
+
+          {timer > 0 && startTimer ? (
+            <div className={styles.otpTimeRemaining}>
+              Time Remaining: {formatTime(timer)}
+            </div>
+          ) : (
+            <div className={styles.resendOtpLinkContainer}>
+              <span
+                className={styles.resendOtpLinkTxt}
+                onClick={() => {
+                  resendOtp();
+                  resetTimer();
+                  setIncorrectOtp(false);
+                  setOtp("");
+                  setExpiredOtp(false);
+                }}
+              >
+                Resend OTP
+              </span>
+            </div>
           )}
         </div>
 
-        {timer > 0 && startTimer ? (
-          <div className={styles.otpTimeRemaining}>
-            Time Remaining: {formatTime(timer)}
+        <div className={styles.bottom_wrapper}>
+          <div className={styles.instruction}>
+            <span className={styles.note}>Note</span> - Please check the OTP
+            entered. ( you will have to wait for the timer to complete to
+            request for a new OTP)
           </div>
-        ) : (
-          <div className={styles.resendOtpLinkContainer}>
-            <span
-              className={styles.resendOtpLinkTxt}
-              onClick={() => {
-                resendOtp();
-                resetTimer();
-                setIncorrectOtp(false);
-                setOtp("");
-                setExpiredOtp(false);
-              }}
-            >
-              Resend OTP
-            </span>
+          <div
+            className={`${styles.verify_btn} ${
+              disabled ? styles.disabled_btn : ""
+            }`}
+            onClick={!disabled ? submitRequest : undefined}
+          >
+            Verify
           </div>
-        )}
-      </div>
-
-      <div className={styles.bottom_wrapper}>
-        <div className={styles.instruction}>
-          <span className={styles.note}>Note</span> - Please check the OTP
-          entered. ( you will have to wait for the timer to complete to request
-          for a new OTP)
         </div>
-        <div
-          className={`${styles.verify_btn} ${
-            disabled ? styles.disabled_btn : ""
-          }`}
-          onClick={!disabled ? submitRequest : undefined}
-        >
-          Verify
-        </div>
-      </div>
         {openToast && <ToastMessage close={closeToast} message={errorMsg} />}
-    </div>
+      </div>
+    </>
   );
 };
 
