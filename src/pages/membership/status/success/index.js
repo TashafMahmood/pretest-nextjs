@@ -61,7 +61,7 @@ const Success = () => {
 
         const result = res?.data?.result?.[0];
         setTransactionData(result);
-        if (result?.status?.toLowerCase() === "pending") {
+        if (result?.transactionDetails?.status?.toLowerCase() === "pending") {
           setIsPending(true);
         } else {
           setIsPending(false);

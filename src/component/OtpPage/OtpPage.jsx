@@ -115,7 +115,7 @@ const OtpPage = ({
             <span>{maskedEmail}</span>
           </div>
 
-          <div className={styles.otpInputLabel}>OTP</div>
+          <div className={styles.otpInputLabel}>Enter OTP</div>
           <div className={styles.otpInputWrapperDiv}>
             <OTPInput
               value={otp}

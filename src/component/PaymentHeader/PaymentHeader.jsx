@@ -6,12 +6,12 @@ import Image from "next/image";
 import logo from "./../../../public/logo.svg";
 import menu from "./../../../public/menu-grid.svg";
 import close from "./../../../public/close.svg";
-import user from "./../../../public/userprofile.svg";
 import logout from "./../../../public/logout.svg";
 import { usePathname } from "next/navigation";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { menuData } from "./menudata";
 import { useLogout } from "@/context/LogoutContext";
+import FallbackImage from "../FallBackImage/FallBackImage";
 
 const PaymentHeader = ({ noDisplay }) => {
   const { setIsOpen } = useLogout();
@@ -32,6 +32,7 @@ const PaymentHeader = ({ noDisplay }) => {
     handleClose();
     setIsOpen(true);
   };
+
   return (
     <>
       <div className={styles.header_wrapper}>
@@ -58,35 +59,19 @@ const PaymentHeader = ({ noDisplay }) => {
         </div>
         <Offcanvas.Body className="payment-menu">
           <div className={styles.user_profile}>
-            <Image
+            <FallbackImage
               src={userData?.dpURL}
+              alt="User Profile"
               width={40}
               height={40}
-              alt="user-profile"
               className={styles.dpImg}
             />
+
             <div className={styles.name_div}>
-              {/* <span className={styles.username}>
-                {(() => {
-                  const first = userData?.firstname || "";
-                  const last = userData?.lastname || "";
-                  const full = `${first} ${last}`.trim();
-
-                  if (full.length <= 20) return full;
-
-                  if (`${first}`.length <= 20) {
-                    return first;
-                  }
-
-                  return `${first}`.substring(0, 17) + "..."; // show ellipsis if even first is too long
-                })()}
-              </span>
-              <span className={styles.name}>
-                {userData?.userName?.length > 18
-                  ? `${userData.userName.slice(0, 15)}...`
-                  : userData?.userName}
-              </span> */}
-              <div className={styles.username}> {userData?.firstname} {userData?.lastname}</div>
+              <div className={styles.username}>
+                {" "}
+                {userData?.firstname} {userData?.lastname}
+              </div>
               <div className={styles.name}>{userData?.userName}</div>
             </div>
           </div>
