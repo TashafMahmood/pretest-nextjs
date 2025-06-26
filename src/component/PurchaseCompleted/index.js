@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./index.module.css";
-import successPayment from "../../../public/successPayment.svg";
+import successPayment from "../../../public/congrats.svg";
 import leftLeaf from "../../../public/leftLeaf.svg";
 import rightLeaf from "../../../public/rightLeaf.svg";
 import Image from "next/image";
