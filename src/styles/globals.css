@@ -136,6 +136,7 @@ a {
 
 .offcanvas-body.payment-menu {
   padding: 20px 0 !important;
+  padding-top: 0 !important;
 }
 
 .offcanvas-backdrop.show {

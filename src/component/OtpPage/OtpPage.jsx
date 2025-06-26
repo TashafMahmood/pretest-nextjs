@@ -8,6 +8,7 @@ import { useCountdownTimer } from "@/Hooks/useCountDownTimer";
 import TitleText from "../TitleText/TitleText";
 import { useRouter, useSearchParams } from "next/navigation";
 import { formatPhoneNumber } from "@/lib/functions";
+import ToastMessage from "../ToastMessage/ToastMessage";
 
 const OtpPage = ({
   // number,
@@ -32,6 +33,8 @@ const OtpPage = ({
   const buttonDisabled = otp.length < 6;
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [openToast, setOpenToast] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const nccode = searchParams.get("nccode");
 
@@ -83,8 +86,15 @@ const OtpPage = ({
         router.push(`/membership/home`);
       }
     } catch (error) {
-      if (error?.response?.data?.errorCode === 115) {
-        toast(error?.response?.data?.message);
+      if (error?.response?.data?.errorCode == -1) {
+        setIncorrectOtp(true);
+      } else if (error?.response?.data?.errorCode === 115) {
+        setErrorMsg(error?.response?.data?.message);
+        setOpenToast(true);
+        setTimeout(() => {
+          setOpenToast(false);
+          setErrorMsg("");
+        }, 3000);
       } else {
         console.log(error);
       }
@@ -112,12 +122,18 @@ const OtpPage = ({
       focusOut();
   }, [otp]);
 
+  const closeToast = () => {
+    setOpenToast(false);
+    setErrorMsg("");
+  };
+
   return (
     <div className={styles.mainPage}>
       <div className={styles.mainPageContent}>
         <TitleText title={"OTP Verification"} />
         <div className={styles.mainPageDesc}>
-          We have sent OTP to your registered Email id <span>{maskedEmail}</span>
+          We have sent OTP to your registered Email id{" "}
+          <span>{maskedEmail}</span>
         </div>
 
         <div className={styles.otpInputLabel}>OTP</div>
@@ -192,6 +208,7 @@ const OtpPage = ({
           Verify
         </div>
       </div>
+        {openToast && <ToastMessage close={closeToast} message={errorMsg} />}
     </div>
   );
 };

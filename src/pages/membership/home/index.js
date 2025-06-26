@@ -105,10 +105,12 @@ const Payments = () => {
     return <FullScreenLoader />;
   }
 
+ 
+
   return (
     <div className={styles.container_div}>
       <PaymentHeader />
-
+      {!state.isLoading && state.errorCode == 116 && <InvalidNetworkComp/>}
       {!state.hasNetworkCode && state.errorCode == null && <HomeComponent />}
 
       {state.hasNetworkCode && state.errorCode == -1 && <InvalidNetworkComp />}

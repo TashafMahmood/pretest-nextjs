@@ -87,7 +87,9 @@ const Success = () => {
           {isPending ? "Pending" : "Success"}
         </div>
         <div className={style.details}>
-          {isPending ? status?.PENDING_STATUS_DESC : status.SUCCESS_STATUS_DESC}
+          {isPending
+            ? status?.PENDING_STATUS_DESC
+            : `Your payment of Rs. 1 for the plan yearly is processed successfully.`}
         </div>
         <div className={style.trnsId}>Transaction ID</div>
         <div className={style.trnx}>
