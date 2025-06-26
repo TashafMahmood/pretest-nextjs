@@ -11,7 +11,9 @@ import { usePathname } from "next/navigation";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { menuData } from "./menudata";
 import { useLogout } from "@/context/LogoutContext";
-import FallbackImage from "../FallBackImage/FallBackImage";
+import avatar from '../../../public/userprofile.svg'
+import ImageWithLoaderAndFallback from "../ImageWithLoaderAndFallback/ImageWithLoaderAndFallback";
+
 
 const PaymentHeader = ({ noDisplay }) => {
   const { setIsOpen } = useLogout();
@@ -33,6 +35,8 @@ const PaymentHeader = ({ noDisplay }) => {
     setIsOpen(true);
   };
 
+
+  const dp = "https://assets-pretest.elred.io/displayPictures/685b915eb256fac03f266608/1750850914695.jpg"
   return (
     <>
       <div className={styles.header_wrapper}>
@@ -59,12 +63,13 @@ const PaymentHeader = ({ noDisplay }) => {
         </div>
         <Offcanvas.Body className="payment-menu">
           <div className={styles.user_profile}>
-            <FallbackImage
+            <ImageWithLoaderAndFallback
               src={userData?.dpURL}
-              alt="User Profile"
+              alt="User profile"
               width={40}
               height={40}
               className={styles.dpImg}
+              fallback={avatar}
             />
 
             <div className={styles.name_div}>
