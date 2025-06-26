@@ -142,7 +142,8 @@ const Login = () => {
           <OtpPage
             resendOtp={signIn}
             email={email}
-            maskedEmail={maskEmail(email)}
+            // maskedEmail={maskEmail(email)}
+            maskedEmail={maskEmail(email).toLowerCase()}
             transactionId={trnID}
             countryPrefix="" // not used if you're validating email
           />
