@@ -12,6 +12,7 @@ import withAuth from "@/hoc/withAuth";
 import axios from "axios";
 import { getBrowserType } from "@/lib/functions";
 import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
+import FullScreenLoader from "@/component/FullScreenLoader/FullScreenLoader";
 
 const Success = () => {
   const searchParams = useSearchParams();
@@ -20,6 +21,7 @@ const Success = () => {
   const [isPending, setIsPending] = useState(false);
   const [transactionData, setTransactionData] = useState(null);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const BROWSER_TYPE = getBrowserType();
 
@@ -61,14 +63,15 @@ const Success = () => {
 
         const result = res?.data?.result?.[0];
         setTransactionData(result);
-        if (result?.transactionDetails?.status?.toLowerCase() === "pending") {
-          setIsPending(true);
-        } else {
-          setIsPending(false);
-        }
+
+        const status = result?.transactionDetails?.status?.toLowerCase();
+        setIsPending(status === "pending");
+
+        setLoading(false); // ✅ Set loading false here
       } catch (err) {
         console.error("Failed to fetch transaction status ❌", err);
         setError("Failed to fetch transaction status");
+        setLoading(false); // ✅ Even on error, stop loading
       }
     };
 
@@ -91,6 +94,8 @@ const Success = () => {
   ) {
     return <BrowserNotSupported />;
   }
+
+  if (loading) return <FullScreenLoader />; // or a spinner
 
   return (
     <div className={style.container_div}>
