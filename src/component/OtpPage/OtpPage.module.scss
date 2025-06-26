@@ -145,10 +145,12 @@
   font-size: 20px;
   font-weight: 500;
   font-family: "AvenirPro-medium";
-  cursor: pointer;
 }
 
 .disabled_btn{
   opacity: 0.5;
 }
 
+.enabled_btn{
+  cursor: pointer;
+}

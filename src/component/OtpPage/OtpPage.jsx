@@ -182,7 +182,7 @@ const OtpPage = ({
           </div>
           <div
             className={`${styles.verify_btn} ${
-              disabled ? styles.disabled_btn : ""
+              disabled ? styles.disabled_btn : styles.enabled_btn
             }`}
             onClick={!disabled ? submitRequest : undefined}
           >
