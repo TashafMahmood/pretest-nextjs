@@ -79,7 +79,7 @@ const Login = () => {
       );
       const transactionId = res?.data?.result?.[0]?.transactionId;
       setTrnID(transactionId);
-      localStorage.setItem("trxId", transactionId);
+      // localStorage.setItem("trxId", transactionId);
       setLoading(false);
       setOtpPage(true);
     } catch (error) {
@@ -141,7 +141,7 @@ const Login = () => {
         {otpPage ? (
           <OtpPage
             resendOtp={signIn}
-            email={email}
+            email={(email).toLowerCase()}
             // maskedEmail={maskEmail(email)}
             maskedEmail={maskEmail(email).toLowerCase()}
             transactionId={trnID}
