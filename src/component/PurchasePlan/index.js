@@ -120,7 +120,7 @@ const PurchasePlan = ({ data }) => {
 
       <div className={style.stickyBtnWrapper}>
         <button className={style.stickyBtn} onClick={handlePayNow}>
-          Pay ₹{subscriptionDetails?.membershipCost} & Join Now
+          Pay Rs.{subscriptionDetails?.membershipCost} to Continue
         </button>
       </div>
 

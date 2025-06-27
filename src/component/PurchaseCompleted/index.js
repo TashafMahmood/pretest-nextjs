@@ -7,7 +7,6 @@ import Image from "next/image";
 import moment from "moment";
 
 const PurchaseCompleted = ({ data, setRenew }) => {
-  console.log(data, "data...");
   return (
     <div className={style.inner_div}>
       <div className={style.plan_div}>
@@ -20,15 +19,8 @@ const PurchaseCompleted = ({ data, setRenew }) => {
         />
         <div className={style.ntw_name_div}>
           <div className={style.ntw_name}>
-            {/* {data?.networkClusterDetails?.name?.length > 18
-              ? data.networkClusterDetails.name.slice(0, 18) + "..."
-              : data?.networkClusterDetails?.name} */}
               {data?.networkClusterDetails?.name}
           </div>
-          {/* <div className={style.ntw_name}>
-            {data?.networkClusterDetails?.name}
-          </div> */}
-
           <div className={style.ntw_type}>Premium Network</div>
         </div>
       </div>

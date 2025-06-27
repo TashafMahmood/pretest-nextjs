@@ -19,11 +19,12 @@ import InvalidNetworkComp from "@/component/InvalidNetwork/InvalidNetwork";
 import LifetimeFreePlan from "@/component/LifetimeFreePlan";
 import { getBrowserType } from "@/lib/functions";
 import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
+import Button from 'react-bootstrap/Button'
 import ToastMessage from "@/component/ToastMessage/ToastMessage";
 
 const Payments = () => {
   const searchParams = useSearchParams();
-  const { isOpen } = useLogout();
+  const { isOpen, setIsOpen } = useLogout();
   const [state, setState] = useState({
     isLoading: true,
     hasNetworkCode: null,
@@ -32,6 +33,7 @@ const Payments = () => {
     errorCode: null,
   });
   const [renew, setRenew] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
   const BROWSER_TYPE = getBrowserType();
 
@@ -124,6 +126,7 @@ const Payments = () => {
   return (
     <div className={styles.container_div}>
       <PaymentHeader />
+      
       {!state.isLoading && state.errorCode == 116 && <InvalidNetworkComp />}
       {!state.hasNetworkCode && state.errorCode == null && <HomeComponent />}
       {state.hasNetworkCode && state.errorCode == -1 && <InvalidNetworkComp />}
@@ -153,7 +156,7 @@ const Payments = () => {
         </>
       )}
 
-      {isOpen && <LogoutPayment />}
+      <LogoutPayment show={isOpen} onHide={() => setIsOpen(false)} />
     </div>
   );
 };

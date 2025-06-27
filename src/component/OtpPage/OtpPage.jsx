@@ -10,6 +10,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { formatPhoneNumber } from "@/lib/functions";
 import ToastMessage from "../ToastMessage/ToastMessage";
 import PaymentHeader from "../PaymentHeader/PaymentHeader";
+import FullScreenLoader from "../FullScreenLoader/FullScreenLoader";
 
 const OtpPage = ({
   // number,
@@ -36,6 +37,7 @@ const OtpPage = ({
   const searchParams = useSearchParams();
   const [openToast, setOpenToast] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const nccode = searchParams.get("nccode");
 
@@ -43,11 +45,52 @@ const OtpPage = ({
     setStartTimer(true);
   }, []);
 
+  // const submitRequest = async () => {
+  //   setLoading(true)
+  //   const data = {
+  //     email,
+  //     providedOTP: otp,
+  //   };
+  //   try {
+  //     const res = await axios.post(
+  //       `https://uftw2680orcg.elred.io/payment/verifyEmailOTP`,
+  //       data
+  //     );
+  //     localStorage.setItem("accessToken", res?.data?.result?.[0]?.accessToken);
+  //     localStorage.setItem("userdata", JSON.stringify(res?.data?.result?.[0]));
+
+  //     if (nccode) {
+  //       router.push(`/membership/home?nccode=${nccode}`);
+  //     } else {
+  //       router.push(`/membership/home`);
+  //     }
+
+  //   } catch (error) {
+  //     if (error?.response?.data?.errorCode == -1) {
+  //       setOtp("");
+  //       setIncorrectOtp(true);
+  //     } else if (error?.response?.data?.errorCode === 115) {
+  //       setErrorMsg(error?.response?.data?.message);
+  //       setOpenToast(true);
+  //       setTimeout(() => {
+  //         setOpenToast(false);
+  //         setErrorMsg("");
+  //       }, 3000);
+  //     } else {
+  //       console.log(error);
+  //     }
+  //   } finally {
+  //     setSubmittingOverlay(false);
+  //   }
+  // };
+
   const submitRequest = async () => {
+    setLoading(true); // Start loading
     const data = {
       email,
       providedOTP: otp,
     };
+
     try {
       const res = await axios.post(
         `https://uftw2680orcg.elred.io/payment/verifyEmailOTP`,
@@ -77,6 +120,7 @@ const OtpPage = ({
       }
     } finally {
       setSubmittingOverlay(false);
+      setLoading(false); // ✅ Ensure this always runs last
     }
   };
 
@@ -103,6 +147,10 @@ const OtpPage = ({
     setOpenToast(false);
     setErrorMsg("");
   };
+
+  if (loading) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <>
@@ -177,8 +225,8 @@ const OtpPage = ({
         <div className={styles.bottom_wrapper}>
           <div className={styles.instruction}>
             <span className={styles.note}>Note</span> - Please check the OTP
-            entered. ( you will have to wait for the timer to complete to
-            request for a new OTP)
+            entered. (you will have to wait for the timer to complete to request
+            for a new OTP)
           </div>
           <div
             className={`${styles.verify_btn} ${

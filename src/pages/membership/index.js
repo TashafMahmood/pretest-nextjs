@@ -26,13 +26,16 @@ const Login = () => {
   const validateEmail = (value) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setInvalidError(false);
-    if (!regex.test(value)) {
+  
+    if (value.length === 0) {
+      setEmailError(""); // Clear error if input is empty
+    } else if (!regex.test(value)) {
       setEmailError("Invalid Email id");
     } else {
-      setEmailError("");
+      setEmailError(""); // Clear error for valid input
     }
   };
-
+  
   const maskEmail = (email) => {
     if (!email || !email.includes("@")) return email;
 
@@ -79,7 +82,6 @@ const Login = () => {
       );
       const transactionId = res?.data?.result?.[0]?.transactionId;
       setTrnID(transactionId);
-      // localStorage.setItem("trxId", transactionId);
       setLoading(false);
       setOtpPage(true);
     } catch (error) {
@@ -141,8 +143,7 @@ const Login = () => {
         {otpPage ? (
           <OtpPage
             resendOtp={signIn}
-            email={(email).toLowerCase()}
-            // maskedEmail={maskEmail(email)}
+            email={email.toLowerCase()}
             maskedEmail={maskEmail(email).toLowerCase()}
             transactionId={trnID}
             countryPrefix="" // not used if you're validating email
@@ -167,9 +168,11 @@ const Login = () => {
                 placeholder="Your Email id"
                 value={email}
                 onChange={(e) => {
-                  setEmail(e.target.value);
-                  validateEmail(e.target.value);
+                  const lowercaseEmail = e.target.value.toLowerCase();
+                  setEmail(lowercaseEmail);
+                  validateEmail(lowercaseEmail);
                 }}
+                type="email"
               />
               {emailError && (
                 <div className={style.error_text}>{emailError}</div>

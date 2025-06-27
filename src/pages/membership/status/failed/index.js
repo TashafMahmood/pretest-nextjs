@@ -10,6 +10,9 @@ import withAuth from "@/hoc/withAuth";
 import axios from "axios";
 import { getBrowserType } from "@/lib/functions";
 import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
+import { usePathname } from "next/navigation";
+
+// import PreventBackNavigation from "@/component/PreventBackNavigation/PreventBackNavigation";
 
 const Failed = () => {
   const searchParams = useSearchParams();
@@ -20,6 +23,7 @@ const Failed = () => {
   const [error, setError] = useState("");
 
   const BROWSER_TYPE = getBrowserType();
+  
 
   useEffect(() => {
     const txnId = searchParams.get("txnid");
@@ -79,32 +83,36 @@ const Failed = () => {
   }
 
   return (
-    <div className={style.container_div}>
-      <div className={style.title}>Transaction Details</div>
-      <div className={style.content_div}>
-        <Image src={failed} alt="failed" />
-        <div className={style.titleTag}>Failed</div>
-        <div className={style.details}>
-          Your payment of Rs. {transactionData?.transactionDetails?.amount} for the yearly plan is failed. Please try again.
-        </div>
-        <div className={style.trnsId}>Transaction ID</div>
-        <div className={style.trnx}>
-          <div>{transactionData?.transactionDetails?.txnid}</div>
-          <div style={{ position: "relative" }}>
-            <Image
-              src={copyIcon}
-              alt="copy"
-              onClick={handleCopy}
-              style={{ cursor: "pointer" }}
-            />
-            {copied && <div className={style.copied}>Copied!</div>}
+    <>
+      {/* <PreventBackNavigation /> */}
+      <div className={style.container_div}>
+        <div className={style.title}>Transaction Details</div>
+        <div className={style.content_div}>
+          <Image src={failed} alt="failed" />
+          <div className={style.titleTag}>Failed</div>
+          <div className={style.details}>
+            Your payment of Rs. {transactionData?.transactionDetails?.amount}{" "}
+            for the yearly plan is failed. Please try again.
+          </div>
+          <div className={style.trnsId}>Transaction ID</div>
+          <div className={style.trnx}>
+            <div>{transactionData?.transactionDetails?.txnid}</div>
+            <div style={{ position: "relative" }}>
+              <Image
+                src={copyIcon}
+                alt="copy"
+                onClick={handleCopy}
+                style={{ cursor: "pointer" }}
+              />
+              {copied && <div className={style.copied}>Copied!</div>}
+            </div>
+          </div>
+          <div className={style.homeBtn} onClick={handleGoHome}>
+            <div className={style.home}>Home</div>
           </div>
         </div>
-        <div className={style.homeBtn} onClick={handleGoHome}>
-          <div className={style.home}>Home</div>
-        </div>
       </div>
-    </div>
+    </>
   );
 };
 
