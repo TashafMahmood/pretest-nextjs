@@ -19,7 +19,7 @@ const PurchaseCompleted = ({ data, setRenew }) => {
         />
         <div className={style.ntw_name_div}>
           <div className={style.ntw_name}>
-              {data?.networkClusterDetails?.name}
+            {data?.networkClusterDetails?.name}
           </div>
           <div className={style.ntw_type}>Premium Network</div>
         </div>
@@ -45,17 +45,23 @@ const PurchaseCompleted = ({ data, setRenew }) => {
           <span className={style.bolder_text}>
             {data?.networkClusterDetails?.name}
           </span>{" "}
-          and now is a part of this network, your subscription starts on{" "}
+          and now you are part of this network, your subscription starts on{" "}
           <span className={style.bolder_text}>
-            {moment(data?.memberShipDetails?.subscriptionStartDate).format(
+            {/* {moment(data?.memberShipDetails?.subscriptionStartDate).format(
               "DD MMMM YYYY"
-            )}
+            )} */}
+            {moment(data?.memberShipDetails?.subscriptionStartDate)
+              .utc()
+              .format("DD MMMM YYYY")}
           </span>{" "}
           and ends on{" "}
           <span className={style.bolder_text}>
-            {moment(data?.memberShipDetails?.subscriptionEndDate).format(
+            {moment(data?.memberShipDetails?.subscriptionEndDate)
+              .utc()
+              .format("DD MMMM YYYY")}
+            {/* {moment(data?.memberShipDetails?.subscriptionEndDate).format(
               "DD MMMM YYYY"
-            )}
+            )} */}
           </span>
           .
         </div>

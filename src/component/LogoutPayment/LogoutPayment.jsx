@@ -32,7 +32,7 @@ const LogoutPayment = (props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         className="custommodal"
-        // backdrop="static"
+        backdrop="static"
         keyboard={false}
       >
         <Modal.Body className="logout_popup">

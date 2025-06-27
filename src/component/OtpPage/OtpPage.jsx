@@ -11,28 +11,18 @@ import { formatPhoneNumber } from "@/lib/functions";
 import ToastMessage from "../ToastMessage/ToastMessage";
 import PaymentHeader from "../PaymentHeader/PaymentHeader";
 import FullScreenLoader from "../FullScreenLoader/FullScreenLoader";
+import Image from "next/image";
+import backButton from "../../../public/ic_back.svg";
+import OTPloader from "../OTPloader/OTPloader";
 
-const OtpPage = ({
-  // number,
-  reason,
-  transactionId,
-  resendOtp,
-  setExisted,
-  setDate,
-  countryPrefix,
-  email,
-  maskedEmail,
-}) => {
+const OtpPage = ({ resendOtp, backToLoginPage, email, maskedEmail }) => {
   const { REACT_APP_API_ENDPOINT } = process.env;
   const [otp, setOtp] = useState("");
   const [incorrectOtp, setIncorrectOtp] = useState(false);
   const [expiredOtp, setExpiredOtp] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [confirm, setConfirm] = useState(false);
   const [startTimer, setStartTimer] = useState(false);
   const { timer, formatTime, resetTimer } = useCountdownTimer(60, startTimer);
   const [submittingOverlay, setSubmittingOverlay] = useState(false);
-  const buttonDisabled = otp.length < 6;
   const router = useRouter();
   const searchParams = useSearchParams();
   const [openToast, setOpenToast] = useState(false);
@@ -44,7 +34,6 @@ const OtpPage = ({
   useEffect(() => {
     setStartTimer(true);
   }, []);
-
 
   const submitRequest = async () => {
     setLoading(true); // Start loading
@@ -66,23 +55,27 @@ const OtpPage = ({
       } else {
         router.push(`/membership/home`);
       }
+      // setLoading(false)
     } catch (error) {
       if (error?.response?.data?.errorCode == -1) {
         setOtp("");
         setIncorrectOtp(true);
+        setLoading(false)
       } else if (error?.response?.data?.errorCode === 115) {
         setErrorMsg(error?.response?.data?.message);
         setOpenToast(true);
+        setLoading(false)
         setTimeout(() => {
           setOpenToast(false);
           setErrorMsg("");
         }, 3000);
       } else {
+        setLoading(false)
         console.log(error);
       }
     } finally {
-      setSubmittingOverlay(false);
-      setLoading(false); // ✅ Ensure this always runs last
+      // setSubmittingOverlay(false);
+      // setLoading(false);
     }
   };
 
@@ -110,18 +103,21 @@ const OtpPage = ({
     setErrorMsg("");
   };
 
-  if (loading) {
-    return <FullScreenLoader />;
-  }
+  // if (loading) {
+  //   return <OTPloader />;
+  // }
 
   return (
     <>
       <PaymentHeader noDisplay />
       <div className={styles.mainPage}>
         <div className={styles.mainPageContent}>
-          <TitleText title={"OTP Verification"} />
+          <div className={styles.top_div}>
+            <Image src={backButton} alt="back" onClick={backToLoginPage} className={styles.back_button_otp}/>
+            <TitleText title={"OTP Verification"} />
+          </div>
           <div className={styles.mainPageDesc}>
-            We have sent OTP to your registered email id{" "}
+            We have sent OTP to your registered email ID{" "}
             <span>{maskedEmail}</span>
           </div>
 
@@ -199,6 +195,7 @@ const OtpPage = ({
             Verify
           </div>
         </div>
+        {loading && <OTPloader />}
         {openToast && <ToastMessage close={closeToast} message={errorMsg} />}
       </div>
     </>

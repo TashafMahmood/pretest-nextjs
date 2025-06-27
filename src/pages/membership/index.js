@@ -126,6 +126,10 @@ const Login = () => {
     setToastErrorMessage("");
   };
 
+  const backToLoginPage = () =>{
+    setOtpPage(!otpPage)
+  }
+
   if (
     BROWSER_TYPE !== "Google Chrome" &&
     BROWSER_TYPE !== "ios" &&
@@ -147,6 +151,7 @@ const Login = () => {
             maskedEmail={maskEmail(email).toLowerCase()}
             transactionId={trnID}
             countryPrefix="" // not used if you're validating email
+            backToLoginPage={backToLoginPage}
           />
         ) : (
           <>
@@ -165,7 +170,7 @@ const Login = () => {
                     ? style.valid_input
                     : ""
                 }`}
-                placeholder="Your Email id"
+                placeholder="Your Email ID"
                 value={email}
                 onChange={(e) => {
                   const lowercaseEmail = e.target.value.toLowerCase();
@@ -179,7 +184,7 @@ const Login = () => {
               )}
               {invalidError && (
                 <div className={style.error_text}>
-                  The email is not used to create an account via the el RED App
+                  The email is not used to create an account via the el RED app
                 </div>
               )}
             </div>

@@ -21,10 +21,12 @@ import { getBrowserType } from "@/lib/functions";
 import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
 import Button from 'react-bootstrap/Button'
 import ToastMessage from "@/component/ToastMessage/ToastMessage";
+import { useRouter } from "next/navigation";
 
 const Payments = () => {
   const searchParams = useSearchParams();
   const { isOpen, setIsOpen } = useLogout();
+  const router = useRouter()
   const [state, setState] = useState({
     isLoading: true,
     hasNetworkCode: null,
@@ -36,6 +38,7 @@ const Payments = () => {
   const [modalShow, setModalShow] = useState(false);
 
   const BROWSER_TYPE = getBrowserType();
+
 
   useEffect(() => {
     const nccode = searchParams.get("nccode");
@@ -108,9 +111,63 @@ const Payments = () => {
     return () => clearTimeout(timer);
   }, [searchParams]);
 
+
+  // useEffect(() => {
+  //   const nccode = searchParams.get("nccode");
+  //   const handleStorageChange = () => {
+  //     const token = localStorage.getItem("accessToken");
+  //     if (!token) {
+  //       // Redirect to login or show error
+  //       router.push(nccode ? `/membership?nccode=${nccode}` : `/membership`)
+  //       // window.location.href = "/membership/login";
+  //     }
+  //   };
+  
+  //   window.addEventListener("storage", handleStorageChange);
+  //   return () => window.removeEventListener("storage", handleStorageChange);
+  // }, []);
+
+  // useEffect(() => {
+  //   const nccode = searchParams.get("nccode");
+  
+  //   const handleStorageChange = () => {
+  //     const token = localStorage.getItem("accessToken");
+
+  //     console.log(nccode,'NNNCCODEE....')
+  //     if (!token) {
+  //       setTimeout(() => {
+  //         router.push(nccode ? `/membership?nccode=${nccode}` : `/membership`);
+  //       }, 6000); // A small delay helps prevent race condition
+  //     }
+  //   };
+  
+  //   window.addEventListener("storage", handleStorageChange);
+  //   return () => window.removeEventListener("storage", handleStorageChange);
+  // }, []);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const token = localStorage.getItem("accessToken");
+  
+      const currentNccode = new URLSearchParams(window.location.search).get("nccode");
+      console.log(currentNccode, 'NNNCCODEE....');
+  
+      if (!token) {
+        setTimeout(() => {
+          router.push(currentNccode ? `/membership?nccode=${currentNccode}` : `/membership`);
+        },50); // slight delay for race condition handling
+      }
+    };
+  
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+  
+
   if (state.isLoading || state.hasNetworkCode === null) {
     return <FullScreenLoader />;
   }
+
 
   if (
     BROWSER_TYPE !== "Google Chrome" &&

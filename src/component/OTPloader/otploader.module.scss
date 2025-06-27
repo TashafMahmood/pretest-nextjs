@@ -12,7 +12,8 @@
 //   left: 0;
   z-index: 999999;
   height: 100vh;
-  background-color: #0d0d0dba;
+  // background-color: #0d0d0dba;
+  background-color: rgba(0,0,0,0.8);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); // ✅ Perfect centering

@@ -17,6 +17,7 @@ const PurchasePlan = ({ data }) => {
     const token = localStorage.getItem("accessToken");
 
     const makePayment = async () => {
+      const token = localStorage.getItem("accessToken");
       try {
         const res = await axios.post(
           "https://uftw2680orcg.elred.io/payment/makePaymentRequest",
@@ -88,7 +89,7 @@ const PurchasePlan = ({ data }) => {
 
         <div className={style.benefits}>Membership Benefits</div>
         <div className={style.benefit}>
-          <Image src={verifyBadge} alt="verified" />
+          <Image src={verifyBadge} alt="verified" className={style.verified_icon}/>
           <div>
             <div className={style.b_title}>
               Access {networkClusterDetails?.numberOfGroups}+ Active Groups
@@ -99,7 +100,7 @@ const PurchasePlan = ({ data }) => {
           </div>
         </div>
         <div className={style.benefit}>
-          <Image src={verifyBadge} alt="verified" />
+          <Image src={verifyBadge} alt="verified" className={style.verified_icon}/>
           <div>
             <div className={style.b_title}>Connect with {networkClusterDetails?.numberOfMembers}+ Members</div>
             <div className={style.b_desc}>
@@ -109,7 +110,7 @@ const PurchasePlan = ({ data }) => {
         </div>
         {membershipData?.map((item, id) => (
           <div className={style.benefit} key={id}>
-            <Image src={verifyBadge} alt="verified" />
+            <Image src={verifyBadge} alt="verified" className={style.verified_icon}/>
             <div>
               <div className={style.b_title}>{item?.title}</div>
               <div className={style.b_desc}>{item?.desc}</div>
@@ -120,7 +121,7 @@ const PurchasePlan = ({ data }) => {
 
       <div className={style.stickyBtnWrapper}>
         <button className={style.stickyBtn} onClick={handlePayNow}>
-          Pay Rs.{subscriptionDetails?.membershipCost} to Continue
+          Pay ₹{subscriptionDetails?.membershipCost} to Continue
         </button>
       </div>
 

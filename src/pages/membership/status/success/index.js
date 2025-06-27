@@ -37,12 +37,6 @@ const Success = () => {
       });
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsPending(false);
-  //   }, 3000);
-  // }, []);
-
   useEffect(() => {
     const txnId = searchParams.get("txnid");
     const token = localStorage.getItem("accessToken");

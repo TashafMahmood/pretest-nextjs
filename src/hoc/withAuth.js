@@ -73,6 +73,8 @@ const withAuth = (WrappedComponent) => {
       const isLoggedIn = localStorage.getItem("accessToken");
 
       if (!isLoggedIn && (nccode || timeoutReached)) {
+
+        console.log(nccode, timeoutReached, '---->')
         if (nccode) {
           router.replace(`/membership?nccode=${nccode}`);
         } else {

@@ -28,6 +28,17 @@
   font-family: "AvenirPro-medium";
 }
 
+.top_div{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.back_button_otp{
+  cursor: pointer;
+}
+
 .otpPagePhoneNumber {
   font-size: 14px;
   color: #aeaeb2;
@@ -113,7 +124,7 @@
 .bottom_wrapper {
   padding: 0 20px;
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
   width: 100%; // Default for small screens
 
   @media (min-width: 501px) {
