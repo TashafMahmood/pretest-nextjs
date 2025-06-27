@@ -12,7 +12,8 @@
 
 .container_div {
   background: #0d0d0d;
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100dvh; /* Use dynamic viewport height */
   max-width: 375px;
   margin: auto;
   color: #fff;
@@ -96,15 +97,15 @@
   font-family: "AvenirPro-md";
 }
 
-.email_input::placeholder{
-  color: #8E8E93;
+.email_input::placeholder {
+  color: #8e8e93;
   font-size: 16px;
   font-weight: 500;
   font-family: "AvenirPro-md";
 }
 
 .error_text {
-  color: #F12632;
+  color: #f12632;
   font-size: 12px;
   margin-top: 6px;
   font-family: "AvenirPro-md";
@@ -112,7 +113,7 @@
 }
 
 .invalid_input {
-  border: 1px solid #F12632;
+  border: 1px solid #f12632;
 }
 
 .valid_input {

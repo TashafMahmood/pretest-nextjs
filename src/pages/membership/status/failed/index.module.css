@@ -30,7 +30,8 @@
 
 .container_div {
   background: #0d0d0d;
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100dvh; /* Use dynamic viewport height */
   max-width: 375px;
   margin: auto;
   color: #fff;
