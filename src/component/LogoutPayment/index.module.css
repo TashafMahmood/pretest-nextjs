@@ -25,7 +25,7 @@
   inset: 0; /* shorthand for top: 0; right: 0; bottom: 0; left: 0 */
   z-index: 9999;
   /* background: #000000cc; */
-  background: #ff6e6ecc;
+  background: #f5ff6ecc;
   color: #fff;
   display: flex;
   justify-content: center;
