@@ -4,7 +4,7 @@
     format("opentype");
 }
 
-/* .container_div {
+.container_div {
   background: #000000cc;
   height: 100%;
   max-width: 375px;
@@ -18,35 +18,7 @@
   width: 100%;
   z-index: 9999;
   font-family: "AvenirPro-medium";
-} */
-
-/* .container_div {
-  position: fixed; 
-  inset: 0; 
-  z-index: 9999;
-  background: #000000cc;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  font-family: "AvenirPro-medium";
-  overflow: hidden;
-  height: 100dvh;
-} */
-
-.container_div {
-  height: calc(var(--vh, 1vh) * 100); /* handles mobile browser height */
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  background: #b70000cc;
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  font-family: "AvenirPro-medium";
 }
-
 
 
 .popup_logout {
