@@ -24,13 +24,15 @@
   position: fixed; /* Changed from absolute */
   inset: 0; /* shorthand for top: 0; right: 0; bottom: 0; left: 0 */
   z-index: 9999;
-  background: #000000cc;
+  /* background: #000000cc; */
+  background: #ff6e6ecc;
   color: #fff;
   display: flex;
   justify-content: center;
   flex-direction: column;
   font-family: "AvenirPro-medium";
   overflow: hidden;
+  height: 100dvh;
 }
 
 
