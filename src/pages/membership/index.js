@@ -153,10 +153,10 @@ const Login = () => {
             <PaymentHeader noDisplay={true} />
             <div className={style.sign_in}>Sign In</div>
             <div className={style.sign_in_text}>
-              Enter your Email id used to sign up on el RED.
+              Enter your email ID used to sign up on el RED.
             </div>
             <div className={style.input_wrapper}>
-              <div className={style.phn_title}>Email id</div>
+              <div className={style.phn_title}>Email ID</div>
               <input
                 className={`${style.email_input} ${
                   emailError

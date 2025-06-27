@@ -45,44 +45,6 @@ const OtpPage = ({
     setStartTimer(true);
   }, []);
 
-  // const submitRequest = async () => {
-  //   setLoading(true)
-  //   const data = {
-  //     email,
-  //     providedOTP: otp,
-  //   };
-  //   try {
-  //     const res = await axios.post(
-  //       `https://uftw2680orcg.elred.io/payment/verifyEmailOTP`,
-  //       data
-  //     );
-  //     localStorage.setItem("accessToken", res?.data?.result?.[0]?.accessToken);
-  //     localStorage.setItem("userdata", JSON.stringify(res?.data?.result?.[0]));
-
-  //     if (nccode) {
-  //       router.push(`/membership/home?nccode=${nccode}`);
-  //     } else {
-  //       router.push(`/membership/home`);
-  //     }
-
-  //   } catch (error) {
-  //     if (error?.response?.data?.errorCode == -1) {
-  //       setOtp("");
-  //       setIncorrectOtp(true);
-  //     } else if (error?.response?.data?.errorCode === 115) {
-  //       setErrorMsg(error?.response?.data?.message);
-  //       setOpenToast(true);
-  //       setTimeout(() => {
-  //         setOpenToast(false);
-  //         setErrorMsg("");
-  //       }, 3000);
-  //     } else {
-  //       console.log(error);
-  //     }
-  //   } finally {
-  //     setSubmittingOverlay(false);
-  //   }
-  // };
 
   const submitRequest = async () => {
     setLoading(true); // Start loading
@@ -159,7 +121,7 @@ const OtpPage = ({
         <div className={styles.mainPageContent}>
           <TitleText title={"OTP Verification"} />
           <div className={styles.mainPageDesc}>
-            We have sent OTP to your registered Email id{" "}
+            We have sent OTP to your registered email id{" "}
             <span>{maskedEmail}</span>
           </div>
 
