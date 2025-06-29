@@ -11,6 +11,7 @@ import axios from "axios";
 import { getBrowserType } from "@/lib/functions";
 import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
 import { usePathname } from "next/navigation";
+import ShimmerImage from "@/component/ShimmerImage/ShimmerImage";
 
 // import PreventBackNavigation from "@/component/PreventBackNavigation/PreventBackNavigation";
 
@@ -21,9 +22,9 @@ const Failed = () => {
   const router = useRouter();
   const [transactionData, setTransactionData] = useState(null);
   const [error, setError] = useState("");
+  const [loaded, setLoaded] = useState(false);
 
   const BROWSER_TYPE = getBrowserType();
-  
 
   useEffect(() => {
     const txnId = searchParams.get("txnid");
@@ -84,11 +85,34 @@ const Failed = () => {
 
   return (
     <>
-      {/* <PreventBackNavigation /> */}
       <div className={style.container_div}>
-        <div className={style.title}>Transaction Details</div>
         <div className={style.content_div}>
-          <Image src={failed} alt="failed" />
+          <div className={style.title}>Transaction Details</div>
+          <div className={style.ntw_info}>
+            <ShimmerImage
+              src={transactionData?.networkClusterDetails?.logo}
+              alt="Logo"
+              width={28}
+              height={28}
+              className={style.ntw_info_logo}
+            />
+            <div className={style.ntw_info_name}>
+              {transactionData?.networkClusterDetails?.name}
+            </div>
+          </div>
+          <div className={style.parent_img}>
+            <div className={style.imgWrapper}>
+              {!loaded && <div className={style.shimmer} />}
+              <Image
+                src={failed}
+                alt="failed"
+                width={100}
+                height={100}
+                onLoadingComplete={() => setLoaded(true)}
+                className={loaded ? style.visible : style.hidden}
+              />
+            </div>
+          </div>
           <div className={style.titleTag}>Failed</div>
           <div className={style.details}>
             Your payment of Rs. {transactionData?.transactionDetails?.amount}{" "}
@@ -107,9 +131,14 @@ const Failed = () => {
               {copied && <div className={style.copied}>Copied!</div>}
             </div>
           </div>
-          <div className={style.homeBtn} onClick={handleGoHome}>
-            <div className={style.home}>Home</div>
+        </div>
+
+        <div className={style.bottom_wrapper}>
+          <div className={style.donot_close}>
+            Please do not click the Browser Back Button. Click the Home button
+            to navigate to Home.
           </div>
+          <div className={style.home_btn} onClick={handleGoHome}>Home</div>
         </div>
       </div>
     </>

@@ -13,6 +13,7 @@ import axios from "axios";
 import { getBrowserType } from "@/lib/functions";
 import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
 import FullScreenLoader from "@/component/FullScreenLoader/FullScreenLoader";
+import ShimmerImage from "@/component/ShimmerImage/ShimmerImage";
 
 const Success = () => {
   const searchParams = useSearchParams();
@@ -22,6 +23,7 @@ const Success = () => {
   const [transactionData, setTransactionData] = useState(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   const BROWSER_TYPE = getBrowserType();
 
@@ -70,6 +72,7 @@ const Success = () => {
     };
 
     fetchTransactionStatus();
+
   }, [searchParams]);
 
   const handleGoHome = () => {
@@ -92,37 +95,74 @@ const Success = () => {
   if (loading) return <FullScreenLoader />; // or a spinner
 
   return (
-    <div className={style.container_div}>
-      <div className={style.title}>Transaction Details</div>
-      <div className={style.content_div}>
-        <Image src={isPending ? pending : success} alt="success" />
-        <div className={style.titleTag}>
-          {isPending ? "Pending" : "Success"}
-        </div>
-        <div className={style.details}>
-          {isPending
-            ? `Your payment of Rs. ${transactionData?.transactionDetails?.amount} for the yearly plan is pending now. Please avoid making a duplicate payment. Kindly check again after some time.`
-            : `Your payment of Rs. ${transactionData?.transactionDetails?.amount} for the yearly plan is processed successfully.`}
+    <>
+      <div className={style.container_div}>
+        <div className={style.content_div}>
+        <div className={style.title}>Transaction Details</div>
+          {/* <Image src={isPending ? pending : success} alt="success" /> */}
+          <div className={style.ntw_info}>
+            <ShimmerImage
+              src={transactionData?.networkClusterDetails?.logo}
+              alt="Logo"
+              width={28}
+              height={28}
+              className={style.ntw_info_logo}
+            />
+            <div className={style.ntw_info_name}>
+              {transactionData?.networkClusterDetails?.name}
+            </div>
+          </div>
+          <div className={style.parent_img}>
+            <div className={style.imgWrapper}>
+              {!loaded && <div className={style.shimmer} />}
+              <Image
+                src={isPending ? pending : success}
+                alt="success"
+                width={100}
+                height={100}
+                onLoadingComplete={() => setLoaded(true)}
+                className={loaded ? style.visible : style.hidden}
+              />
+            </div>
+          </div>
+          <div className={style.titleTag}>
+            {isPending ? "Pending" : "Success"}
+          </div>
+          <div className={style.details}>
+            {isPending
+              ? `Your payment of Rs. ${transactionData?.transactionDetails?.amount} for the yearly plan is pending now. Please avoid making a duplicate payment. Kindly check again after some time.`
+              : `Your payment of Rs. ${transactionData?.transactionDetails?.amount} for the yearly plan is processed successfully.`}
+          </div>
+
+          <div className={style.trnsId}>Transaction ID</div>
+          <div className={style.trnx}>
+            <div>{transactionData?.transactionDetails?.txnid}</div>
+            <div style={{ position: "relative" }}>
+              <Image
+                src={copyIcon}
+                alt="copy"
+                onClick={handleCopy}
+                style={{ cursor: "pointer" }}
+              />
+              {copied && <div className={style.copied}>Copied!</div>}
+            </div>
+          </div>
+          {/* <div className={style.homeBtn} onClick={handleGoHome}>
+            <div className={style.home}>Home</div>
+          </div> */}
         </div>
 
-        <div className={style.trnsId}>Transaction ID</div>
-        <div className={style.trnx}>
-          <div>{transactionData?.transactionDetails?.txnid}</div>
-          <div style={{ position: "relative" }}>
-            <Image
-              src={copyIcon}
-              alt="copy"
-              onClick={handleCopy}
-              style={{ cursor: "pointer" }}
-            />
-            {copied && <div className={style.copied}>Copied!</div>}
+        <div className={style.bottom_wrapper}>
+          <div className={style.donot_close}>
+            Please do not click the Browser Back Button. Click the Home button
+            to navigate to Home.
+          </div>
+          <div className={style.home_btn} onClick={handleGoHome}>
+            Home
           </div>
         </div>
-        <div className={style.homeBtn} onClick={handleGoHome}>
-          <div className={style.home}>Home</div>
-        </div>
       </div>
-    </div>
+    </>
   );
 };
 

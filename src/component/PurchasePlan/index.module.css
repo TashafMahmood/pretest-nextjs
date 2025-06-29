@@ -64,7 +64,7 @@
 .plan_container {
   border: 1px solid #434343;
   border-radius: 12px;
-  padding: 30px;
+  padding: 30px 20px;
   text-align: center;
 }
 
@@ -77,11 +77,20 @@
 }
 
 .network_type {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 30px;
-  font-family: "AvenirPro-md";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+.name{
+  background: linear-gradient(90deg, #B77C17, #FFB81E);
+  max-width: fit-content;
+  padding: 5px 14px;
+  border-radius: 68px;
+  font-family: "AvenirPro-demi";
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
 .network_membership {

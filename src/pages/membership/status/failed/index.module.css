@@ -28,6 +28,12 @@
     format("opentype");
 }
 
+@font-face {
+  font-family: "AvenirPro-Lt";
+  src: url("../../../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-UltLt.otf")
+    format("opentype");
+}
+
 .container_div {
   background: #0d0d0d;
   /* height: 100vh; */
@@ -49,6 +55,35 @@
   font-weight: 400;
   color: #cccccc;
   font-family: "AvenirPro-regular";
+  margin-bottom: 40px;
+}
+/* 
+.ntw_info{
+  display: flex;
+  align-items: center;
+} */
+
+.ntw_info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%; /* ensure container doesn't overflow */
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.ntw_info_logo{
+  border-radius: 100%;
+  border: 1px solid #9E9E9E;
+}
+
+.ntw_info_name {
+  flex: 1; /* grow to fill remaining space */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "AvenirPro-md";
+
 }
 
 .titleTag {
@@ -75,13 +110,14 @@
 } */
 
 .content_div {
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   text-align: center;
-  width: 90%;
+  /* width: 90%; */
   max-width: 375px;
+  padding: 0 40px;
 }
 
 .trnsId {
@@ -139,7 +175,93 @@
   font-weight: 500;
   font-family: "AvenirPro-md";
   cursor: pointer;
+}
 
+.bottom_wrapper {
+  position: fixed;
+  bottom: 0;
+  /* background-color: red; */
+  width: 100%;
+  max-width: 375px;
+  padding: 20px;
+  padding-top: 0;
+  background-color: #0d0d0d;
+  z-index: 999;
+}
+
+.donot_close{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #ccc;
+  padding: 10px 20px;
+  font-family: "AvenirPro-regular";
+}
+
+.home_btn {
+  height: 48px;
+  background-color: #e72d38;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: "AvenirPro-md";
+  color: #fff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.parent_img{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgWrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%; /* or 50% for circle */
+  overflow: hidden;
+
+  /* ✅ Center children (Image & shimmer) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Shimmer placeholder */
+.shimmer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.2s infinite linear;
+  z-index: 1;
+}
+
+/* Fade-in image styles */
+.hidden {
+  opacity: 0;
+  position: absolute;
+}
+
+.visible {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  position: relative;
+  z-index: 2;
 }
 
 @media (max-width: 500px) {

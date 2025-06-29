@@ -1,0 +1,47 @@
+.wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%; /* or 8px for rounded corners */
+    display: inline-block;
+  }
+  
+  .shimmer {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(
+      to right,
+      #e4e4e4 0%,
+      #edeef1 20%,
+      #9a9a9a 40%,
+      #f6f7f8 100%
+    );
+    background-size: 800px 100%;
+    animation: shimmer 1.2s infinite linear;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -800px 0;
+    }
+    100% {
+      background-position: 800px 0;
+    }
+  }
+  
+  .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 50%;
+    transition: opacity 0.3s ease;
+  }
+  
+  .hidden {
+    opacity: 0;
+  }
+  
+  .visible {
+    opacity: 1;
+  }
+  

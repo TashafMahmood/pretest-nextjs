@@ -48,7 +48,6 @@ const PurchasePlan = ({ data }) => {
     }
   }, [networkClusterDetails?.networkClusterCode]);
 
-  console.log(networkClusterDetails, memberShipDetails);
   const handlePayNow = () => {
     if (!payuFormData) {
       alert("Please wait while we prepare your payment.");
@@ -76,7 +75,9 @@ const PurchasePlan = ({ data }) => {
           <div className={style.network_name}>
             {networkClusterDetails?.name}
           </div>
-          <div className={style.network_type}>Premium Network</div>
+          <div className={style.network_type}>
+            <div className={style.name}>Premium Network</div>
+          </div>
           <div className={style.network_membership}>Membership Fee</div>
           <div className={style.network_amount}>
             ₹

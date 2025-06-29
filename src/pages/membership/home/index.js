@@ -111,46 +111,11 @@ const Payments = () => {
     return () => clearTimeout(timer);
   }, [searchParams]);
 
-
-  // useEffect(() => {
-  //   const nccode = searchParams.get("nccode");
-  //   const handleStorageChange = () => {
-  //     const token = localStorage.getItem("accessToken");
-  //     if (!token) {
-  //       // Redirect to login or show error
-  //       router.push(nccode ? `/membership?nccode=${nccode}` : `/membership`)
-  //       // window.location.href = "/membership/login";
-  //     }
-  //   };
-  
-  //   window.addEventListener("storage", handleStorageChange);
-  //   return () => window.removeEventListener("storage", handleStorageChange);
-  // }, []);
-
-  // useEffect(() => {
-  //   const nccode = searchParams.get("nccode");
-  
-  //   const handleStorageChange = () => {
-  //     const token = localStorage.getItem("accessToken");
-
-  //     console.log(nccode,'NNNCCODEE....')
-  //     if (!token) {
-  //       setTimeout(() => {
-  //         router.push(nccode ? `/membership?nccode=${nccode}` : `/membership`);
-  //       }, 6000); // A small delay helps prevent race condition
-  //     }
-  //   };
-  
-  //   window.addEventListener("storage", handleStorageChange);
-  //   return () => window.removeEventListener("storage", handleStorageChange);
-  // }, []);
-
   useEffect(() => {
     const handleStorageChange = () => {
       const token = localStorage.getItem("accessToken");
   
       const currentNccode = new URLSearchParams(window.location.search).get("nccode");
-      console.log(currentNccode, 'NNNCCODEE....');
   
       if (!token) {
         setTimeout(() => {
@@ -161,13 +126,11 @@ const Payments = () => {
   
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
-  }, []);
-  
+  }, []); 
 
   if (state.isLoading || state.hasNetworkCode === null) {
     return <FullScreenLoader />;
   }
-
 
   if (
     BROWSER_TYPE !== "Google Chrome" &&
