@@ -22,7 +22,8 @@
   background-image: url("../../../public/planBGstatic.png");
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100%;
   max-width: 375px;
   margin: auto;
   color: #fff;
