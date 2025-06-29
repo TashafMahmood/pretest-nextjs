@@ -65,6 +65,7 @@
   align-items: center;
   gap: 16px;
   backdrop-filter: blur(4px);
+  margin-bottom: 20px;
 }
 
 .ntw_name {
