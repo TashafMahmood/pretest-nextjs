@@ -42,7 +42,8 @@
   
   .inner_div {
     /* padding: 0 25px; */
-    height: 100vh;
+    /* height: 100vh; */
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
