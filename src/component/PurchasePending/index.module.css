@@ -1,7 +1,8 @@
 .inner_div {
   padding-top: 78px;
   position: relative;
-  height: 100vh;
+  /* height: 100vh; */
+  height: 100%;
 }
 
 .plan_div {
