@@ -37,7 +37,8 @@
 .container_div {
   background: #0d0d0d;
   /* height: 100vh; */
-  height: 100dvh; /* Use dynamic viewport height */
+  /* height: 100dvh;  */
+  height: 100%;
   max-width: 375px;
   margin: auto;
   color: #fff;
@@ -266,6 +267,14 @@
 
 @media (max-width: 500px) {
   .container_div {
+    max-width: 100%;
+  }
+
+  .content_div{
+    max-width: 100%;
+  }
+
+  .bottom_wrapper{
     max-width: 100%;
   }
 }
