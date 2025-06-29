@@ -65,7 +65,6 @@
   align-items: center;
   gap: 16px;
   backdrop-filter: blur(4px);
-  margin-bottom: 20px;
 }
 
 .ntw_name {
@@ -99,6 +98,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70%;
+  margin-top: 20px;
 }
 
 .congrats {
