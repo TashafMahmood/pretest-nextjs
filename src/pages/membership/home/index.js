@@ -19,14 +19,14 @@ import InvalidNetworkComp from "@/component/InvalidNetwork/InvalidNetwork";
 import LifetimeFreePlan from "@/component/LifetimeFreePlan";
 import { getBrowserType } from "@/lib/functions";
 import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
-import Button from 'react-bootstrap/Button'
+import Button from "react-bootstrap/Button";
 import ToastMessage from "@/component/ToastMessage/ToastMessage";
 import { useRouter } from "next/navigation";
 
 const Payments = () => {
   const searchParams = useSearchParams();
   const { isOpen, setIsOpen } = useLogout();
-  const router = useRouter()
+  const router = useRouter();
   const [state, setState] = useState({
     isLoading: true,
     hasNetworkCode: null,
@@ -38,7 +38,6 @@ const Payments = () => {
   const [modalShow, setModalShow] = useState(false);
 
   const BROWSER_TYPE = getBrowserType();
-
 
   useEffect(() => {
     const nccode = searchParams.get("nccode");
@@ -95,6 +94,14 @@ const Payments = () => {
             data: [],
             errorCode: 1,
           });
+        } else if (error?.response?.data?.errorCode == 12) {
+          setState({
+            isLoading: false,
+            hasNetworkCode: true,
+            membershipStatus: null,
+            data: [],
+            errorCode: 12,
+          });
         } else {
           setState({
             isLoading: false,
@@ -114,19 +121,25 @@ const Payments = () => {
   useEffect(() => {
     const handleStorageChange = () => {
       const token = localStorage.getItem("accessToken");
-  
-      const currentNccode = new URLSearchParams(window.location.search).get("nccode");
-  
+
+      const currentNccode = new URLSearchParams(window.location.search).get(
+        "nccode"
+      );
+
       if (!token) {
         setTimeout(() => {
-          router.push(currentNccode ? `/membership?nccode=${currentNccode}` : `/membership`);
-        },50); // slight delay for race condition handling
+          router.push(
+            currentNccode
+              ? `/membership?nccode=${currentNccode}`
+              : `/membership`
+          );
+        }, 50); // slight delay for race condition handling
       }
     };
-  
+
     window.addEventListener("storage", handleStorageChange);
     return () => window.removeEventListener("storage", handleStorageChange);
-  }, []); 
+  }, []);
 
   if (state.isLoading || state.hasNetworkCode === null) {
     return <FullScreenLoader />;
@@ -146,12 +159,12 @@ const Payments = () => {
   return (
     <div className={styles.container_div}>
       <PaymentHeader />
-      
+
       {!state.isLoading && state.errorCode == 116 && <InvalidNetworkComp />}
       {!state.hasNetworkCode && state.errorCode == null && <HomeComponent />}
       {state.hasNetworkCode && state.errorCode == -1 && <InvalidNetworkComp />}
-      {state.hasNetworkCode && state.errorCode == 1 && <SessionExpired />}
-
+      {state.hasNetworkCode &&
+        (state.errorCode === 1 || state.errorCode === 12) && <SessionExpired />}
       {state.hasNetworkCode && renew ? (
         <PurchasePlan data={state?.data} />
       ) : (
