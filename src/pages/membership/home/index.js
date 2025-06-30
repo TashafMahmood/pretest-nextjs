@@ -86,22 +86,15 @@ const Payments = () => {
         });
       } catch (error) {
         console.error("API ERROR:", error?.response?.data?.errorCode);
-        if (error?.response?.data?.errorCode == 1) {
+        if (error?.response?.data?.errorCode == -1) {
           setState({
             isLoading: false,
             hasNetworkCode: true,
             membershipStatus: null,
             data: [],
-            errorCode: 1,
+            errorCode: -1,
           });
-        } else if (error?.response?.data?.errorCode == -1) {
-          // setState({
-          //   isLoading: false,
-          //   hasNetworkCode: true,
-          //   membershipStatus: null,
-          //   data: [],
-          //   errorCode: 1,
-          // });
+        } else if (error?.response?.data?.errorCode == 1) {
           handleSessionExpired();
         } else if (error?.response?.data?.errorCode == 12) {
           setState({
@@ -171,7 +164,7 @@ const Payments = () => {
 
       {!state.isLoading && state.errorCode == 12 && <InvalidNetworkComp />}
       {!state.hasNetworkCode && state.errorCode == null && <HomeComponent />}
-      {!state.isLoading && state.errorCode == 1 && <SessionExpired />}
+      {!state.isLoading && state.errorCode == -1 && <SessionExpired />}
       {state.hasNetworkCode && renew ? (
         <PurchasePlan data={state?.data} />
       ) : (
