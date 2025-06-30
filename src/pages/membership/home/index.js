@@ -44,6 +44,14 @@ const Payments = () => {
 
     setState((prev) => ({ ...prev, isLoading: true }));
 
+    const handleSessionExpired = () => {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("userdata");
+      localStorage.removeItem("trxId");
+      router.push(nccode ? `/membership?nccode=${nccode}` : "/membership");
+      setIsOpen(false);
+    };
+
     const fetchData = async () => {
       try {
         if (!nccode) {
@@ -78,15 +86,7 @@ const Payments = () => {
         });
       } catch (error) {
         console.error("API ERROR:", error?.response?.data?.errorCode);
-        if (error?.response?.data?.errorCode == -1) {
-          setState({
-            isLoading: false,
-            hasNetworkCode: true,
-            membershipStatus: null,
-            data: [],
-            errorCode: -1,
-          });
-        } else if (error?.response?.data?.errorCode == 1) {
+        if (error?.response?.data?.errorCode == 1) {
           setState({
             isLoading: false,
             hasNetworkCode: true,
@@ -94,6 +94,15 @@ const Payments = () => {
             data: [],
             errorCode: 1,
           });
+        } else if (error?.response?.data?.errorCode == -1) {
+          // setState({
+          //   isLoading: false,
+          //   hasNetworkCode: true,
+          //   membershipStatus: null,
+          //   data: [],
+          //   errorCode: 1,
+          // });
+          handleSessionExpired();
         } else if (error?.response?.data?.errorCode == 12) {
           setState({
             isLoading: false,
@@ -160,11 +169,9 @@ const Payments = () => {
     <div className={styles.container_div}>
       <PaymentHeader />
 
-      {!state.isLoading && state.errorCode == 116 && <InvalidNetworkComp />}
+      {!state.isLoading && state.errorCode == 12 && <InvalidNetworkComp />}
       {!state.hasNetworkCode && state.errorCode == null && <HomeComponent />}
-      {state.hasNetworkCode && state.errorCode == 12 && <InvalidNetworkComp />}
-      {state.hasNetworkCode &&
-        (state.errorCode === 1 || state.errorCode == -1) && <SessionExpired />}
+      {!state.isLoading && state.errorCode == 1 && <SessionExpired />}
       {state.hasNetworkCode && renew ? (
         <PurchasePlan data={state?.data} />
       ) : (
