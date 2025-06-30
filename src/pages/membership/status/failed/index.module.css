@@ -222,8 +222,8 @@
 
 .imgWrapper {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%; /* or 50% for circle */
   overflow: hidden;
 

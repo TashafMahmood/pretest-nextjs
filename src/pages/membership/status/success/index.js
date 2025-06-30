@@ -72,7 +72,6 @@ const Success = () => {
     };
 
     fetchTransactionStatus();
-
   }, [searchParams]);
 
   const handleGoHome = () => {
@@ -98,7 +97,7 @@ const Success = () => {
     <>
       <div className={style.container_div}>
         <div className={style.content_div}>
-        <div className={style.title}>Transaction Details</div>
+          <div className={style.title}>Transaction Details</div>
           {/* <Image src={isPending ? pending : success} alt="success" /> */}
           <div className={style.ntw_info}>
             <ShimmerImage
@@ -125,6 +124,21 @@ const Success = () => {
               />
             </div>
           </div>
+          {/* <div className={style.parent_img}>
+            <div className={style.imgWrapper}>
+              {!loaded && <div className={style.shimmer} />}
+              <Image
+                src={isPending ? pending : success}
+                alt="success"
+                onLoadingComplete={() => setLoaded(true)}
+                fill
+                className={`${style.image} ${
+                  loaded ? style.visible : style.hidden
+                }`}
+              />
+            </div>
+          </div> */}
+
           <div className={style.titleTag}>
             {isPending ? "Pending" : "Success"}
           </div>
