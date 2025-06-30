@@ -162,9 +162,9 @@ const Payments = () => {
 
       {!state.isLoading && state.errorCode == 116 && <InvalidNetworkComp />}
       {!state.hasNetworkCode && state.errorCode == null && <HomeComponent />}
-      {state.hasNetworkCode && state.errorCode == -1 && <InvalidNetworkComp />}
+      {state.hasNetworkCode && state.errorCode == 12 && <InvalidNetworkComp />}
       {state.hasNetworkCode &&
-        (state.errorCode === 1 || state.errorCode === 12) && <SessionExpired />}
+        (state.errorCode === 1 || state.errorCode == -1) && <SessionExpired />}
       {state.hasNetworkCode && renew ? (
         <PurchasePlan data={state?.data} />
       ) : (
