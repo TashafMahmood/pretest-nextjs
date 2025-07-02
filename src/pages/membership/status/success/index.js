@@ -81,7 +81,7 @@ const Success = () => {
         console.error("Failed to fetch transaction status ❌", err);
         setError("Failed to fetch transaction status");
 
-        if (err?.response?.data?.errorCode == 1) {
+        if (err?.response?.data?.errorCode == 1 || err?.response?.data?.errorCode == -1) {
           handleSessionExpired(); // this triggers redirect
           return; // ⛔ stop execution and rendering
         }
