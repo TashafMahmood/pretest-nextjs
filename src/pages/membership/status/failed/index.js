@@ -12,6 +12,8 @@ import { getBrowserType } from "@/lib/functions";
 import BrowserNotSupported from "@/component/BrowserNotSupported/BrowserNotSupported";
 import { usePathname } from "next/navigation";
 import ShimmerImage from "@/component/ShimmerImage/ShimmerImage";
+import OTPloader from "@/component/OTPloader/OTPloader";
+import FullScreenLoader from "@/component/FullScreenLoader/FullScreenLoader";
 
 // import PreventBackNavigation from "@/component/PreventBackNavigation/PreventBackNavigation";
 
@@ -23,14 +25,25 @@ const Failed = () => {
   const [transactionData, setTransactionData] = useState(null);
   const [error, setError] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const BROWSER_TYPE = getBrowserType();
 
   useEffect(() => {
+    setLoading(true);
     const txnId = searchParams.get("txnid");
     const token = localStorage.getItem("accessToken");
 
     if (!txnId) return;
+
+    const handleSessionExpired = () => {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("userdata");
+      localStorage.removeItem("trxId");
+      // router.push(nccode ? `/membership?nccode=${nccode}` : "/membership");
+      router.push("/membership");
+      // setIsOpen(false);
+    };
 
     const fetchTransactionStatus = async () => {
       try {
@@ -43,11 +56,18 @@ const Failed = () => {
             },
           }
         );
-
         setTransactionData(res?.data?.result?.[0]);
+        setLoading(false);
       } catch (err) {
         console.error("Failed to fetch transaction status ❌", err);
         setError("Failed to fetch transaction status");
+
+        if (err?.response?.data?.errorCode == 1) {
+          handleSessionExpired(); // this triggers redirect
+          return; // ⛔ stop execution and rendering
+        }
+
+        setLoading(false); // only call this if not session expired
       }
     };
 
@@ -81,6 +101,10 @@ const Failed = () => {
     BROWSER_TYPE !== "Unknown browser"
   ) {
     return <BrowserNotSupported />;
+  }
+
+  if (loading) {
+    return <FullScreenLoader />;
   }
 
   return (
@@ -138,7 +162,9 @@ const Failed = () => {
             Please do not click the Browser Back Button. Click the Home button
             to navigate to Home.
           </div>
-          <div className={style.home_btn} onClick={handleGoHome}>Home</div>
+          <div className={style.home_btn} onClick={handleGoHome}>
+            Home
+          </div>
         </div>
       </div>
     </>

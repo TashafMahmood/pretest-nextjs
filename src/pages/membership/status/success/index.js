@@ -45,6 +45,19 @@ const Success = () => {
 
     if (!txnId) return;
 
+    const handleSessionExpired = () => {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("userdata");
+      localStorage.removeItem("trxId");
+      router.push(
+        transactionData?.networkClusterDetails?.networkClusterCode
+          ? `/membership?nccode=${transactionData?.networkClusterDetails?.networkClusterCode}`
+          : "/membership"
+      );
+      // router.push("/membership");
+      // setIsOpen(false);
+    };
+
     const fetchTransactionStatus = async () => {
       try {
         const res = await axios.get(
@@ -67,7 +80,13 @@ const Success = () => {
       } catch (err) {
         console.error("Failed to fetch transaction status ❌", err);
         setError("Failed to fetch transaction status");
-        setLoading(false); // ✅ Even on error, stop loading
+
+        if (err?.response?.data?.errorCode == 1) {
+          handleSessionExpired(); // this triggers redirect
+          return; // ⛔ stop execution and rendering
+        }
+
+        setLoading(false); // only call this if not session expired
       }
     };
 
