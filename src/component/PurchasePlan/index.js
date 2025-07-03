@@ -202,6 +202,11 @@ const PurchasePlan = ({ data }) => {
             name="udf2"
             value={payuFormData?.transactionDetails?.udf2 || ""}
           />
+          <input
+            type="hidden"
+            name="drop_category"
+            value={payuFormData?.transactionDetails?.drop_category || ""}
+          />
         </form>
       )}
     </>
