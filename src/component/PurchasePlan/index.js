@@ -84,7 +84,7 @@ const PurchasePlan = ({ data }) => {
             <span className={style.numbers}>
               {subscriptionDetails?.membershipCost}
             </span>
-            /Yr
+            /Year
           </div>
         </div>
 
