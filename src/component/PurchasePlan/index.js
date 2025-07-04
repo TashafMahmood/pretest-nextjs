@@ -74,7 +74,7 @@ const PurchasePlan = ({ data }) => {
       if (formRef.current) {
         formRef.current.submit(); // Submit PayU form after a tick
       }
-    }, 100); // Small delay to ensure re-render happens
+    }, 200); // Small delay to ensure re-render happens
   };
   
 
