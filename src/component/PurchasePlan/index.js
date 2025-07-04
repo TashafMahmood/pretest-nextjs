@@ -15,8 +15,19 @@ const PurchasePlan = ({ data }) => {
   const formRef = useRef(null);
   const [loading, setLoading] = useState(false);
 
+  // Reset on mount
   useEffect(() => {
-    setLoading(false)
+    setLoading(false);
+  }, []);
+
+  // Reset on browser back (bfcache or reload)
+  useEffect(() => {
+    const handlePageShow = () => setLoading(false);
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
+
+  useEffect(() => {
     const token = localStorage.getItem("accessToken");
 
     const makePayment = async () => {
@@ -67,16 +78,15 @@ const PurchasePlan = ({ data }) => {
       alert("Please wait while we prepare your payment.");
       return;
     }
-  
+
     setLoading(true); // Show loader before redirect
-  
+
     setTimeout(() => {
       if (formRef.current) {
         formRef.current.submit(); // Submit PayU form after a tick
       }
     }, 100); // Small delay to ensure re-render happens
   };
-  
 
   return (
     <>
