@@ -16,7 +16,7 @@ const PurchasePlan = ({ data }) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // setLoading(true)
+    setLoading(false)
     const token = localStorage.getItem("accessToken");
 
     const makePayment = async () => {
