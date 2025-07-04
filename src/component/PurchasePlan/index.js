@@ -5,6 +5,7 @@ import Image from "next/image";
 import verifyBadge from "../../../public/verifyWhiteBadge.svg";
 import axios from "axios";
 import { membershipData } from "@/constants/membershipData";
+import { Spinner } from "react-bootstrap";
 
 const PurchasePlan = ({ data }) => {
   const { memberShipDetails, networkClusterDetails, subscriptionDetails } =
@@ -12,8 +13,10 @@ const PurchasePlan = ({ data }) => {
 
   const [payuFormData, setPayuFormData] = useState(null);
   const formRef = useRef(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    // setLoading(true)
     const token = localStorage.getItem("accessToken");
 
     const makePayment = async () => {
@@ -48,16 +51,32 @@ const PurchasePlan = ({ data }) => {
     }
   }, [networkClusterDetails?.networkClusterCode]);
 
+  // const handlePayNow = () => {
+  //   if (!payuFormData) {
+  //     alert("Please wait while we prepare your payment.");
+  //     return;
+  //   }
+
+  //   if (formRef.current) {
+  //     formRef.current.submit();
+  //   }
+  // };
+
   const handlePayNow = () => {
     if (!payuFormData) {
       alert("Please wait while we prepare your payment.");
       return;
     }
-
-    if (formRef.current) {
-      formRef.current.submit();
-    }
+  
+    setLoading(true); // Show loader before redirect
+  
+    setTimeout(() => {
+      if (formRef.current) {
+        formRef.current.submit(); // Submit PayU form after a tick
+      }
+    }, 100); // Small delay to ensure re-render happens
   };
+  
 
   return (
     <>
@@ -90,7 +109,11 @@ const PurchasePlan = ({ data }) => {
 
         <div className={style.benefits}>Membership Benefits</div>
         <div className={style.benefit}>
-          <Image src={verifyBadge} alt="verified" className={style.verified_icon}/>
+          <Image
+            src={verifyBadge}
+            alt="verified"
+            className={style.verified_icon}
+          />
           <div>
             <div className={style.b_title}>
               Access {networkClusterDetails?.numberOfGroups}+ Active Groups
@@ -101,9 +124,15 @@ const PurchasePlan = ({ data }) => {
           </div>
         </div>
         <div className={style.benefit}>
-          <Image src={verifyBadge} alt="verified" className={style.verified_icon}/>
+          <Image
+            src={verifyBadge}
+            alt="verified"
+            className={style.verified_icon}
+          />
           <div>
-            <div className={style.b_title}>Connect with {networkClusterDetails?.numberOfMembers}+ Members</div>
+            <div className={style.b_title}>
+              Connect with {networkClusterDetails?.numberOfMembers}+ Members
+            </div>
             <div className={style.b_desc}>
               Discover opportunities, mentorship, and partnerships.
             </div>
@@ -111,7 +140,11 @@ const PurchasePlan = ({ data }) => {
         </div>
         {membershipData?.map((item, id) => (
           <div className={style.benefit} key={id}>
-            <Image src={verifyBadge} alt="verified" className={style.verified_icon}/>
+            <Image
+              src={verifyBadge}
+              alt="verified"
+              className={style.verified_icon}
+            />
             <div>
               <div className={style.b_title}>{item?.title}</div>
               <div className={style.b_desc}>{item?.desc}</div>
@@ -121,8 +154,29 @@ const PurchasePlan = ({ data }) => {
       </div>
 
       <div className={style.stickyBtnWrapper}>
-        <button className={style.stickyBtn} onClick={handlePayNow}>
-          Pay ₹{subscriptionDetails?.membershipCost} to Continue
+        {/* <button className={style.stickyBtn} onClick={handlePayNow}>
+          {loading ? (
+            <Spinner
+              animation="border"
+              className={style.submit_button_spinner}
+            />
+          ) : (
+            `Pay ₹${subscriptionDetails?.membershipCost} to Continue`
+          )}
+        </button> */}
+        <button
+          className={loading ? style.stickyBtnLoading : style.stickyBtn}
+          onClick={handlePayNow}
+          // disabled={loading}
+        >
+          {loading ? (
+            <Spinner
+              animation="border"
+              className={style.submit_button_spinner}
+            />
+          ) : (
+            `Pay ₹${subscriptionDetails?.membershipCost} to Continue`
+          )}
         </button>
       </div>
 
