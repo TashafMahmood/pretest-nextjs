@@ -341,8 +341,7 @@ const Failed = () => {
           <div className={style.details}>
             {isPending
               ? `Your payment of Rs. ${transactionData?.transactionDetails?.amount} for the yearly plan is pending now. Please avoid making a duplicate payment. Kindly check again after some time.`
-              : `Your payment of Rs. ${transactionData?.transactionDetails?.amount}{" "}
-            for the yearly plan is failed. Please try again.`}
+              : `Your payment of Rs. ${transactionData?.transactionDetails?.amount} for the yearly plan is failed. Please try again.`}
           </div>
           <div className={style.trnsId}>Transaction ID</div>
           <div className={style.trnx}>

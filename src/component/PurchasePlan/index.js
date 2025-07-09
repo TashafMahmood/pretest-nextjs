@@ -194,7 +194,7 @@ const PurchasePlan = ({ data }) => {
       {payuFormData && (
         <form
           ref={formRef}
-          action="https://secure.payu.in/_payment"
+          action={payuFormData?.transactionDetails?.url}
           method="post"
           style={{ display: "none" }}
         >
