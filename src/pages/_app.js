@@ -5,7 +5,7 @@ import { LogoutProvider } from "@/context/LogoutContext";
 import Head from "next/head";
 
 
-console.log(" deployed...");
+console.log("new deployment...");
 export default function App({ Component, pageProps }) {
 
   return (
