@@ -4,33 +4,24 @@
         "details": [
             {
                 "appID": "YN83UST97S.com.elredmod.one",
-                "paths": [
-                    "*"
-                ]
+                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" ]
             },
             {
                 "appID": "YN83UST97S.com.elredmod.one.test",
-                "paths": [
-                    "*"
-                ]
+                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" ]
             },
             {
                 "appID": "YN83UST97S.com.elredmod.one.dev",
-                "paths": [
-                    "*"
-                ]
+                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" ]
             },
             {
                 "appID": "YN83UST97S.com.elredmod.one.demo",
-                "paths": [
-                    "*"
-                ]
+                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" ]
             },
             {
                 "appID": "YN83UST97S.com.elredmod.one.backup",
-                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*" ]
+                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" ]
             }
         ]
     }
   }
-  
