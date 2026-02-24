@@ -24,13 +24,13 @@
   
   /* ================= GLOBAL SCROLL FIX ================= */
   
-  html,
+  /* html,
   body {
     height: 100%;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
-  
+   */
   /* ================= MAIN LAYOUT ================= */
   
   .main {
