@@ -290,7 +290,7 @@ const EventDetailsPage = ({ eventData, eventId }) => {
   //   };
 
   const handleShare = async () => {
-    const shareLink = `${process.env.REACT_WEBVIEW_URL}event-details?eventId=${eventId}`;
+    const shareLink = `${process.env.NEXT_PUBLIC_WEBVIEW_URL}event-details?eventId=${eventId}`;
 
     if (navigator.share) {
       await navigator.share({
@@ -356,7 +356,7 @@ const EventDetailsPage = ({ eventData, eventId }) => {
         <meta property="og:image" content={eventData.eventScreenshotImage} />
         <meta
           property="og:url"
-          content={`${process.env.REACT_WEBVIEW_URL}event-details?eventId=${eventId}`}
+          content={`${process.env.NEXT_PUBLIC_WEBVIEW_URL}event-details?eventId=${eventId}`}
         />
 
         <meta property="og:image:type" content="image/jpeg" />
