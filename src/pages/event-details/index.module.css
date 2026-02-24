@@ -308,7 +308,7 @@
 
 .bottomCTA {
   /* position: fixed; */
-  bottom: 0;
+  /* bottom: 0; */
   width: 100%;
   max-width: 375px;
   /* background-color: #0d0d0d; */
@@ -317,6 +317,7 @@
   font-size: 18px;
   font-family: "AvenirPro-medium";
   color: #e72d38;
+  margin-top: 15px;
   /* border-top: 1px solid #1f1f1f; */
   /* cursor: pointer; */
 }
