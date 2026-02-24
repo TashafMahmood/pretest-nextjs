@@ -269,9 +269,9 @@ const EventDetailsPage = ({ eventData, eventId }) => {
   }
 
   const handleShare = async () => {
-    if (typeof window === "undefined") return;
+    // if (typeof window === "undefined") return;
 
-    const shareLink = `${window.location.origin}/event-details?eventId=${eventId}`;
+    const shareLink = `${process.env.REACT_WEBVIEW_URL}event-details?eventId=${eventId}`;
 
     if (navigator.share) {
       try {
@@ -337,14 +337,13 @@ const EventDetailsPage = ({ eventData, eventId }) => {
       {/* ================= OG TAGS ================= */}
       <Head>
         <title>{eventData.eventName}</title>
-
         <meta property="og:type" content="website" />
         <meta property="og:title" content={eventData.eventName} />
         <meta property="og:description" content={eventData.eventDescription} />
         <meta property="og:image" content={eventData.eventImage} />
         <meta
           property="og:url"
-          content={`${process.env.NEXT_PUBLIC_DOMAIN}/event-details?eventId=${eventId}`}
+          content={`${process.env.REACT_WEBVIEW_URL}event-details?eventId=${eventId}`}
         />
 
         <meta property="og:image:type" content="image/jpeg" />
