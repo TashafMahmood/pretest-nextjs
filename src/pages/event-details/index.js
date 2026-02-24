@@ -388,7 +388,7 @@ const EventDetailsPage = ({ eventData, eventId }) => {
               src={eventData.eventImage || "/event-banner.png"}
               alt="Event Banner"
               width={375}
-              height={240}
+              height={445}
               className={styles.bannerImage}
             />
           </div>
