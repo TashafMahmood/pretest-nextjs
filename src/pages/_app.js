@@ -5,7 +5,7 @@ import { LogoutProvider } from "@/context/LogoutContext";
 import Head from "next/head";
 
 
-console.log("new deployment...");
+console.log("tashaf account pretest...");
 export default function App({ Component, pageProps }) {
 
   return (
