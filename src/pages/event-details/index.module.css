@@ -210,6 +210,7 @@
   font-size: 36px;
   font-family: "AvenirPro-medium";
   margin-bottom: 24px;
+  margin-top: 10px;
 }
 
 .eventDescription {
@@ -247,7 +248,7 @@
 .speakerImage {
   border-radius: 50%;
   object-fit: cover;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
 }
 
 .speakerName {
@@ -259,9 +260,8 @@
   font-size: 16px;
   line-height: 24px;
   margin-top: 10px;
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: "AvenirPro-regular";
-
 }
 
 .linkRow {
@@ -269,7 +269,7 @@
   align-items: center;
   gap: 8px;
   margin-top: 10px;
-  color: #147BFF;
+  color: #147bff;
 }
 
 .linkRow a {
@@ -279,25 +279,45 @@
 }
 
 .attendText {
-  font-size: 16px;
+  font-size: 14px;
+  display: block;
   /* margin-bottom: 120px; spacing for bottom button */
   font-family: "AvenirPro-medium";
-  color: #fff;
+  text-decoration: none;
+}
+
+.hrefLink {
+  display: block;
+  max-width: fit-content;
+}
+
+.hrefLink span{
+    font-size: 14px;
+    font-family: "AvenirPro-demi";
+    margin-left: 4px;
 
 }
+
+/* .attendText {
+    display: block;      
+    margin-top: 8px;     
+    font-size: 16px;
+    color: #e72d38;
+    text-decoration: none;
+} */
 
 .bottomCTA {
   /* position: fixed; */
   bottom: 0;
   width: 100%;
   max-width: 375px;
-  background-color: #0d0d0d;
+  /* background-color: #0d0d0d; */
   text-align: center;
   padding: 18px;
   font-size: 18px;
   font-family: "AvenirPro-medium";
   color: #e72d38;
-  border-top: 1px solid #1f1f1f;
+  /* border-top: 1px solid #1f1f1f; */
   /* cursor: pointer; */
 }
 
