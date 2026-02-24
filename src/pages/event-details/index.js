@@ -271,21 +271,34 @@ const EventDetailsPage = ({ eventData, eventId }) => {
   const handleShare = async () => {
     // if (typeof window === "undefined") return;
 
-    const shareLink = `${process.env.REACT_WEBVIEW_URL}event-details?eventId=${eventId}`;
+//     const shareLink = `${process.env.REACT_WEBVIEW_URL}event-details?eventId=${eventId}`;
 
+//     if (navigator.share) {
+//       try {
+//         await navigator.share({
+//           title: eventData.eventName,
+//           text: eventData.eventDescription,
+//           url: shareLink,
+//         });
+//       } catch (err) {
+//         console.log("Share cancelled", err);
+//       }
+//     } else {
+//       await navigator.clipboard.writeText(shareLink);
+//       alert("Link copied to clipboard!");
+//     }
+//   };
+
+const handleShare = async () => {
+    const shareLink = `${process.env.REACT_WEBVIEW_URL}event-details?eventId=${eventId}`;
+  
     if (navigator.share) {
-      try {
-        await navigator.share({
-          title: eventData.eventName,
-          text: eventData.eventDescription,
-          url: shareLink,
-        });
-      } catch (err) {
-        console.log("Share cancelled", err);
-      }
+      await navigator.share({
+        title: eventData.eventName,
+        url: shareLink,   // 🔥 remove custom text
+      });
     } else {
       await navigator.clipboard.writeText(shareLink);
-      alert("Link copied to clipboard!");
     }
   };
 
