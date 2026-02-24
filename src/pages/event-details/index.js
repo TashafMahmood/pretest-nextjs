@@ -340,7 +340,7 @@ const EventDetailsPage = ({ eventData, eventId }) => {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={eventData.eventName} />
         <meta property="og:description" content={eventData.eventDescription} />
-        <meta property="og:image" content={eventData.eventImage} />
+        <meta property="og:image" content={eventData.eventScreenshotImage} />
         <meta
           property="og:url"
           content={`${process.env.REACT_WEBVIEW_URL}event-details?eventId=${eventId}`}
@@ -354,7 +354,7 @@ const EventDetailsPage = ({ eventData, eventId }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={eventData.eventName} />
         <meta name="twitter:description" content={eventData.eventDescription} />
-        <meta name="twitter:image" content={eventData.eventImage} />
+        <meta name="twitter:image" content={eventData.eventScreenshotImage} />
       </Head>
 
       {/* ================= UI ================= */}
