@@ -291,11 +291,10 @@
   max-width: fit-content;
 }
 
-.hrefLink span{
-    font-size: 14px;
-    font-family: "AvenirPro-demi";
-    margin-left: 4px;
-
+.hrefLink span {
+  font-size: 14px;
+  font-family: "AvenirPro-demi";
+  margin-left: 4px;
 }
 
 /* .attendText {
@@ -306,21 +305,15 @@
     text-decoration: none;
 } */
 
-.bottomCTA {
-  /* position: fixed; */
-  /* bottom: 0; */
-  width: 100%;
-  max-width: 375px;
-  /* background-color: #0d0d0d; */
+.joinNetwork {
   text-align: center;
-  padding: 18px;
   font-size: 18px;
   font-family: "AvenirPro-medium";
   color: #e72d38;
-  margin-top: 15px;
-  /* border-top: 1px solid #1f1f1f; */
-  /* cursor: pointer; */
+  margin-top: 30px;
+  margin-bottom: 20px;
 }
+
 
 @media (max-width: 500px) {
   .main {

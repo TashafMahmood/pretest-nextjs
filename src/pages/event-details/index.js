@@ -485,9 +485,10 @@ const EventDetailsPage = ({ eventData, eventId }) => {
               )}{" "}
             </>
             {/* )} */}
-            <div className={styles.bottomCTA}>
-              {eventData.ctaText || "Join network to attend"}
+            <div className={styles.joinNetwork}>
+                Join network to attend
             </div>
+           
           </div>
         </div>
       </div>
