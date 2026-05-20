@@ -23,6 +23,8 @@ const Login = () => {
 
   const BROWSER_TYPE = getBrowserType();
 
+  console.log('pretest branch - elre_nextjs with tashafmahmood')
+
   const validateEmail = (value) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setInvalidError(false);
