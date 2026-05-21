@@ -57,7 +57,7 @@ export default function AccountScreen() {
         {/* Action and Download zone */}
         <div className={styles.bottomSection}>
           <div className={styles.textGroup}>
-            <h1 className={styles.headline}>You dont have an account!</h1>
+            <h1 className={styles.headline}>You don't have an account!</h1>
             <p className={styles.subtext}>
               Please download <Image src={logo} alt="text" height={10} className={styles.logo_txt}/> app to get the best experience.
             </p>
