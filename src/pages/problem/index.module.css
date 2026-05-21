@@ -1,0 +1,386 @@
+@font-face {
+  font-family: "AvenirPro-md";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Medium.otf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "AvenirPro-demi";
+  src: url("../../assets/fonts/Avenir_Next_Pro/AvenirNextLTPro-Demi.otf")
+    format("opentype");
+}
+
+/* Centered layout viewport on desktop */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Keeps the card perfectly anchored to the bottom screen edge */
+  min-height: 100vh;
+  background-color: #f3f4f6;
+  overflow: hidden;
+  font-family: "AvenirPro-md";
+}
+
+/* The core wrapper component */
+.card {
+  width: 100%;
+  height: auto; /* FIX: Removes the forced 850px height so it fits content dynamically */
+  max-height: 95vh; /* Prevents overflow cuts on short viewports */
+  background-color: #ffffff;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  box-shadow:
+    0 -10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 -5px 10px -5px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 0; /* FIX: Eliminates any default margin causing separation from the baseline */
+
+  /* Slide from bottom animation */
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Responsive constraints via media queries */
+@media (max-width: 767px) {
+  .card {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    align-items: center; /* Centers layout nicely on large desktop displays */
+  }
+  .card {
+    max-width: 375px;
+    border-radius: 1.5rem;
+    margin-bottom: 0;
+  }
+}
+
+/* Slide up animation definition */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Top Close Button */
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.closeButton:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* ... Keep your .container, .card, and .closeButton styles identical ... */
+
+/* Top Banner Block */
+.topSection {
+  position: relative;
+  /* background-color: #BE212A; */
+  background-color: #040404;
+  height: 100vh; /* Reduced slightly since images generally need less overflow spacing than hardcode wrappers */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2rem;
+  overflow: hidden;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+.logo {
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  z-index: 10;
+}
+
+.logoPrefix {
+  font-style: italic;
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-transform: lowercase;
+  margin-right: 0.25rem;
+}
+
+.logoMain {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+/* NEW: Image Positioning Engine */
+.imageWrapper {
+  position: absolute;
+  bottom: 0; /* Forces the asset to snap exactly flush against the white bottomSection split */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 85%; /* Matches your original layout mockup proportions */
+  height: 290px; /* Controls how much vertical space the image view window gets */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.halfDeviceImage {
+  width: auto;
+  /* height: 100%; */
+  max-height: 50vh;
+  object-fit: contain; /* Ensures the graphic asset scales properly without stretching or pixelating */
+  object-position: bottom center;
+  display: block;
+}
+
+/* ... Keep your .bottomSection, .textGroup, and button styles identical ... */
+
+.logoMain {
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+/* Phone Mockup Section */
+.phoneMockup {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  background-color: #1a1a1a;
+  border-top-left-radius: 40px;
+  border-top-right-radius: 40px;
+  border: 4px solid #2d2d2d;
+  border-bottom: none;
+  padding: 0.75rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.dynamicIsland {
+  width: 6.5rem;
+  height: 1.25rem;
+  background-color: #000000;
+  margin: 0 auto 0.75rem auto;
+  border-radius: 9999px;
+}
+
+.phoneScreen {
+  flex: 1;
+  background-image: url("https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop");
+  background-size: cover;
+  background-position: center;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.phoneScreen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  z-index: 0;
+}
+
+.profileHeader {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.profileCard {
+  position: relative;
+  z-index: 10;
+  margin-top: auto;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.avatar {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  object-fit: cover;
+  margin-bottom: 0.5rem;
+}
+
+.profileNameRow {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.profileName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.verifiedBadge {
+  background-color: #3b82f6;
+  border-radius: 50%;
+  width: 0.875rem;
+  height: 0.875rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profileMeta {
+  font-size: 0.7rem;
+  opacity: 0.9;
+  margin: 0.125rem 0 0 0;
+}
+
+.quickActions {
+  margin-top: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.actionItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.6rem;
+}
+
+.actionIcon {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.35rem;
+  border-radius: 50%;
+  margin-bottom: 0.15rem;
+}
+
+/* Bottom Interface Box */
+.bottomSection {
+  height: auto; /* FIX: Removes the fixed 40% percentage ratio layout split */
+  background-color: #ffffff;
+  padding: 18px; /* Better breathing room balanced around content */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; /* FIX: Uses tight structured gaps instead of stretching out space */
+  text-align: center;
+}
+
+.textGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.headline {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.subtext {
+  font-size: 0.85rem;
+  color: #6b7280;
+  max-width: 20rem;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+/* Button Horizontal Alignment */
+.buttonGroup {
+  width: 100%;
+  display: flex;
+  gap: 0rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.storeButton {
+  /* width: 50%; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  /* background-color: #000000; */
+  color: #ffffff;
+  padding: 0.8rem 1.1rem;
+  border-radius: 0.65rem;
+  border: 0.3px solid #000000;
+  text-decoration: none;
+}
+
+.btnTextWrapper {
+  text-align: left;
+  line-height: 1.1;
+}
+
+.btnLabel {
+  font-size: 12px;
+  color: black;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  font-family: "AvenirPro-md";
+}
+
+.btnTitle {
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.wrapper {
+  position: absolute;
+}
+
+.logo_txt{
+    margin-top: -3px;
+}
