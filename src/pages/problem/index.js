@@ -13,7 +13,7 @@ import styles from "./index.module.css";
 import Image from "next/image";
 import playstore from "../../../public/playstore.svg";
 import google_play from "../../../public/google_play_text.svg";
-import logo from "../../../public/thenetwork.svg";
+import logo from "../../../public/theNetwork.svg";
 
 export default function AccountScreen() {
   return (
