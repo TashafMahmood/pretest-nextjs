@@ -4,23 +4,23 @@
         "details": [
             {
                 "appID": "YN83UST97S.com.elredmod.one",
-                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" , "/event-details" , "/event-details/*" ]
+                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" , "/event-details/*" , "/problem/*" ]
             },
             {
                 "appID": "YN83UST97S.com.elredmod.one.test",
-                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" , "/event-details" ,  "/event-details/*" ]
+                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" , "/event-details/*" , "/problem/*" ]
             },
             {
                 "appID": "YN83UST97S.com.elredmod.one.dev",
-                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" , "/event-details" ,  "/event-details/*" ]
+                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" ,  "/event-details/*" , "/problem/*" ]
             },
             {
                 "appID": "YN83UST97S.com.elredmod.one.demo",
-                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" , "/event-details" ,  "/event-details/*" ]
+                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" ,  "/event-details/*" , "/problem/*" ]
             },
             {
                 "appID": "YN83UST97S.com.elredmod.one.backup",
-                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" , "/event-details" ,  "/event-details/*" ]
+                "paths": [ "/shareNeed/*", "/shareLead/*", "/shareProfile/*", "/shareCard/*", "/viewCollabNeeds/*" ,  "/event-details/*" , "/problem/*" ]
             }
         ]
     }
